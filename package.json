@@ -23,13 +23,21 @@
     "@whiskeysockets/baileys": "^6.6.0",
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
     "express": "^4.19.1",
+    "express-validator": "^7.0.1",
+    "fs": "^0.0.1-security",
+    "path": "^0.12.7",
     "pino": "^8.19.0",
+    "pretty-logger": "^0.1.2",
     "qrcode": "^1.5.3",
     "qrcode-terminal": "^0.12.0"
   },
   "devDependencies": {
+    "@types/ejs": "^3.1.5",
     "@types/express": "^4.17.21",
+    "@types/qrcode": "^1.5.5",
+    "tailwindcss": "^3.4.1",
     "tsx": "^4.7.1",
     "typescript": "^5.4.3"
   }
