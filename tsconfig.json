@@ -1,0 +1,8 @@
+{
+    "files": ["app.ts", "coba.ts"],
+    "include": ["app/**/*"],
+    "compilerOptions": {
+    
+        "esModuleInterop": true
+    }
+}
