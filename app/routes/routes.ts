@@ -14,6 +14,8 @@ const router = express.Router();
 
 router.get('/', authenticateWEB, InitController.initial);
 router.get('/whatsapp', authenticateWEB, InitController.check);
+router.get('/whatsapp/qr', authenticateWEB, InitController.qrCode);
+router.get('/logging/whatsapp/log', authenticateWEB, InitController.keepAlive)
 
 router.get('/beranda', authenticateWEB, HomeController.homePage);
 
