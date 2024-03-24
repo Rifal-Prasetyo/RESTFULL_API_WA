@@ -1,9 +1,11 @@
 import { Request, Response } from "express";
 import 'dotenv/config';
 import prisma from "../../../database/prisma";
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { secretKey } from "../../../config/server";
+import next from "next";
+import hashing from "../../../services/hashPassword";
 const nameApp = process.env.NAME_APP;
 
 
@@ -13,13 +15,54 @@ export class LoginController {
     public static async loginPage(req: Request, res: Response) {
         res.render('login/login', {
             nameApp: nameApp,
-            titlePage: `${nameApp} | Login Ke Whatsapp API`
+            titlePage: `${nameApp} | Login Ke Whatsapp API`,
+            alert: false
         });
     }
 
     public static async loginAction(req: Request, res: Response) {
         const { password } = req.body
-        const noWA: number = req.body.noWA;
+        const noWA: string = req.body.noWA;
+        try {
+            const user = await prisma.user.findFirst({
+                where: {
+                    noWa: noWA
+                }
+            });
+
+            if (!user) {
+                return res.render('login/login', {
+                    nameApp: nameApp,
+                    titlePage: `${nameApp} | Login Ke Whatsapp API`,
+                    alert: true,
+                    message: "Username atau Sandi Kamu Salah"
+                });
+
+            } else {
+                req.session.regenerate((err) => {
+                    if (err) return next(err);
+
+                    // store to session
+
+                    req.session.user = user.noWa;
+                    req.session.key = user.password;
+
+
+                    // save session
+                    req.session.save((err) => {
+                        if (err) return next(err);
+                        res.redirect('/beranda');
+
+                    })
+                })
+            }
+        } catch (error) {
+            res.redirect('/login');
+        }
+    }
+    public static async loginActionAPI(req: Request, res: Response) {
+        const { password } = req.body
+        const noWA: string = req.body.noWA;
         try {
             const user = await prisma.user.findFirst({
                 where: {

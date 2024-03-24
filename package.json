@@ -5,7 +5,8 @@
   "main": "npx tsx app.ts",
   "scripts": {
     "test": "npx tsx coba.ts",
-    "start": "npx tsx app.ts"
+    "start": "npx tsx app.ts",
+    "seed": "npx tsx app/database/seeder/seedDatabase.ts"
   },
   "repository": {
     "type": "git",
@@ -23,11 +24,12 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.6",
     "@whiskeysockets/baileys": "^6.6.0",
-    "bcryptjs": "^2.4.3",
+    "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.1",
+    "express-session": "^1.18.0",
     "express-validator": "^7.0.1",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
@@ -38,8 +40,10 @@
     "qrcode-terminal": "^0.12.0"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/ejs": "^3.1.5",
     "@types/express": "^4.17.21",
+    "@types/express-session": "^1.18.0",
     "@types/qrcode": "^1.5.5",
     "prisma": "^5.11.0",
     "tailwindcss": "^3.4.1",

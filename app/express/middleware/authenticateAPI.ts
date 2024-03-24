@@ -3,7 +3,7 @@ import { secretKey } from '../../config/server';
 import { NextFunction, Request, RequestHandler, RequestParamHandler, Response } from 'express';
 
 
-const authenticate = (req: Request, res: Response, next: NextFunction) => {
+const authenticateAPI = (req: Request, res: Response, next: NextFunction) => {
     const token = req.header('Authorization');
     if (!token) return res.status(401).json({ message: 'Access denied. No token provided.' });
 
@@ -16,4 +16,4 @@ const authenticate = (req: Request, res: Response, next: NextFunction) => {
     }
 };
 
-export default authenticate;
+export default authenticateAPI;

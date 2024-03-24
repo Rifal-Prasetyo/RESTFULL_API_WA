@@ -9,25 +9,33 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
   id       Int       @id @default(autoincrement())
   name     String
-  noWa     BigInt
+  noWa     String
   role     String    @default("user")
   password String
   time     DateTime
-  pushes   apiPush[]
+  pushes   ApiPush[]
+  api      ApiKey?
 }
 
-model apiPush {
+model ApiPush {
   id       Int      @id @default(autoincrement())
   User_use User     @relation(fields: [user_id], references: [id])
   user_id  Int
-  time     DateTime
   message  String
   toMsg    String
+  time     DateTime
+}
+
+model ApiKey {
+  id       Int  @id @default(autoincrement())
+  User_use User @relation(fields: [user_id], references: [id])
+  user_id  Int  @unique
+  totalUse Int
 }

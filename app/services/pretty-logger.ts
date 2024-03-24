@@ -1,4 +1,6 @@
 import Logger from 'pretty-logger';
+
+
 // configure level one time, it will be set to every instance of the logger
 Logger.setLevel('info'); // only warnings and errors will be shown
 Logger.setLevel('info', true); // only warnings and errors will be shown and no message about the level change will be printed
@@ -10,6 +12,7 @@ var customConfig = {
     error: ["bgRed", "bold"],
     debug: "rainbow"
 };
+
 
 var log = new Logger(customConfig) // custom config parameters will be used, defaults will be used for the other parameters
 //var log = new Logger(); // you can also do this to accept the defaults

@@ -6,65 +6,20 @@ import log from '../services/pretty-logger';
 import * as fs from 'fs';
 import { LoginController } from '../express/controller/Web/LoginController';
 import { HomeController } from '../express/controller/Web/HomeController';
-import authenticate from '../express/middleware/authenticate';
+import { authenticateWEB } from '../express/middleware/authenticateWEB';
+import { InitController } from '../express/controller/Web/InitController';
 
 const router = express.Router();
 
-let isRunning = false;
-router.get('/', async (req, res) => {
-    // res.send({
-    //     'code': 'success'
-    // });
-    if (isRunning) {
 
-        let dataText = {
-            title: "Anda sudah Login",
-            pr: 'Selamat menggunakan layanan Whatsapp API Rifal'
-        };
-        res.render('index', {
-            title: dataText.title,
-            pr: dataText.pr
-        });
-    } else {
-        let dataText = {
-            title: "Login ke akun Whatsapp Anda",
-            pr: 'Login untuk dapat menggunkaan layanan ini'
-        };
-        res.render('index', {
-            title: dataText.title,
-            pr: dataText.pr
-        });
-    }
-})
-router.get('/whatsapp', async (req, res) => {
+router.get('/', authenticateWEB, InitController.initial);
+router.get('/whatsapp', authenticateWEB, InitController.check);
 
-    if (isRunning) {
-        log.info("ACCESS FROM BROWSER : WA HAS RUNNING");
-        const imageData = fs.readFileSync('public/img/profile.png');
-        res.writeHead(200, { 'Content-Type': 'image/jpeg', 'Content-Length': imageData.length });
-        res.end(imageData);
-
-    } else {
-        await init();
-        await delay(5000)
-        const qrCode = await getQrData();
-        if (qrCode.qr) {
-            res.end(await toBuffer(qrCode.qr));
-            log.info("ACCESS FROM BROWSER : WA QR CODE");
-        } else {
-            log.error("ACCESS FROM BROWSER : WA OLD USER");
-            const imageData = fs.readFileSync('public/img/profile.png');
-            res.writeHead(200, { 'Content-Type': 'image/jpeg', 'Content-Length': imageData.length });
-            res.end(imageData);
-        }
-    }
-    isRunning = true;
-
-});
+router.get('/beranda', authenticateWEB, HomeController.homePage);
 
 router.get('/login', LoginController.loginPage)
-router.post('/login', LoginController.loginAction)
+router.post('/login', LoginController.loginAction);
+// router.post('/login/api', LoginController.loginActinAPI)
 
 //protected Route
-router.get('/home', authenticate, HomeController.homePage);
 export default router;   
