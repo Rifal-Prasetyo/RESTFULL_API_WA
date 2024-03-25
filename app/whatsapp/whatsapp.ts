@@ -2,6 +2,7 @@ import { makeWASocket, useMultiFileAuthState, Browsers, BufferJSON, DisconnectRe
 import Logger, { pino } from 'pino';
 import log from "../services/pretty-logger";
 import * as fs from 'fs';
+import { Boom } from "@hapi/boom";
 const session: Map<string, WASocket> = new Map();
 let qrData = null;
 let newLogin = false;
@@ -36,7 +37,28 @@ export async function init() {
             const connLost = DisconnectReason.connectionLost == 408 ? dataWrite.connection = "conLost" : "";
             const connClose = DisconnectReason.connectionClosed == 428 ? dataWrite.connection = "connClode" : "";
             const badSession = DisconnectReason.badSession == 500 ? dataWrite.connection = "badSession" : "";
+            const statusCode = (lastDisconnect.error as Boom)?.output.statusCode;
 
+            if (statusCode == 408 || statusCode == 428) {
+                log.error("SYSTEM : CONNECTION LOST, RETRYING");
+                setTimeout(() => init(), 10000);
+            }
+
+            if (statusCode == 401) {
+                log.error("SYSTEM : KELUAR, LOG OUT: DELETING CREDENTIALS");
+                return setTimeout(() => {
+                    fs.rm('app/whatsapp/session', { recursive: true, force: true }, (err) => {
+                        if (err) {
+                            log.error("SYSTEM: FAILED DELETE CREDENTIALS");
+                        } else {
+                            log.info("SYSTEM: CREDENTIALS DELETED RETRYING");
+                            setTimeout(() => init(), 2000);
+                        }
+                    })
+                }, 4000)
+            }
+
+            console.log("INI DARI INFO SYSTEM", statusCode);
             // console.log('connection closed due to ', lastDisconnect.error, ', reconnecting ', shouldReconnect)
             // reconnect if not logged out
             // if (connLost) {
@@ -52,11 +74,7 @@ export async function init() {
             //         })
             //     }, 4000)
             // }
-            if (connectionLost) {
 
-                log.error("SYSTEM : CONNECTION LOST, RETRYING");
-                setTimeout(() => init(), 10000);
-            }
 
         } else if (connection === 'open') {
             dataWrite.connection = "open";
