@@ -8,16 +8,21 @@ import { LoginController } from '../express/controller/Web/LoginController';
 import { HomeController } from '../express/controller/Web/HomeController';
 import { authenticateWEB } from '../express/middleware/authenticateWEB';
 import { InitController } from '../express/controller/Web/InitController';
+import { isAdmin } from '../express/middleware/isAdminWeb';
+import { QrCodeController } from '../express/controller/Api/QrCodeController';
 
 const router = express.Router();
 
+// route for admin
+router.get('/', isAdmin, InitController.initial); // WEB
+router.get('/whatsapp', isAdmin, InitController.check); // API
+router.get('/whatsapp/qr', isAdmin, InitController.qrCode); // API
+router.get('/logging/whatsapp/log', isAdmin, InitController.keepAlive) // API STREAN
 
-router.get('/', authenticateWEB, InitController.initial);
-router.get('/whatsapp', authenticateWEB, InitController.check);
-router.get('/whatsapp/qr', authenticateWEB, InitController.qrCode);
-router.get('/logging/whatsapp/log', authenticateWEB, InitController.keepAlive)
-
+// route for Authenticate USER
 router.get('/beranda', authenticateWEB, HomeController.homePage);
+router.get('/docs', authenticateWEB, HomeController.docsPage);
+router.get('/randomApi', authenticateWEB, QrCodeController.qrRandom) // API
 
 router.get('/login', LoginController.loginPage)
 router.post('/login', LoginController.loginAction);

@@ -2,7 +2,9 @@ import hashing from "../../services/hashPassword";
 import log from "../../services/pretty-logger";
 import prisma from "../prisma";
 
-const d = new Date();
+const date = new Date();
+
+
 
 async function seeder() {
     await prisma.$transaction([
@@ -13,13 +15,13 @@ async function seeder() {
                     role: "owner",
                     noWa: "6283109895990",
                     password: hashing("sukidakara"),
-                    time: d
+                    time: date
                 },
                 {
                     name: "Nisaazzahra",
-                    noWa: "6283109895990",
+                    noWa: "6283104841191",
                     password: hashing("sukidakara"),
-                    time: d
+                    time: date
                 }
             ]
         }),
@@ -28,11 +30,13 @@ async function seeder() {
                 {
 
                     user_id: 1,
+                    api: "$2a$12$L0o4RlZsxhPiZB5MUY7oFO24qWDcr2Tehj9vDw8FKFT9bivAYgrau",
                     totalUse: 1
                 },
                 {
 
                     user_id: 2,
+                    api: "$2a$12$L0o4RlZsxhPiZB5MUY7oFO24qWDcr2Tehj9vDw8FKFT9bivAYgrau",
                     totalUse: 1
                 }
             ]
@@ -44,7 +48,8 @@ seeder()
         log.info("Berhasil Seeding Data")
         await prisma.$disconnect()
     }).catch(async (e) => {
-        log.error("gagal Seeding Data")
+        log.error("gagal Seeding Data");
+        console.log(e);
         await prisma.$disconnect()
         process.exit(1)
     });

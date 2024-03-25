@@ -6,6 +6,7 @@
   "scripts": {
     "test": "npx tsx coba.ts",
     "start": "npx tsx app.ts",
+    "migrate": "npx prisma migrate dev --name init",
     "seed": "npx tsx app/database/seeder/seedDatabase.ts"
   },
   "repository": {
@@ -26,6 +27,8 @@
     "@whiskeysockets/baileys": "^6.6.0",
     "bcrypt": "^5.1.1",
     "body-parser": "^1.20.2",
+    "bootstrap-icons": "^1.11.3",
+    "crypto": "^1.0.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.9",
     "express": "^4.19.1",

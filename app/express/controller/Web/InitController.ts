@@ -78,6 +78,7 @@ export class InitController {
             let dataWrite = await stateWA();
             res.write(`data: ${JSON.stringify(dataWrite)}\n\n`);
         }, 1000);
+        
 
         // Handle jika klien terputus
         req.on('close', () => {

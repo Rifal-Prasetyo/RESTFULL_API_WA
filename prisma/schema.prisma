@@ -16,7 +16,7 @@ datasource db {
 model User {
   id       Int       @id @default(autoincrement())
   name     String
-  noWa     String
+  noWa     String    @unique
   role     String    @default("user")
   password String
   time     DateTime
@@ -34,8 +34,9 @@ model ApiPush {
 }
 
 model ApiKey {
-  id       Int  @id @default(autoincrement())
-  User_use User @relation(fields: [user_id], references: [id])
-  user_id  Int  @unique
+  id       Int    @id @default(autoincrement())
+  User_use User   @relation(fields: [user_id], references: [id])
+  user_id  Int    @unique
+  api      String
   totalUse Int
 }

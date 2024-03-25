@@ -4,7 +4,6 @@ import prisma from "../../../database/prisma";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { secretKey } from "../../../config/server";
-import next from "next";
 import hashing from "../../../services/hashPassword";
 const nameApp = process.env.NAME_APP;
 
@@ -40,7 +39,7 @@ export class LoginController {
 
             } else {
                 req.session.regenerate((err) => {
-                    if (err) return next(err);
+                    if (err) return res.redirect('/login');
 
                     // store to session
 
@@ -50,7 +49,7 @@ export class LoginController {
 
                     // save session
                     req.session.save((err) => {
-                        if (err) return next(err);
+                        if (err) return res.redirect('/login');
                         res.redirect('/beranda');
 
                     })
