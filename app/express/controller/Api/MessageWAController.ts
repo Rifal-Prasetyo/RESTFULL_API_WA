@@ -34,26 +34,35 @@ export class MessageWAController {
             } else {
                 const rslt = await whatsappAct.sendMessage(receiver, type, data.message);
                 if (rslt.status) {
-                    await prisma.apiPush.create({
-                        data: {
-                            type: type,
-                            type_msg: 'message',
-                            user_id: apiKey.User_use.id,
-                            message: data.message,
-                            toMsg: receiver,
-                            time: new Date(),
-                        }
-                    });
-                    await prisma.apiKey.update({
-                        where: {
-                            id: apiKey.id
-                        },
-                        data: {
-                            totalUse: {
-                                increment: 1
+                    try {
+                        await prisma.apiPush.create({
+                            data: {
+                                type: type,
+                                type_msg: 'message',
+                                user_id: apiKey.User_use.id,
+                                message: data.message,
+                                toMsg: receiver,
+                                time: new Date(),
                             }
-                        }
-                    })
+                        });
+                        await prisma.apiKey.update({
+                            where: {
+                                id: apiKey.id
+                            },
+                            data: {
+                                totalUse: {
+                                    increment: 1
+                                }
+                            }
+                        })
+                    } catch (err) {
+                        return res.send({
+                            code: 500,
+                            status: true,
+                            message: "ERROR: Salah format mungkin, coba teliti lagi",
+                        });
+                    }
+
                     return res.send({
                         code: 200,
                         status: true,
@@ -99,26 +108,35 @@ export class MessageWAController {
             } else {
                 const rslt = await whatsappAct.sendMedia(receiver, type, media, data);
                 if (rslt.status) {
-                    await prisma.apiPush.create({
-                        data: {
-                            type: type,
-                            type_msg: media,
-                            user_id: apiKey.User_use.id,
-                            message: data.message,
-                            toMsg: receiver,
-                            time: new Date(),
-                        }
-                    });
-                    await prisma.apiKey.update({
-                        where: {
-                            id: apiKey.id
-                        },
-                        data: {
-                            totalUse: {
-                                increment: 1
+                    try {
+                        await prisma.apiPush.create({
+                            data: {
+                                type: type,
+                                type_msg: media,
+                                user_id: apiKey.User_use.id,
+                                message: data.message,
+                                toMsg: receiver,
+                                time: new Date(),
                             }
-                        }
-                    })
+                        });
+                        await prisma.apiKey.update({
+                            where: {
+                                id: apiKey.id
+                            },
+                            data: {
+                                totalUse: {
+                                    increment: 1
+                                }
+                            }
+                        })
+                    } catch (err) {
+                        return res.send({
+                            code: 500,
+                            status: true,
+                            message: "ERROR: Salah format mungkin, coba teliti lagi",
+                        });
+                    }
+
                     return res.send({
                         code: 200,
                         status: true,
