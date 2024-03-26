@@ -10,23 +10,31 @@ import { authenticateWEB } from '../express/middleware/authenticateWEB';
 import { InitController } from '../express/controller/Web/InitController';
 import { isAdmin } from '../express/middleware/isAdminWeb';
 import { QrCodeController } from '../express/controller/Api/QrCodeController';
+import { MessageWAController } from '../express/controller/Api/MessageWAController';
+import { ApiValidator } from '../utils/ApiValidator';
 
 const router = express.Router();
+const validator = new ApiValidator();
 
 // route for admin
 router.get('/', isAdmin, InitController.initial); // WEB
 router.get('/whatsapp', isAdmin, InitController.check); // API
 router.get('/whatsapp/qr', isAdmin, InitController.qrCode); // API
-router.get('/logging/whatsapp/log', isAdmin, InitController.keepAlive) // API STREAN
+router.get('/logging/whatsapp/log', isAdmin, InitController.keepAlive); // API STREAN
 
 // route for Authenticate USER
 router.get('/beranda', authenticateWEB, HomeController.homePage);
 router.get('/docs', authenticateWEB, HomeController.docsPage);
-router.get('/randomApi', authenticateWEB, QrCodeController.qrRandom) // API
+router.get('/randomApi', authenticateWEB, QrCodeController.qrRandom); // API
 
-router.get('/login', LoginController.loginPage)
+router.get('/login', LoginController.loginPage);
 router.post('/login', LoginController.loginAction);
 // router.post('/login/api', LoginController.loginActinAPI)
+
+// API Send Message
+router.post('/whatsapp/sendmessage', validator.sendMessage(), MessageWAController.sendMessage);
+router.get('/whatsapp/sendimage')
+
 
 //protected Route
 export default router;   

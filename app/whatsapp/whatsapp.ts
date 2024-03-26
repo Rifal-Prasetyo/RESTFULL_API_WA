@@ -43,6 +43,10 @@ export async function init() {
                 log.error("SYSTEM : CONNECTION LOST, RETRYING");
                 setTimeout(() => init(), 10000);
             }
+            if (statusCode == 515) {
+                log.error("SYSTEM : BUTUH RESTART, MERESTART, RESTARTING");
+                setTimeout(() => init(), 1000);
+            }
 
             if (statusCode == 401) {
                 log.error("SYSTEM : KELUAR, LOG OUT: DELETING CREDENTIALS");

@@ -20,6 +20,8 @@ model User {
 
 model ApiPush {
   id       Int      @id @default(autoincrement())
+  type     Type
+  type_msg String
   user_id  Int
   message  String
   toMsg    String
@@ -33,4 +35,9 @@ model ApiKey {
   api      String
   totalUse Int
   User_use User   @relation(fields: [user_id], references: [id])
+}
+
+enum Type {
+  PERSONAL
+  GROUP
 }

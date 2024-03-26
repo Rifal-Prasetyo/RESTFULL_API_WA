@@ -1,3 +1,6 @@
+-- CreateEnum
+CREATE TYPE "Type" AS ENUM ('PERSONAL', 'GROUP');
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
@@ -13,6 +16,8 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "ApiPush" (
     "id" SERIAL NOT NULL,
+    "type" "Type" NOT NULL,
+    "type_msg" TEXT NOT NULL,
     "user_id" INTEGER NOT NULL,
     "message" TEXT NOT NULL,
     "toMsg" TEXT NOT NULL,
@@ -30,9 +35,6 @@ CREATE TABLE "ApiKey" (
 
     CONSTRAINT "ApiKey_pkey" PRIMARY KEY ("id")
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "User_noWa_key" ON "User"("noWa");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "ApiKey_user_id_key" ON "ApiKey"("user_id");
