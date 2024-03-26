@@ -1,66 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mencoba</title>
-    <link href="/css/style.css" rel="stylesheet" />
-  </head>
-  <body>
-    <div class="w-full h-screen">
-      <div class="container mx-auto">
-        <div class="w-full h-screen flex justify-center items-center">
-          <div
-            class="flex flex-col h-[40%] max-w-md p-8 items-center border border-gray-200 rounded-lg shadow md:flex-row bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
-          >
-            <img
-              class="object-cover w-full rounded-t-lg h-96 md:h-48 md:w-48 md:rounded-lg"
-              id="image-target"
-              alt=""
-            />
-            <div
-              class="flex flex-col justify-between p-4 leading-normal w-[70%]"
-            >
-              <h5 id="title" class="font-bold text-2xl"><%= title %></h5>
-              <p
-                id="prgrf"
-                class="mb-3 font-normal text-gray-700 dark:text-gray-400"
-              >
-                <%= pr %>
-              </p>
-              <p
-                id="info"
-                class="mb-3 font-mono text-gray-700 dark:text-gray-400"
-              ></p>
-            </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mencoba</title>
+  <link href="/css/style.css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="w-full h-screen">
+    <div class="container mx-auto">
+      <div class="w-full h-screen flex justify-center items-center">
+        <div
+          class="flex flex-col h-[40%] max-w-md p-8 items-center border border-gray-200 rounded-lg shadow md:flex-row bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+          <img class="object-cover w-full rounded-t-lg h-96 md:h-48 md:w-48 md:rounded-lg" id="image-target" alt="" />
+          <div class="flex flex-col justify-between p-4 leading-normal w-[70%]">
+            <h5 id="title" class="font-bold text-2xl">
+              <%= title %>
+            </h5>
+            <p id="prgrf" class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+              <%= pr %>
+            </p>
+            <p id="info" class="mb-3 font-mono text-gray-700 dark:text-gray-400"></p>
           </div>
         </div>
       </div>
     </div>
-    <script>
-      const eventSource = new EventSource("/logging/whatsapp/log");
-      eventSource.onmessage = function (event) {
-        const data = JSON.parse(event.data);
-        // Render data ke tampilan menggunakan EJS
-        if (data.connection == "connecting" && typeof data.qrCode == "string") {
-          document.getElementById("image-target").src = "/whatsapp/qr";
-        }
-        document.getElementById("info").innerHTML =
-          "Informasi Koneksi: " + data.connection;
+  </div>
+  <script>
+    const eventSource = new EventSource("/logging/whatsapp/log");
+    eventSource.onmessage = function (event) {
+      const data = JSON.parse(event.data);
+      // Render data ke tampilan menggunakan EJS
+      if (data.connection == "connecting" && typeof data.qrCode == "string") {
+        document.getElementById("image-target").src = "/whatsapp/qr";
+      }
+      document.getElementById("info").innerHTML =
+        "Informasi Koneksi: " + data.connection;
 
-        if (data.connection == "open") {
-          document.getElementById("title").innerHTML = "Anda Telah Login";
-          document.getElementById("prgrf").innerHTML =
-            "Tunggu di redirect ke halaman Home";
-          document.getElementById("image-target").src = "/img/profile.png";
-          setTimeout(() => {
-            window.location.href = "/home";
-          }, 7000);
-        }
-        setInterval(() => {
-          window.location.href = "/";
-        }, 10000);
-      };
-    </script>
-  </body>
+      if (data.connection == "open") {
+        document.getElementById("title").innerHTML = "Anda Telah Login";
+        document.getElementById("prgrf").innerHTML =
+          "Tunggu di redirect ke halaman Home";
+        document.getElementById("image-target").src = "/img/profile.png";
+        setTimeout(() => {
+          window.location.href = "/home";
+        }, 7000);
+      }
+      setInterval(() => {
+        window.location.href = "/";
+      }, 10000);
+    };
+  </script>
+</body>
+
 </html>

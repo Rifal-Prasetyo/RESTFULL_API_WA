@@ -23,7 +23,7 @@ router.get('/whatsapp/qr', isAdmin, InitController.qrCode); // API
 router.get('/logging/whatsapp/log', isAdmin, InitController.keepAlive); // API STREAN
 
 // route for Authenticate USER
-router.get('/beranda', authenticateWEB, HomeController.homePage);
+router.get('/home', authenticateWEB, HomeController.homePage);
 router.get('/docs', authenticateWEB, HomeController.docsPage);
 router.get('/randomApi', authenticateWEB, QrCodeController.qrRandom); // API
 
@@ -33,7 +33,9 @@ router.post('/login', LoginController.loginAction);
 
 // API Send Message
 router.post('/whatsapp/sendmessage', validator.sendMessage(), MessageWAController.sendMessage);
-router.get('/whatsapp/sendimage')
+router.get('/whatsapp/sendimage', validator.sendMedia(), MessageWAController.sendMedia);
+
+router.get('/logout',)
 
 
 //protected Route

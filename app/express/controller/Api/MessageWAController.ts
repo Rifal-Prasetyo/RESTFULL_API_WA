@@ -114,7 +114,7 @@ export class MessageWAController {
                                 type: type,
                                 type_msg: media,
                                 user_id: apiKey.User_use.id,
-                                message: data.message,
+                                message: "Caption: " + data.caption,
                                 toMsg: receiver,
                                 time: new Date(),
                             }

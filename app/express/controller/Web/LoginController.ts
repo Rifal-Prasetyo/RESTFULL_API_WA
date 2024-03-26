@@ -50,7 +50,7 @@ export class LoginController {
                     // save session
                     req.session.save((err) => {
                         if (err) return res.redirect('/login');
-                        res.redirect('/beranda');
+                        res.redirect('/home');
 
                     })
                 })
@@ -85,5 +85,10 @@ export class LoginController {
             console.error(error);
             res.status(500).json({ message: 'Internal Server Error' });
         }
+    }
+    public static async logout(req: Request, res: Response) {
+        req.session.destroy(function () {
+            res.redirect('/');
+        });
     }
 }
