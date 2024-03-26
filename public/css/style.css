@@ -444,6 +444,16 @@ video {
   display: none;
 }
 
+@font-face {
+  font-family: 'Inter';
+
+  src: url(/fonts/Inter-VariableFont_slnt,wght.ttf);
+}
+
+html {
+  font-family: "Inter", system-ui, sans-serif;
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -576,6 +586,34 @@ video {
   .container {
     max-width: 1536px;
   }
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+.bottom-3 {
+  bottom: 0.75rem;
+}
+
+.right-0 {
+  right: 0px;
+}
+
+.right-4 {
+  right: 1rem;
+}
+
+.-z-\[1\] {
+  z-index: -1;
+}
+
+.z-20 {
+  z-index: 20;
 }
 
 .col-span-1 {
@@ -1000,8 +1038,30 @@ video {
   transition-duration: 150ms;
 }
 
+.duration-150 {
+  transition-duration: 150ms;
+}
+
+.duration-200 {
+  transition-duration: 200ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
+
+.visible-dropdown {
+  bottom: -3rem;
+}
+
+.hover\:scale-95:hover {
+  --tw-scale-x: .95;
+  --tw-scale-y: .95;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 .hover\:bg-blue-800:hover {
