@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import prisma from "../../../database/prisma";
 import { validationResult } from "express-validator";
 import { WhatsappAction } from "../../../utils/WhatsappAction";
+import { isRequestAllowed } from "../../../utils/rateLimiter";
 
 
 const whatsappAct = new WhatsappAction();
@@ -17,6 +18,7 @@ export class MessageWAController {
             }
 
         });
+
         if (apiKey === null) {
             return res.send({
                 code: 404,
@@ -24,6 +26,13 @@ export class MessageWAController {
                 message: "INVALID API KEY!!!",
             });
         } else {
+            if (!isRequestAllowed(api_key, 1, 10000)) {
+                return res.send({
+                    code: 404,
+                    status: false,
+                    message: "Too Many Request",
+                });
+            }
             const result = validationResult(req);
             if (!result.isEmpty()) {
                 return res.send({
@@ -98,6 +107,13 @@ export class MessageWAController {
                 message: "INVALID API KEY!!!",
             });
         } else {
+            if (!isRequestAllowed(api_key, 1, 10000)) {
+                return res.send({
+                    code: 404,
+                    status: false,
+                    message: "Too Many Request",
+                });
+            }
             const result = validationResult(req);
             if (!result.isEmpty()) {
                 return res.send({

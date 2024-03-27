@@ -40,16 +40,19 @@ export async function init() {
             const statusCode = (lastDisconnect.error as Boom)?.output.statusCode;
 
             if (statusCode == 408 || statusCode == 428) {
+                dataWrite.connection = "CONNLOST"
                 log.error("SYSTEM : CONNECTION LOST, RETRYING");
                 setTimeout(() => init(), 10000);
             }
             if (statusCode == 515) {
+                dataWrite.connection = "RESTART"
                 log.error("SYSTEM : BUTUH RESTART, MERESTART, RESTARTING");
                 setTimeout(() => init(), 1000);
             }
 
             if (statusCode == 401) {
                 log.error("SYSTEM : KELUAR, LOG OUT: DELETING CREDENTIALS");
+                dataWrite.connection = "LOGOUT"
                 return setTimeout(() => {
                     fs.rm('app/whatsapp/session', { recursive: true, force: true }, (err) => {
                         if (err) {
@@ -81,10 +84,10 @@ export async function init() {
 
 
         } else if (connection === 'open') {
-            dataWrite.connection = "open";
+            dataWrite.connection = "OPEN";
             log.info("SYSTEM : CONNECTION OPEN, GOOD LUCK : ) ");
         } else if (connection === 'connecting') {
-            dataWrite.connection = "connecting";
+            dataWrite.connection = "CONNECTING";
             log.warn("SYSTEM : CONNECTING, PLEASE WAIT : ) ");
         }
 

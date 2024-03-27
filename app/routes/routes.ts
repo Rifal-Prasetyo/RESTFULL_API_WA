@@ -35,6 +35,9 @@ router.post('/login', LoginController.loginAction);
 router.post('/whatsapp/sendmessage', validator.sendMessage(), MessageWAController.sendMessage);
 router.get('/whatsapp/sendimage', validator.sendMedia(), MessageWAController.sendMedia);
 
+// API Information
+router.get('/whatsapp/info', authenticateWEB, HomeController.infouser)
+
 router.get('/logout', authenticateWEB, LoginController.logout);
 
 

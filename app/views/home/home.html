@@ -20,24 +20,31 @@
           <div class="flex gap-4 items-center">
             <i class="bi bi-person-circle text-[2rem] md:text-[4rem]"></i>
             <div class="">
-              <h3 class="text-sm md:text-subHeading">Selamat Datang</h3>
+              <h3 class="text-sm md:text-subHeading mb-1">Selamat Datang</h3>
               <h1 class="text-lg md:text-heading font-bold">
                 <%= nameUser %>
               </h1>
             </div>
           </div>
-          <div class="relative">
+          <div class="relative  hover:bg-black bg-opacity-30">
             <img src="/img/profile.png" alt="Gambar Proyek" class="w-8 md:w-16 rounded-md" id="imageButton" />
             <div
               class="absolute shadow-lg px-4 py-2 rounded-normal -bottom-0 -left-11 opacity-0 transition-all duration-150 ease-in-out  -z-40  bg-accent text-text-primary"
               id="targetImageButton">
               <ul>
                 <li>
-                  <a href="/logout" class="flex items-center gap-4">
-                    <i class="bi bi-box-arrow-in-right text-[1rem]"></i>
-                    <span>logout</span>
+                  <a href="/profile" class="flex items-center justify-between gap-4">
+                    <i class="bi bi-person text-[1rem]"></i>
+                    <span class="text-body">Profile</span>
                   </a>
                 </li>
+                <li>
+                  <a href="/logout" class="flex items-center justify-between gap-4">
+                    <i class="bi bi-box-arrow-in-right text-[1rem]"></i>
+                    <span class="text-body">logout</span>
+                  </a>
+                </li>
+
               </ul>
             </div>
           </div>
@@ -72,11 +79,11 @@
           <div class="flex gap-4">
             <div class="flex items-center gap-4">
               <p class="text-body">Status Layanan WA: </p>
-              <span class="text-body rounded-lg bg-primary text-white px-2">OPEN</span>
+              <span id="span-connection" class="text-body rounded-lg bg-primary text-white px-2"></span>
             </div>
             <div class="flex items-center gap-4">
               <p class="text-body">Total HitAPI: </p>
-              <span class="text-body rounded-lg bg-secondary text-white px-2">9999</span>
+              <span id="span-hitapi" class="text-body rounded-lg bg-secondary text-white px-2">0</span>
             </div>
           </div>
         </div>
@@ -169,6 +176,23 @@
     buttonImage.addEventListener('click', () => {
       targetImageButton.classList.toggle('visible-dropdown1');
     });
+
+    // fetch information data
+    async function getInfo() {
+      const spanConnection = document.querySelector("#span-connection");
+      const spanHitAPI = document.querySelector("#span-hitapi");
+      try {
+        const get = await fetch('/whatsapp/info');
+        const json = await get.json();
+        spanConnection.innerHTML = json.info ? json.info : "OFFLINE";
+        spanHitAPI.innerHTML = json.totalHitAPI
+      } catch (e) {
+        spanConnection.innerHTML = "ERR";
+        spanHitAPI.innerHTML = "0"
+      }
+
+    }
+    getInfo()
   </script>
   <%- include('../layout/footer.html'); %>
 </body>
