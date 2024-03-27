@@ -1,170 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= titlePage %></title>
-    <link href="/css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
-  </head>
 
-  <body class="bg-accent">
-    <div class="w-full h-screen p-8">
-      <div class="container mx-auto flex justify-center">
-        <div class="w-full md:max-w-[60%]">
-          <!-- beginning CONTENT  -->
-          <div
-            class="bg-white shadow-lg rounded-normal px-8 py-4 flex items-center justify-between mb-4"
-          >
-            <div class="flex gap-4 items-center">
-              <i class="bi bi-person-circle text-[2rem] md:text-[4rem]"></i>
-              <div class="">
-                <h3 class="text-sm md:text-subHeading">Selamat Datang</h3>
-                <h1 class="text-lg md:text-heading font-bold">
-                  <%= nameUser %>
-                </h1>
-              </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= titlePage %>
+  </title>
+  <link href="/css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
+</head>
+
+<body class="bg-accent">
+  <div class="w-full h-screen p-8">
+    <div class="container mx-auto flex justify-center">
+      <div class="w-full md:max-w-[60%]">
+        <!-- beginning CONTENT  -->
+        <div class="bg-white shadow-lg rounded-normal px-8  flex items-center justify-between mb-4">
+          <div class="flex gap-4 items-center">
+            <i class="bi bi-person-circle text-[2rem] md:text-[4rem]"></i>
+            <div class="">
+              <h3 class="text-sm md:text-subHeading">Selamat Datang</h3>
+              <h1 class="text-lg md:text-heading font-bold">
+                <%= nameUser %>
+              </h1>
             </div>
-            <img
-              src="/img/profile.png"
-              alt="Gambar Proyek"
-              class="w-8 md:w-16 rounded-md"
-            />
           </div>
-          <div class="grid grid-cols-2 gap-4 mb-4 relative">
-            <a
-              href="/docs"
-              class="bg-text-primary transition-all ease-in-out duration-150 hover:scale-95 shadow-lg rounded-normal text-white px-8 py-2 col-span-1 flex w-full justify-center items-center"
-            >
+          <div class="relative">
+            <img src="/img/profile.png" alt="Gambar Proyek" class="w-8 md:w-16 rounded-md" id="imageButton" />
+            <div
+              class="absolute shadow-lg px-4 py-2 rounded-normal -bottom-0 -left-11 opacity-0 transition-all duration-150 ease-in-out  -z-40  bg-accent text-text-primary"
+              id="targetImageButton">
+              <ul>
+                <li>
+                  <a href="/logout" class="flex items-center gap-4">
+                    <i class="bi bi-box-arrow-in-right text-[1rem]"></i>
+                    <span>logout</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4 mb-4 relative">
+          <a href="/docs"
+            class="bg-text-primary transition-all ease-in-out duration-150 hover:scale-95 shadow-lg rounded-normal text-white px-8 py-2 col-span-1 flex w-full justify-center items-center">
+            <div class="flex flex-col">
+              <i class="bi bi-journal-bookmark-fill text-[4rem] mb-4"></i>
+              <span class="text-subHeading text-center">Docs</span>
+            </div>
+          </a>
+          <div class="relative z-20">
+            <div id="button-report"
+              class="bg-white cursor-pointer transition-all ease-in-out duration-150 hover:scale-95 shadow-lg rounded-normal text-text-primary px-8 py-2 col-span-1 flex w-full justify-center items-center">
               <div class="flex flex-col">
-                <i class="bi bi-journal-bookmark-fill text-[4rem] mb-4"></i>
-                <span class="text-subHeading text-center">Docs</span>
+                <i class="bi bi-info-square-fill text-[4rem] mb-4"></i>
+                <span class="text-subHeading text-center">Report</span>
               </div>
+            </div>
+            <div id="dropdown-btn"
+              class="absolute right-4 bottom-3 transition-all ease-out duration-200 -z-[1] bg-accent shadow-lg rounded-normal px-4 py-2">
+              <ul class="text-text-primary text-body">
+                <li class=" cursor-pointer mb-2 bg-opacity-30 hover:bg-secondary hover:rounded-lg">Tidak Berfungsi?</li>
+                <li class=" cursor-pointer bg-opacity-30 hover:bg-secondary hover:rounded-lg">Offline?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="w-full mb-4 px-8 py-6 bg-white text-text-primary rounded-normal shadow-lg">
+          <h4 class="text-subHeading ">Informasi Dasar</h4>
+          <div class="flex gap-4">
+            <div class="flex items-center gap-4">
+              <p class="text-body">Status Layanan WA: </p>
+              <span class="text-body rounded-lg bg-primary text-white px-2">OPEN</span>
+            </div>
+            <div class="flex items-center gap-4">
+              <p class="text-body">Total HitAPI: </p>
+              <span class="text-body rounded-lg bg-secondary text-white px-2">9999</span>
+            </div>
+          </div>
+        </div>
+        <div class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2">
+          Laporan Terkirim. Terimakasih Laporannya
+        </div>
+        <div class="w-full rounded-normal bg-white shadow-lg px-8 py-6 text-text-primary mb-4">
+          <h4 class="text-subHeading">Kode APIKEY Anda:</h4>
+          <h5 class="text-body mb-4">
+            Gunakan APIKEY Ini untuk menggunakan layanan
+          </h5>
+          <div class="grid grid-cols-12 gap-4 w-full">
+            <input type="text" class="px-4 py-2 rounded-normal border border-black bg-accent col-span-8" id="apiValue"
+              value="<%= apiKey %>" />
+            <button onclick="randomApiKey()"
+              class="px-4 py-2 flex justify-center items-center rounded-normal border bg-accent border-black col-span-2 hover:opacity-65 transition-all ease-out"
+              id="button-random">
+              <i class="bi bi-dice-5-fill text-xs md:text-[1.5rem] m-0"></i>
+            </button>
+            <button
+              class="px-4 py-2 rounded-normal border bg-accent flex justify-center items-center border-black col-span-2 hover:opacity-65 transition-all ease-out"
+              id="button-copy">
+              <i class="bi bi-arrow-left-square text-xs md:text-[1.5rem] m-0"></i>
+            </button>
+          </div>
+        </div>
+        <div class="w-full flex justify-between items-center flex-wrap mb-4">
+          <div class="flex gap-4">
+            <button id="expand-info" class="px-8 py-2 rounded-normal bg-white flex justify-between items-center gap-4">
+              <i class="bi bi-info-circle text-[2rem]"></i>
+              <span class="text-body">Info App</span>
+            </button>
+            <a href="https://saweria.co/rifalkom" id="saweria"
+              class="px-8 py-2 rounded-normal bg-white flex justify-between items-center gap-4">
+              <i class="bi bi-emoji-smile text-[2rem]"></i>
+              <span class="text-body">Buy me a Coffe</span>
             </a>
-            <div class="relative z-20">
-              <div
-                id="button-report"
-                class="bg-white transition-all ease-in-out duration-150 hover:scale-95 shadow-lg rounded-normal text-text-primary px-8 py-2 col-span-1 flex w-full justify-center items-center"
-              >
-                <div class="flex flex-col">
-                  <i class="bi bi-info-square-fill text-[4rem] mb-4"></i>
-                  <span class="text-subHeading text-center">Report</span>
-                </div>
-              </div>
-              <div
-                id="dropdown-btn"
-                class="absolute right-4 bottom-3 transition-all ease-out duration-200 -z-[1] bg-accent shadow-lg rounded-normal px-4 py-2"
-              >
-                <ul class="text-text-primary text-body">
-                  <li class="">Tidak Berfungsi?</li>
-                </ul>
-              </div>
-            </div>
           </div>
-          <div
-            class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2"
-          >
-            Laporan Terkirim. Terimakasih Laporannya
-          </div>
-          <div
-            class="w-full rounded-normal bg-white shadow-lg px-8 py-6 text-text-primary mb-4"
-          >
-            <h4 class="text-subHeading">Kode APIKEY Anda:</h4>
-            <h5 class="text-body mb-4">
-              Gunakan APIKEY Ini untuk menggunakan layanan
-            </h5>
-            <div class="grid grid-cols-12 gap-4 w-full">
-              <input
-                type="text"
-                class="px-4 py-2 rounded-normal border border-black bg-accent col-span-8"
-                id="apiValue"
-                value="<%= apiKey %>"
-              />
-              <button
-                onclick="randomApiKey()"
-                class="px-4 py-2 flex justify-center items-center rounded-normal border bg-accent border-black col-span-2 hover:opacity-65 transition-all ease-out"
-                id="button-random"
-              >
-                <i class="bi bi-dice-5-fill text-xs md:text-[1.5rem] m-0"></i>
-              </button>
-              <button
-                class="px-4 py-2 rounded-normal border bg-accent flex justify-center items-center border-black col-span-2 hover:opacity-65 transition-all ease-out"
-                id="button-copy"
-              >
-                <i
-                  class="bi bi-arrow-left-square text-xs md:text-[1.5rem] m-0"
-                ></i>
-              </button>
-            </div>
-          </div>
-          <div class="w-full flex justify-between items-center flex-wrap mb-4">
-            <div class="flex gap-4">
-              <button
-                id="expand-info"
-                class="px-8 py-2 rounded-normal bg-white flex justify-between items-center gap-4"
-              >
-                <i class="bi bi-info-circle text-[2rem]"></i>
-                <span class="text-body">Info App</span>
-              </button>
-              <a
-                href="https://saweria.co/rifalkom"
-                id="saweria"
-                class="px-8 py-2 rounded-normal bg-white flex justify-between items-center gap-4"
-              >
-                <i class="bi bi-emoji-smile text-[2rem]"></i>
-                <span class="text-body">Buy me a Coffe</span>
-              </a>
-            </div>
-            <a
-              href="http://rifalkom.my.id"
-              class="text-body font-mono text-text-primary"
-              >Develope By : Muhamamad Rifal Prasetyo</a
-            >
-          </div>
-          <div
-            class="w-full px-8 py-4 rounded-normal bg-white shadow-lg text-text-primary"
-          >
-            <h2 class="text-subHeading">Tentang Web</h2>
-            <p class="text-body">
-              WhatsappQue adalah RESTFULL API Whatsapp yang digunakan untuk push
-              Notifikasi ke Whatsapp
-            </p>
-          </div>
+          <a href="http://rifalkom.my.id" target="_blank"
+            class="text-body hover:develope-info transition-all cursor-pointer  duration-200 ease-linear font-mono text-text-primary">Develope
+            By : Muhamamad Rifal
+            Prasetyo</a>
+        </div>
+        <div class="w-full px-8 py-4 rounded-normal bg-white shadow-lg text-text-primary">
+          <h2 class="text-subHeading">Tentang Web</h2>
+          <p class="text-body">
+            WhatsappQue adalah RESTFULL API Whatsapp yang digunakan untuk push
+            Notifikasi ke Whatsapp
+          </p>
         </div>
       </div>
     </div>
-    <script>
-      async function randomApiKey() {
-        try {
-          const apiValue = document.getElementById("apiValue");
-          const hitApi = await fetch("/randomApi");
-          const json = await hitApi.json();
-          apiValue.value = json.apiKey;
-        } catch (e) {
-          console.log("DATA FAIL FETCHED", e);
-        }
+  </div>
+  <script>
+    async function randomApiKey() {
+      try {
+        const apiValue = document.getElementById("apiValue");
+        const hitApi = await fetch("/randomApi");
+        const json = await hitApi.json();
+        apiValue.value = json.apiKey;
+      } catch (e) {
+        console.log("DATA FAIL FETCHED", e);
       }
-      const inputElement = document.querySelector("#apiValue");
+    }
+    const inputElement = document.querySelector("#apiValue");
 
-      async function copyData() {
-        try {
-          await navigator.clipboard.writeText(inputElement.value);
-          alert("Data berhasil disalin!");
-        } catch (error) {
-          console.error("Gagal menyalin data:", error);
-        }
+    async function copyData() {
+      try {
+        await navigator.clipboard.writeText(inputElement.value);
+        alert("Data berhasil disalin!");
+      } catch (error) {
+        console.error("Gagal menyalin data:", error);
       }
+    }
 
-      document
-        .querySelector("#button-copy")
-        .addEventListener("click", copyData);
+    document
+      .querySelector("#button-copy")
+      .addEventListener("click", copyData);
 
-      const reportBtn = document.querySelector("#button-report");
-      const dropdownBtn = document.querySelector("#dropdown-btn");
-      reportBtn.addEventListener("click", () => {
-        dropdownBtn.classList.toggle("visible-dropdown");
-      });
-    </script>
-    <%- include('../layout/footer.html'); %>
-  </body>
+    const reportBtn = document.querySelector("#button-report");
+    const dropdownBtn = document.querySelector("#dropdown-btn");
+    reportBtn.addEventListener("click", () => {
+      dropdownBtn.classList.toggle("visible-dropdown");
+    });
+
+    // dropdown near profile to logout
+    const buttonImage = document.querySelector("#imageButton");
+    const targetImageButton = document.querySelector("#targetImageButton");
+
+    buttonImage.addEventListener('click', () => {
+      targetImageButton.classList.toggle('visible-dropdown1');
+    });
+  </script>
+  <%- include('../layout/footer.html'); %>
+</body>
+
 </html>

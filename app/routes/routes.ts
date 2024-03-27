@@ -35,7 +35,7 @@ router.post('/login', LoginController.loginAction);
 router.post('/whatsapp/sendmessage', validator.sendMessage(), MessageWAController.sendMessage);
 router.get('/whatsapp/sendimage', validator.sendMedia(), MessageWAController.sendMedia);
 
-router.get('/logout',)
+router.get('/logout', authenticateWEB, LoginController.logout);
 
 
 //protected Route

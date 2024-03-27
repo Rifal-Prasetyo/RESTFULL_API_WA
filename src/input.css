@@ -14,5 +14,13 @@
     }
   }
 .visible-dropdown {
-    @apply -bottom-12
+    @apply -bottom-20
+}
+
+.visible-dropdown1 {
+  @apply -bottom-10 opacity-100 z-30
+}
+
+.develope-info {
+  @apply bg-accent text-white
 }
