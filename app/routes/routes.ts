@@ -26,6 +26,9 @@ router.get('/logging/whatsapp/log', isAdmin, InitController.keepAlive); // API S
 router.get('/home', authenticateWEB, HomeController.homePage);
 router.get('/docs', authenticateWEB, HomeController.docsPage);
 router.get('/randomApi', authenticateWEB, QrCodeController.qrRandom); // API
+router.get('/profile', authenticateWEB, HomeController.infoProfile);
+router.post('/profile/update', authenticateWEB, HomeController.updateProfileAction);
+
 
 router.get('/login', LoginController.loginPage);
 router.post('/login', LoginController.loginAction);
