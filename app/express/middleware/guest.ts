@@ -1,7 +1,7 @@
-import { Request, Response, NextFunction } from "express";
-import prisma from "../../database/prisma";
-import { owner } from "../../config/owner";
-export async function isAdmin(req: Request, res: Response, next: NextFunction) {
+import { NextFunction, Request, Response } from "express"
+import prisma from "../../database/prisma"
+import * as bcrypt from 'bcrypt';
+export async function guest(req: Request, res: Response, next: NextFunction) {
     if (req.session.user) {
         const user = await prisma.user.findFirst({
             where: {
@@ -15,13 +15,12 @@ export async function isAdmin(req: Request, res: Response, next: NextFunction) {
         //         return next('route');
         //     }
         // })
-        if (user.noWa == owner.noHp) {
-            return next();
-        } else {
-            res.redirect('/login');
+        if (user) {
+            return res.redirect('/wait')
         }
 
     } else {
-        res.redirect('/login');
+        return next();
     }
+
 }

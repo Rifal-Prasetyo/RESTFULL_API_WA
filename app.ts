@@ -3,6 +3,7 @@ import server, { secretKey } from './app/config/server';
 import router from './app/routes/routes';
 import bodyParser from 'body-parser';
 import session from 'express-session';
+import flash from 'express-flash';
 import ejs from 'ejs';
 import 'dotenv/config';
 import * as path from 'path';
@@ -14,7 +15,8 @@ app.use(session({
     secret: secretKey,
     resave: false,
     saveUninitialized: true
-}))
+}));
+app.use(flash());
 app.engine('.html', ejs.__express);
 app.set('views', './app/views');
 app.use(express.static('./public'));

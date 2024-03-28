@@ -15,8 +15,10 @@ export async function authenticateWEB(req: Request, res: Response, next: NextFun
         //         return next('route');
         //     }
         // })
-        if (user) {
+        if (user && user.isVerified == 1) {
             return next();
+        } else {
+            res.redirect('/wait');
         }
 
     } else {

@@ -22,4 +22,15 @@ export class ApiValidator {
             body('data').exists().isObject().withMessage('data must be object'),
         ]
     }
+    registerSerialize() {
+        return [
+            body('name').isLength({ min: 5 }),
+            body('noWa').exists(),
+            body('organization').exists(),
+            body('name_project').exists(),
+            body('address').isLength({ min: 3 }),
+            body('note').isLength({ min: 10 }),
+            body('password').exists(),
+        ];
+    }
 }                

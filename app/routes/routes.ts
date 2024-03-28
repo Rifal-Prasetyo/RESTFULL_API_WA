@@ -12,6 +12,9 @@ import { isAdmin } from '../express/middleware/isAdminWeb';
 import { QrCodeController } from '../express/controller/Api/QrCodeController';
 import { MessageWAController } from '../express/controller/Api/MessageWAController';
 import { ApiValidator } from '../utils/ApiValidator';
+import { RegisterController } from '../express/controller/Web/RegisterController';
+import authButNotVerified from '../express/middleware/authButNotVerified';
+import { guest } from '../express/middleware/guest';
 
 const router = express.Router();
 const validator = new ApiValidator();
@@ -30,8 +33,12 @@ router.get('/profile', authenticateWEB, HomeController.infoProfile);
 router.post('/profile/update', authenticateWEB, HomeController.updateProfileAction);
 
 
-router.get('/login', LoginController.loginPage);
+// PUBLIC ROUTE
+router.get('/login', guest, LoginController.loginPage);
 router.post('/login', LoginController.loginAction);
+router.get('/register', RegisterController.registerPage);
+router.post('/register/action', validator.registerSerialize(), RegisterController.registerAction);
+router.get('/wait', authButNotVerified, HomeController.waitUntilAdminVerify);
 // router.post('/login/api', LoginController.loginActinAPI)
 
 // API Send Message

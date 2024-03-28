@@ -24,3 +24,7 @@
 .develope-info {
   @apply bg-accent text-white
 }
+
+.expandinfo {
+  @apply -translate-y-0 z-0 opacity-100 
+}

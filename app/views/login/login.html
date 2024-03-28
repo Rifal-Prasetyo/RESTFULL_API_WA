@@ -1,66 +1,46 @@
 <%- include('../layout/header.html', {title: titlePage}) %>
 
-<div class="w-full h-screen">
-  <div class="container mx-auto">
-    <div class="w-full h-screen flex justify-center items-center p-8">
-      <div class="min-w-80 p-8 border border-gray-600 rounded">
-        <form class="mx-auto" method="post" action="/login">
-          <div class="flex flex-col items-center pb-10">
-            <img
-              class="w-24 h-24 mb-3 rounded-full shadow-lg"
-              src="/img/profile.png"
-              alt="Bonnie image"
-            />
-            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
-              <%= nameApp %>
-            </h5>
-            <span class="text-sm text-gray-500 dark:text-gray-400"
-              >WhatsappAPI</span
-            >
-          </div>
-          <% if (alert) { %> <%- include('../components/partials/alert.html',
-          {alert: alert ? alert : false, message: message}) %> <% } %>
+  <div class="w-full h-screen">
+    <div class="container mx-auto">
+      <div class="w-full h-screen flex justify-center items-center p-8">
+        <div class="min-w-80 p-8 border border-gray-600 rounded">
+          <form class="mx-auto" method="post" action="/login">
+            <div class="flex flex-col items-center pb-10">
+              <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/img/profile.png" alt="Bonnie image" />
+              <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                <%= nameApp %>
+              </h5>
+              <span class="text-sm text-gray-500 dark:text-gray-400">WhatsappAPI</span>
+            </div>
+            <% if (alert) { %> <%- include('../components/partials/alert.html', {alert: alert ? alert : false, message:
+                message}) %>
+                <% } %>
 
-          <div class="mb-5">
-            <label
-              for="noTelp"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >No. Whatsapp Anda</label
-            >
-            <input
-              type="number"
-              id="noTelp"
-              name="noWA"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="080xxxxxxxxx"
-              required
-            />
-          </div>
-          <div class="mb-5">
-            <label
-              for="password"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >Kata Sandi Anda</label
-            >
-            <input
-              type="password"
-              id="password"
-              name="password"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required
-            />
-          </div>
-
-          <button
-            type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Kirim
-          </button>
-        </form>
+                  <div class="mb-5">
+                    <label for="noTelp" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">No.
+                      Whatsapp Anda</label>
+                    <input type="number" id="noTelp" name="noWA"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      placeholder="080xxxxxxxxx" required />
+                  </div>
+                  <div class="mb-3">
+                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata
+                      Sandi Anda</label>
+                    <input type="password" id="password" name="password"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                      required />
+                  </div>
+                  <p class="text-body mb-4">Belum Punya akun? <a href="/register"
+                      class="text-cyan-500 underline">Daftar</a>
+                  </p>
+                  <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Login
+                  </button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<%- include('../layout/footer.html'); %>
+  <%- include('../layout/footer.html'); %>

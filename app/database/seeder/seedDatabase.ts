@@ -13,13 +13,21 @@ async function seeder() {
                 {
                     name: "Muhammad Rifal Prasetyo",
                     role: "owner",
-                    noWa: "6283109895990",
+                    organization: "XI TEFA",
+                    address: "Srikandang Bangsri Jepara",
+                    note: "ingin menggunakan layanan anda karena sangat bermanfaat pada aplikasi saya",
+                    name_project: "Siladu",
+                    noWa: "083109895990",
                     password: hashing("sukidakara"),
                     time: date
                 },
                 {
                     name: "Nisaazzahra",
-                    noWa: "6283104841191",
+                    noWa: "083104841191",
+                    organization: "OTKP",
+                    address: "Mlonggo",
+                    note: "ingin menggunakan layanan anda karena sangat bermanfaat pada aplikasi saya",
+                    name_project: "MPLB",
                     password: hashing("sukidakara"),
                     time: date
                 }

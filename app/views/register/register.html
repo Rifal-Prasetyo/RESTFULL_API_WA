@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= titlePage %>
+    </title>
+    <link href="/css/style.css" rel="stylesheet" />
+</head>
+
+<body class="">
+    <div class="w-full h-screen">
+        <div class="container mx-auto">
+            <div class="w-full  flex justify-center items-center p-8">
+                <div class="min-w-80 p-8 border border-gray-600 rounded my-60">
+                    <form class="mx-auto" method="post" action="/register/action">
+                        <div class="flex flex-col items-center pb-10 ">
+                            <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/img/profile.png"
+                                alt="Bonnie image" />
+                            <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+                                <%= nameApp %>
+                            </h5>
+                            <span class="text-sm text-gray-500 dark:text-gray-400">Daftar</span>
+                        </div>
+                        <% if (message.length> 0 ) { %>
+                            <div
+                                class="w-full mb-4 flex justify-center  bg-white text-secondary rounded-normal border border-black py-2">
+                                <%= message %>
+                            </div>
+                            <% } %>
+
+                                <div class="mb-5">
+                                    <label for="namaLengkap"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
+                                        Lengkap</label>
+                                    <input type="text" id="namaLengkap" name="name"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        placeholder="Abdul Aciz" required />
+                                </div>
+                                <div class="mb-5">
+                                    <label for="noWa"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor
+                                        Whatsapp</label>
+                                    <input type="number" id="noWa" name="noWa"
+                                        class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required placeholder="08000000000" />
+                                    <p class="font-mono"><span class="text-accent2 text-2xl">*</span>Perhatikan
+                                        Format Nomor Whatsapp!!! </p>
+                                </div>
+                                <div class="mb-5">
+                                    <label for="organization"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Instansi/Kelas/Organisasi</label>
+                                    <input type="text" id="organization" name="organization"
+                                        class="bg-gray-50 border mb-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required placeholder="XI PPLG 2" />
+                                </div>
+                                <div class="mb-5">
+                                    <label for="namaProject"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
+                                        Project</label>
+                                    <input type="text" id="namaProject" name="name_project"
+                                        class="bg-gray-50 border mb-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required placeholder="SI SI SI" />
+                                </div>
+                                <div class="mb-5">
+                                    <label for="alamat"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
+                                    <input type="text" id="alamat" name="address"
+                                        class="bg-gray-50 border mb-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required placeholder="Bangsri RT 02 RW 2" />
+                                </div>
+                                <div class="mb-5">
+                                    <label for="AlasanDaftar"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alasan
+                                        Daftar</label>
+                                    <input type="text" id="AlasanDaftar" name="note"
+                                        class="bg-gray-50 border mb-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required placeholder="Bangsri RT 02 RW 2" />
+                                </div>
+                                <div class="mb-5">
+                                    <label for="password"
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kata
+                                        Sandi Anda</label>
+                                    <input type="password" id="password" name="password"
+                                        class="bg-gray-50 border mb-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                        required />
+                                </div>
+                                <button type="submit"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    Daftar
+                                </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('../layout/footer.html'); %>

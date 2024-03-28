@@ -1,7 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import prisma from "../../database/prisma";
-import { owner } from "../../config/owner";
-export async function isAdmin(req: Request, res: Response, next: NextFunction) {
+import { NextFunction, Request, Response } from "express"
+import prisma from "../../database/prisma"
+export default async function authButNotVerified(req: Request, res: Response, next: NextFunction) {
     if (req.session.user) {
         const user = await prisma.user.findFirst({
             where: {
@@ -15,10 +14,10 @@ export async function isAdmin(req: Request, res: Response, next: NextFunction) {
         //         return next('route');
         //     }
         // })
-        if (user.noWa == owner.noHp) {
-            return next();
+        if (user && user.isVerified == 1) {
+            return res.redirect('/home')
         } else {
-            res.redirect('/login');
+            return next()
         }
 
     } else {

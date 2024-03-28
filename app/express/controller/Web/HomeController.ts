@@ -14,25 +14,15 @@ export class HomeController {
                 api: true
             }
         })
-        let sessionMessage = req.session.message?.isMessage ? req.session.message.isMessage : false;
-        let typeSessionInfo = req.session.message?.type ? req.session.message.type : false;
-        let messageSessionInfo = req.session.message?.message ? req.session.message.message : false;
         res.render('home/home', {
             titlePage: `${nameApp} | Home`,
             alert: false,
             nameUser: user.name,
             apiKey: user.api.api,
-            isMessage: sessionMessage,
-            info_message: {
-                type: typeSessionInfo,
-                message: messageSessionInfo
-            }
+            message: req.flash('info')
         })
-        req.session.message = {
-            isMessage: false,
-            type: "",
-            message: ""
-        }
+
+
     }
     public static async docsPage(req: Request, res: Response) {
         res.render('docs/docs', {
@@ -93,28 +83,28 @@ export class HomeController {
                 },
                 data: {
                     name: req.body.name,
-                    noWa: req.body.noWa,
                     password: hashing(req.body.password)
                 }
             });
 
             // set Session
-            req.session.message = {
-                isMessage: true,
-                type: 'success_style',
-                message: "Berhasil Update"
-            };
+            req.flash('info', "Berhasil Update")
 
             return res.redirect('/home')
         } catch (error) {
-            return res.render('profile/profile', {
-                titlePage: `${nameApp} | Profile`,
-                user: user,
-                error: true,
-                message: "Cek Kemabali"
-            });
+            req.flash('info', "Gagal Update, Periksa Kembali");
+            return res.redirect('/profile');
         }
     }
+
+    public static async waitUntilAdminVerify(req: Request, res: Response) {
+        res.render('wait/wait', {
+            titlePage: `${nameApp} | Waiting`,
+            error: false,
+            message: req.flash('info')
+        })
+    }
+
 
 
 }
