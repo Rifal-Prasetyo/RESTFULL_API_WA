@@ -8,6 +8,7 @@ import ejs from 'ejs';
 import 'dotenv/config';
 import * as path from 'path';
 import { init } from './app/whatsapp/whatsapp';
+import apiRouter from './app/routes/apiRoutes';
 
 const app = express();
 app.use(express.json());
@@ -23,6 +24,7 @@ app.use(express.static('./public'));
 app.set('view engine', 'html');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', router);
+app.use('/api', apiRouter)
 
 
 

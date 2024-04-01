@@ -15,6 +15,7 @@ import { ApiValidator } from '../utils/ApiValidator';
 import { RegisterController } from '../express/controller/Web/RegisterController';
 import authButNotVerified from '../express/middleware/authButNotVerified';
 import { guest } from '../express/middleware/guest';
+import { ApiServiceController } from '../express/controller/Api/ApiServiceController';
 
 const router = express.Router();
 const validator = new ApiValidator();
@@ -31,6 +32,7 @@ router.get('/docs', authenticateWEB, HomeController.docsPage);
 router.get('/randomApi', authenticateWEB, QrCodeController.qrRandom); // API
 router.get('/profile', authenticateWEB, HomeController.infoProfile);
 router.post('/profile/update', authenticateWEB, HomeController.updateProfileAction);
+router.get('/history', HomeController.history);
 
 
 // PUBLIC ROUTE
@@ -47,7 +49,6 @@ router.get('/whatsapp/sendimage', validator.sendMedia(), MessageWAController.sen
 
 // API Information
 router.get('/whatsapp/info', authenticateWEB, HomeController.infouser)
-
 router.get('/logout', authenticateWEB, LoginController.logout);
 
 

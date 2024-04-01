@@ -28,3 +28,7 @@
 .expandinfo {
   @apply -translate-y-0 z-0 opacity-100 
 }
+
+.kamu_pacaran_wkwkwk_goblog {
+  @apply bg-accent2
+}

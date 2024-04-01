@@ -82,14 +82,20 @@
             </div>
             <div class="w-full mb-4 px-8 py-6 bg-white text-text-primary rounded-normal shadow-lg">
               <h4 class="text-subHeading ">Informasi Dasar</h4>
-              <div class="flex gap-4">
-                <div class="flex items-center gap-4">
-                  <p class="text-body">Status Layanan WA: </p>
-                  <span id="span-connection" class="text-body rounded-lg bg-primary text-white px-2"></span>
+              <div class="flex flex-wrap  justify-between">
+                <div class="flex flex-wrap gap-4">
+                  <div class="flex items-center gap-4">
+                    <p class="text-body">Status Layanan WA: </p>
+                    <span id="span-connection" class="text-body rounded-lg bg-primary text-white px-2"></span>
+                  </div>
+                  <div class="flex items-center gap-4">
+                    <p class="text-body">Total HitAPI: </p>
+                    <span id="span-hitapi" class="text-body rounded-lg bg-secondary text-white px-2">0</span>
+                  </div>
                 </div>
                 <div class="flex items-center gap-4">
-                  <p class="text-body">Total HitAPI: </p>
-                  <span id="span-hitapi" class="text-body rounded-lg bg-secondary text-white px-2">0</span>
+                  <a href="/history"
+                    class="bg-primary shadow-md rounded-normal text-white hover:bg-secondary px-4 text-body ">Riwayat</a>
                 </div>
               </div>
             </div>
@@ -191,6 +197,9 @@
         const get = await fetch('/whatsapp/info');
         const json = await get.json();
         spanConnection.innerHTML = json.info ? json.info : "OFFLINE";
+        if (!json.info) {
+          spanConnection.classList.add('kamu_pacaran_wkwkwk_goblog');
+        }
         spanHitAPI.innerHTML = json.totalHitAPI
       } catch (e) {
         spanConnection.innerHTML = "ERR";

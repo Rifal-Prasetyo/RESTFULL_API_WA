@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import prisma from "../../../database/prisma";
 import { stateWA } from "../../../whatsapp/whatsapp";
 import hashing from "../../../services/hashPassword";
+import { owner } from "../../../config/owner";
 const nameApp = process.env.NAME_APP;
 
 export class HomeController {
@@ -104,8 +105,24 @@ export class HomeController {
             message: req.flash('info')
         })
     }
+    public static async history(req: Request, res: Response) {
+        const apiPush = await prisma.apiPush.findMany({
+            include: {
+                User_use: true
+            },
+            where: {
+                User_use: {
+                    noWa: req.session.user
+                }
+            }
+        });
+        res.render('history/history', {
+            titlePage: `${nameApp} | Histori`,
+            error: false,
+            message: req.flash('info'),
+            data: apiPush
+        });
 
-
-
+    }
 }
 
