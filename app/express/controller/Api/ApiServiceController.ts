@@ -5,7 +5,7 @@ import { isRequestAllowed } from "../../../utils/rateLimiter";
 
 export class ApiServiceController {
     public static async info(req: Request, res: Response) {
-        const api = req.body.apiKey;
+        const api = req.body.api_key;
         let data = [];
         if (!isRequestAllowed(api, 1, 10000)) {
             return res.status(403).send({
@@ -14,7 +14,7 @@ export class ApiServiceController {
             });
         }
         try {
-            const result = await prisma.user.findMany({
+            const result = await prisma.user.findFirst({
                 where: {
                     api: {
                         api: api
@@ -28,17 +28,16 @@ export class ApiServiceController {
                 },
 
             });
-            result.forEach(user => {
-                data = data.concat(user.pushes)
-            });
+            result.pushes.forEach(push => {
+                data = data.concat(push);
+            })
 
             return res.status(200).send({
                 status: true,
-                name: result[0].name,
+                name: result.name,
                 message: "success",
-                organization: result[0].organization,
+                organization: result.organization,
                 data: data
-
             });
 
         } catch (err) {

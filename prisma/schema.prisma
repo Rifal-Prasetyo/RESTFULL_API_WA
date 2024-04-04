@@ -31,7 +31,7 @@ model ApiPush {
   message  String
   toMsg    String
   time     DateTime
-  User_use User     @relation(fields: [user_id], references: [id])
+  User_use User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 model ApiKey {
@@ -39,7 +39,7 @@ model ApiKey {
   user_id  Int    @unique
   api      String
   totalUse Int
-  User_use User   @relation(fields: [user_id], references: [id])
+  User_use User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 enum Type {

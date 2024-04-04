@@ -1,18 +1,30 @@
 import prisma from "./app/database/prisma";
 async function apalah() {
+    let data = [];
+    const result = await prisma.user.findFirst({
+        where: {
+            api: {
+                api: ""
+            }
+        },
+        select: {
+            name: true,
+            organization: true,
+            api: true,
+            pushes: true
+        },
 
-    // const apiKey = prisma.apiKey.findFirst({
-    //     where: {
-    //         api: "MFAKORuZR5Ida/CasL8V6W2kTVXsFI990/jk0KszoqM="
-    //     },
-    //     include: {
-    //         User_use: true
-    //     }
+    });
+    // result.forEach(user => {
+    //     data = data.concat(user.pushes)
     // });
-    // return apiKey
-    const text = "083109895990";
-    const mentions = [text.matchAll(/@(\d{0,16})/g)].map((v) => v[1] + "@s.whatsapp.net");
-    return mentions
+    result.pushes.forEach(push => {
+        data = data.concat(push);
+    })
+    return {
+        result: result,
+        data: data
+    }
 }
 apalah().then((r) => {
     console.log(r)

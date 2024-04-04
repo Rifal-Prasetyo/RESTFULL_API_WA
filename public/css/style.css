@@ -663,6 +663,11 @@ html {
   margin-bottom: 15rem;
 }
 
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -701,6 +706,10 @@ html {
 
 .h-1 {
   height: 0.25rem;
+}
+
+.h-2 {
+  height: 0.5rem;
 }
 
 .h-24 {
@@ -788,6 +797,10 @@ html {
   gap: 1rem;
 }
 
+.overflow-x-auto {
+  overflow-x: auto;
+}
+
 .rounded {
   border-radius: 0.25rem;
 }
@@ -870,6 +883,11 @@ html {
 .bg-secondary {
   --tw-bg-opacity: 1;
   background-color: rgb(244 162 18 / var(--tw-bg-opacity));
+}
+
+.bg-slate-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(148 163 184 / var(--tw-bg-opacity));
 }
 
 .bg-text-primary {

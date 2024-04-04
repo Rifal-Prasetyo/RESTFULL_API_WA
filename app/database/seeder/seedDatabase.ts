@@ -39,13 +39,13 @@ async function seeder() {
 
                     user_id: 1,
                     api: "$2a$12$L0o4RlZsxhPiZB5MUY7oFO24qWDcr2Tehj9vDw8FKFT9bivAYgrau",
-                    totalUse: 1
+                    totalUse: 0
                 },
                 {
 
                     user_id: 2,
                     api: "$2a$12$L0o4RlZsxhPiZB5MUY7oFO24qWDcr2Tehj9vDw8FKFT9bivAYgrau",
-                    totalUse: 1
+                    totalUse: 0
                 }
             ]
         })

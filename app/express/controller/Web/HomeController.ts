@@ -56,6 +56,9 @@ export class HomeController {
             select: {
                 name: true,
                 noWa: true,
+                organization: true,
+                name_project: true,
+                address: true,
             }
         });
 

@@ -78,7 +78,7 @@ export class RegisterController {
             message += `Verifikasi Daftar dengan balas dengan salin pesan ini`;
 
             await session.sendMessage(numberResolve(owner.noHp), { text: message });
-            await session.sendMessage(numberResolve(owner.noHp), { text: `/verif ${noWa}` });
+            await session.sendMessage(numberResolve(owner.noHp), { text: `/reg ${noWa}` });
             req.session.user = noWa;
             req.session.key = password;
             return res.redirect('/wait');
