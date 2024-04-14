@@ -37,10 +37,10 @@ export async function init() {
             const logout = DisconnectReason.loggedOut == 401 ? dataWrite.connection = "logout" : "";
             const connLost = DisconnectReason.connectionLost == 408 ? dataWrite.connection = "conLost" : "";
             const connClose = DisconnectReason.connectionClosed == 428 ? dataWrite.connection = "connClode" : "";
-            const badSession = DisconnectReason.badSession == 500 ? dataWrite.connection = "badSession" : "";
+            const badSession = DisconnectReason.unavailableService == 503 ? dataWrite.connection = "badSession" : "";
             const statusCode = (lastDisconnect.error as Boom)?.output.statusCode;
 
-            if (statusCode == 408 || statusCode == 428) {
+            if (statusCode == 408 || statusCode == 428 || statusCode == 503) {
                 dataWrite.connection = "CONNLOST"
                 log.error("SYSTEM : CONNECTION LOST, RETRYING");
                 setTimeout(() => init(), 10000);
@@ -66,7 +66,7 @@ export async function init() {
                 }, 4000)
             }
 
-            console.log("INI DARI INFO SYSTEM", statusCode);
+            // console.log("INI DARI INFO SYSTEM", statusCode);
             // console.log('connection closed due to ', lastDisconnect.error, ', reconnecting ', shouldReconnect)
             // reconnect if not logged out
             // if (connLost) {

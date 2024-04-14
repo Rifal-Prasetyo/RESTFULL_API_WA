@@ -38,22 +38,33 @@ export class LoginController {
                 });
 
             } else {
-                req.session.regenerate((err) => {
-                    if (err) return res.redirect('/login');
+                const validatePassword = bcrypt.compareSync(password, user.password);
+                if (validatePassword) {
 
-                    // store to session
-
-                    req.session.user = user.noWa;
-                    req.session.key = user.password;
-
-
-                    // save session
-                    req.session.save((err) => {
+                    req.session.regenerate((err) => {
                         if (err) return res.redirect('/login');
-                        res.redirect('/home');
 
+                        // store to session
+
+                        req.session.user = user.noWa;
+                        req.session.key = user.password;
+
+
+                        // save session
+                        req.session.save((err) => {
+                            if (err) return res.redirect('/login');
+                            res.redirect('/home');
+
+                        })
                     })
-                })
+                } else {
+                    return res.render('login/login', {
+                        nameApp: nameApp,
+                        titlePage: `${nameApp} | Login Ke Whatsapp API`,
+                        alert: true,
+                        message: "Username atau Sandi Kamu Salah"
+                    });
+                }
             }
         } catch (error) {
             res.redirect('/login');

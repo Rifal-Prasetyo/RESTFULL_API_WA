@@ -32,3 +32,28 @@
 .kamu_pacaran_wkwkwk_goblog {
   @apply bg-accent2
 }
+.visible {
+  @apply block
+}
+
+.scroll-text-container {
+  overflow: hidden;
+}
+
+.scroll-text {
+  white-space: nowrap;
+  animation: scroll 10s linear infinite; /* Ubah 10s sesuai kecepatan yang Anda inginkan */
+}
+.scroll-text1 {
+  white-space: nowrap;
+  animation: scroll 20s linear infinite; /* Ubah 10s sesuai kecepatan yang Anda inginkan */
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}

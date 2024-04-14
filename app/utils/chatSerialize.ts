@@ -1,27 +1,40 @@
 import { WAMessage } from "@whiskeysockets/baileys";
 import { actionMessage } from "./actionMessage";
+import log from "../services/pretty-logger";
+
 interface DataMessage {
 
     name: string,
     type: string,
     number: string,
-    message: string
+    message: string,
+    group?: string
 
 }
 export async function serializeMessage(messages: WAMessage[]) {
-    let data: any = {};
+    let data: DataMessage = {
+        name: "",
+        type: "",
+        number: "",
+        message: ""
+    };
     const m = messages[0];
     if (m.key.fromMe) return false;
-    const messageType = Object.keys(m.message)[0];
+    if (m.key.remoteJid === 'status@broadcast') return false;
+    const messageType = Object.keys(m.message)[0] ? Object.keys(m.message)[0] : null;
     const text = messageType === "conversation" ? m.message.conversation
         : messageType === "extendedTextMessage" ? m.message.extendedTextMessage.text
             : messageType === "imageMessage" ? m.message.imageMessage.caption
-                : messageType === "videoMessage" ? m.message.videoMessage.caption : ""
+                : messageType === "videoMessage" ? m.message.videoMessage.caption
+                    : ""
 
     data['name'] = m.pushName;
     data['number'] = m.key.remoteJid;
-    data['type'] = Object.keys(m.message)[0];
+    data['type'] = messageType;
     data['message'] = text;
-
+    if (m.key.remoteJid.endsWith('@g.us')) {
+        data['number'] = m.key.participant;
+        data['group'] = m.key.remoteJid;
+    }
     actionMessage(data);
 }

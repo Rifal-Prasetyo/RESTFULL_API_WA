@@ -7,6 +7,7 @@ const nameApp = process.env.NAME_APP;
 
 export class HomeController {
     public static async homePage(req: Request, res: Response) {
+        let isOwner = null;
         const user = await prisma.user.findFirst({
             where: {
                 noWa: req.session.user
@@ -15,12 +16,22 @@ export class HomeController {
                 api: true
             }
         })
+        const nomorHp = "6" + owner.noHp.slice(1);
+        if (owner.noHp == user.noWa) {
+            isOwner = true
+        } else {
+            isOwner = false;
+        }
+
         res.render('home/home', {
             titlePage: `${nameApp} | Home`,
             alert: false,
             nameUser: user.name,
             apiKey: user.api.api,
-            message: req.flash('info')
+            message: req.flash('info'),
+            ownerNumber: nomorHp,
+            isOwner: isOwner,
+            userProfileImage: user.image
         })
 
 

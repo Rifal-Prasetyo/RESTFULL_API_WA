@@ -9,6 +9,7 @@ datasource db {
 
 model User {
   id           Int       @id @default(autoincrement())
+  image        String
   name         String
   organization String
   address      String

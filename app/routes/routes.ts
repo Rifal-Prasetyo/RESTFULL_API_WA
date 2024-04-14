@@ -16,6 +16,8 @@ import { RegisterController } from '../express/controller/Web/RegisterController
 import authButNotVerified from '../express/middleware/authButNotVerified';
 import { guest } from '../express/middleware/guest';
 import { ApiServiceController } from '../express/controller/Api/ApiServiceController';
+import { upload } from '../utils/fileUpload';
+import { AdminController } from '../express/controller/Web/AdminController';
 
 const router = express.Router();
 const validator = new ApiValidator();
@@ -25,6 +27,8 @@ router.get('/', isAdmin, InitController.initial); // WEB
 router.get('/whatsapp', isAdmin, InitController.check); // API
 router.get('/whatsapp/qr', isAdmin, InitController.qrCode); // API
 router.get('/logging/whatsapp/log', isAdmin, InitController.keepAlive); // API STREAN
+router.get('/manage/user', AdminController.manageUserPage); // Manage User
+router.get('/manage/user/detail/:id', AdminController.detailUser)
 
 // route for Authenticate USER
 router.get('/home', authenticateWEB, HomeController.homePage);
@@ -39,7 +43,7 @@ router.get('/history', HomeController.history);
 router.get('/login', guest, LoginController.loginPage);
 router.post('/login', LoginController.loginAction);
 router.get('/register', RegisterController.registerPage);
-router.post('/register/action', validator.registerSerialize(), RegisterController.registerAction);
+router.post('/register/action', upload.single('image'), validator.registerSerialize(), RegisterController.registerAction);
 router.get('/wait', authButNotVerified, HomeController.waitUntilAdminVerify);
 // router.post('/login/api', LoginController.loginActinAPI)
 

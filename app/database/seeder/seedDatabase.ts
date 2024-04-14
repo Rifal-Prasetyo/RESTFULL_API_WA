@@ -11,6 +11,7 @@ async function seeder() {
         prisma.user.createMany({
             data: [
                 {
+
                     name: "Muhammad Rifal Prasetyo",
                     role: "owner",
                     organization: "XI TEFA",
@@ -18,16 +19,20 @@ async function seeder() {
                     note: "ingin menggunakan layanan anda karena sangat bermanfaat pada aplikasi saya",
                     name_project: "Siladu",
                     noWa: "083109895990",
+                    isVerified: 1,
+                    image: '/user/coba.jpg',
                     password: hashing("sukidakara"),
                     time: date
                 },
                 {
+
                     name: "Nisaazzahra",
                     noWa: "083104841191",
                     organization: "OTKP",
                     address: "Mlonggo",
                     note: "ingin menggunakan layanan anda karena sangat bermanfaat pada aplikasi saya",
                     name_project: "MPLB",
+                    image: '/user/coba.jpg',
                     password: hashing("sukidakara"),
                     time: date
                 }

@@ -30,28 +30,9 @@ export class RegisterController {
             req.flash('info', 'Perhatikan Format yang ada');
             return res.redirect('/register');
         }
+        const nameFile = req.file.filename;
         try {
-            await prisma.user.create({
-                data: {
-                    name: name,
-                    organization: organization,
-                    address: address,
-                    noWa: noWa,
-                    password: hashing(password),
-                    note: note,
-                    name_project: name_project,
-                    time: new Date(),
-                    api: {
-                        create: {
-                            api: crypto.randomBytes(32).toString('base64'),
-                            totalUse: 1
-                        }
-                    }
-                },
-                include: {
-                    api: true
-                }
-            });
+
             // req.session.regenerate((err) => {
             //     if (err) res.redirect('/register');
             //     // store to session
@@ -74,17 +55,40 @@ export class RegisterController {
             message += `Catatan        : ${note}\n`;
             message += `Waktu          : ${new Date()}\n`;
             message += `================\n\n`;
-            message += `Buka Whatsapp Pendaftar https://wa.me/${numberResolve(noWa)}\n`;
-            message += `Verifikasi Daftar dengan balas dengan salin pesan ini`;
+            message += `Buka Whatsapp Pendaftar https://wa.me/${"6" + noWa.slice(1)}\n`;
+            message += `Verifikasi pendaftar dengan balas pesan sesuai dibawah ini`;
 
             await session.sendMessage(numberResolve(owner.noHp), { text: message });
             await session.sendMessage(numberResolve(owner.noHp), { text: `/reg ${noWa}` });
             req.session.user = noWa;
             req.session.key = password;
+
+            await prisma.user.create({
+                data: {
+                    name: name,
+                    organization: organization,
+                    address: address,
+                    noWa: noWa,
+                    image: nameFile,
+                    password: hashing(password),
+                    note: note,
+                    name_project: name_project,
+                    time: new Date(),
+                    api: {
+                        create: {
+                            api: crypto.randomBytes(32).toString('base64'),
+                            totalUse: 0
+                        }
+                    }
+                },
+                include: {
+                    api: true
+                }
+            });
             return res.redirect('/wait');
         } catch (error) {
             console.log(error);
-            req.flash('info', 'Kesalahan');
+            req.flash('info', 'Kesalahan, Server Sibuk.');
             return res.redirect('/register');
         }
 

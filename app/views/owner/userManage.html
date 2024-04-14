@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= titlePage %></title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
+  </head>
+
+  <body class="bg-accent">
+    <div class="w-full h-screen p-8">
+      <div class="container mx-auto flex justify-center">
+        <div class="w-full md:max-w-[80%]">
+          <div class="mb-4">
+            <a
+              href="/home"
+              class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4"
+            >
+              <i class="bi bi-arrow-left-circle text-[1rem]"></i>
+              <span class="text-body">Kembali</span>
+            </a>
+          </div>
+          <h1 class="text-heading font-bold mb-4">Owner Dashboard</h1>
+          <div class="flex flex-wrap gap-4 text-text-primary mb-4">
+            <a
+              href="/history"
+              class="px-4 py-2 rounded-normal bg-secondary hover:shadow-xl flex gap-4 items-center"
+            >
+              <i class="bi bi-person-rolodex text-[2rem]"></i>
+              <span class="text-body">Manajemen Pengguna</span>
+            </a>
+            <a
+              href="/history"
+              class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center"
+            >
+              <i class="bi bi-send text-[2rem]"></i>
+              <span class="text-body">Pengumuman</span>
+            </a>
+          </div>
+          <div class="w-full mb-2 flex justify-between">
+            <h1 class="text-heading">Pengguna</h1>
+            <div class="flex gap-4">
+              <input
+                type="text"
+                name="search"
+                id="search"
+                placeholder="Cari"
+                class="px-4 py-2 overflow-hidden rounded-normal border border-black bg-white col-span-8"
+              />
+              <button
+                class="border border-black bg-white px-4 py-2 rounded-normal"
+              >
+                <i class="bi bi-search text-[1rem]"></i>
+              </button>
+            </div>
+          </div>
+          <div class="mb-4">
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+              <table
+                class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+              >
+                <thead
+                  class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+                >
+                  <tr>
+                    <th scope="col" class="px-6 py-3">Foto</th>
+                    <th scope="col" class="px-6 py-3">Nama Lengkap</th>
+                    <th scope="col" class="px-6 py-3">No Whatsapp</th>
+                    <th scope="col" class="px-6 py-3">Organisasi</th>
+                    <th scope="col" class="px-6 py-3">Proyek</th>
+                    <th scope="col" class="px-6 py-3">Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% for( let index = 0; index < users.length; index++ ) { %>
+                        <tr
+                          class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                        >
+                          <th
+                            scope="row"
+                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
+                            <img
+                              src="/img/profile-user/<%= users[index].image %>"
+                              alt=""
+                              srcset=""
+                              class="w-16 h-16 rounded-full"
+                            />
+                          </th>
+                          <td class="px-6 py-4"><%= users[index].name %></td>
+                          <td class="px-6 py-4"><%= users[index].noWa %></td>
+                          <td class="px-6 py-4"><%= users[index].organization %></td>
+                          <td class="px-6 py-4"><%= users[index].name_project %></td>
+                          <td class="px-6 py-4">
+                            <a
+                              href="/manage/user/detail/<%= users[index].id %>""
+                              class="font-medium text-green-600 dark:text-green-500 hover:underline"
+                              >Detail</a
+                            > |
+                            <a
+                              href="/manage/user/edit/<%= users[index].id %>"
+                              class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                              >Edit</a
+                            >
+                            |
+                            <a
+                              href="/manage/user/delete/<%= users[index].id %>"
+                              class="font-medium text-red-600 dark:text-red-500 hover:underline"
+                              >Hapus</a
+                            >
+                            <br>
+                            <% if ( users[index].isVerified == 0) { %>
+                                <a
+                                    href="/manage/user/verif/<%= users[index].id %>"
+                                    class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-accent transition-all delay-75 duration-150 z-40 bg-accent flex justify-between items-center gap-4"
+                                >
+                                <i class="bi bi-check-circle-fill text-[1rem]"></i>
+                                    <span class="text-body">Verifikasi</span>
+                                </a>
+                            <% } %>
+                          </td>
+                        </tr>
+                    <% } %>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+
+
+  <nav aria-label="Page navigation example">
+    <ul class="inline-flex -space-x-px text-base h-10">
+      <li>
+        <a href="#" class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+      </li>
+      <li>
+        <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-accent bg-text-primary border border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+      </li>
+     
+      <li>
+        <a href="#" class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+      </li>
+    </ul>
+  </nav>
+  
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

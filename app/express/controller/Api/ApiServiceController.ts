@@ -6,6 +6,7 @@ import { isRequestAllowed } from "../../../utils/rateLimiter";
 export class ApiServiceController {
     public static async info(req: Request, res: Response) {
         const api = req.body.api_key;
+        const page = req.body.page ? req.body.page * 10 : 0;
         let data = [];
         if (!isRequestAllowed(api, 1, 10000)) {
             return res.status(403).send({
@@ -24,7 +25,13 @@ export class ApiServiceController {
                     name: true,
                     organization: true,
                     api: true,
-                    pushes: true
+                    pushes: {
+                        skip: page,
+                        take: 10,
+                        orderBy: {
+                            id: 'desc'
+                        }
+                    }
                 },
 
             });
