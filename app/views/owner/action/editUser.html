@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= titlePage %></title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
+  </head>
+
+  <body class="bg-accent">
+    <div class="w-full h-screen p-8">
+      <div class="container mx-auto flex justify-center">
+        <div class="w-full md:max-w-[80%] text-text-primary">
+          <div class="mb-4">
+            <a
+              href="/manage/user"
+              class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4"
+            >
+              <i class="bi bi-arrow-left-circle text-[1rem]"></i>
+              <span class="text-body">Kembali</span>
+            </a>
+          </div>
+          <h1 class="text-heading font-bold mb-4">Edit Pengguna</h1>
+          <% if (message.length > 0 ) { %>
+          <div
+            class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2"
+          >
+            <%= message %>
+          </div>
+          <% } %> <% if (isHasData) { %>
+          <div
+            class="grid grid-cols-3 gap-8 bg-white px-8 py-4 rounded-normal shadow-2xl"
+          >
+            <div class="col-span-2 flex gap-8">
+              <img
+                src="/img/profile-user/<%= user.image %>"
+                alt=""
+                id="previewImage"
+                srcset=""
+                class="w-32 h-32 rounded-full"
+              />
+              <div class="flex flex-col">
+                <form action="/manage/user/edit/<%= user.id %>" method="post" enctype="multipart/form-data">
+                  <input
+                    type="text"
+                    name="name"
+                    class="text-subHeading font-bold mb-2 hover:border hover:border-black"
+                    value="<%= user.name %>"
+                  />
+                  <ul>
+                    <li>
+                      <div class="mb-2">
+                        <label
+                          for="nomorWhatsapp"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >Nomor Whatsapp</label
+                        >
+                        <input
+                          type="text"
+                          id="nomorWhatsapp"
+                          value="<%= user.noWa %>"
+                          name="noWa"
+                          class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="mb-2">
+                        <label
+                          for="organization"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >Instansi/Sekolah/Organisasi</label
+                        >
+                        <input
+                          type="text"
+                          id="organization"
+                          value="<%= user.organization %>"
+                          name="organization"
+                          class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="mb-2">
+                        <label
+                          for="namaProjek"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >Nama Projek</label
+                        >
+                        <input
+                          type="text"
+                          id="namaProjek"
+                          value="<%= user.name_project %>"
+                          name="name_project"
+                          class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="mb-2">
+                        <label
+                          for="alamatNyaDia"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                          >Alamat</label
+                        >
+                        <input
+                          type="text"
+                          id="alamatNyaDia"
+                          value="<%= user.address %>"
+                          name="address"
+                          class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <label
+                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        for="uploadInput"
+                        >Update Foto</label
+                      >
+                      <input
+                        class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                        aria-describedby="user_avatar_help"
+                        id="uploadInput"
+                        type="file"
+                        name="image"
+                      />
+                      <div
+                        class="mt-1 text-sm text-gray-500 dark:text-gray-300 mb-2"
+                        id="uploadInput_help"
+                      >
+                        Abaikan jika tidak update | Foto Profil Baru tidak boleh
+                        melebihi 10MB
+                      </div>
+                    </li>
+                    <li>
+                      <div class="flex gap-2 mb-2 items-center">
+                        <i class="bi bi-plus-circle text-[1rem]"></i>
+                        <span class="text-body"><%= user.time %></span>
+                      </div>
+                    </li>
+                    <li class="md:w-[70%]">
+                      <div class="rounded-normal bg-accent px-4 py-2 mb-4">
+                        <h3 class="text-subHeading mb-2">Catatan</h3>
+
+                        <textarea
+                          id="message"
+                          name="note"
+                          rows="4"
+                          class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Leave a comment..."
+                        >
+                          <%= user.note %></textarea
+                        >
+                      </div>
+                    </li>
+                    <li>
+                      <button
+                        type="submit"
+                        class="px-8 py-2 rounded-normal w-fit hover:bg-white hover:text-text-primary text-white transition-all delay-75 duration-150 z-40 bg-text-primary flex justify-between items-center gap-4"
+                      >
+                        <i class="bi bi-send text-[1rem]"></i>
+                        <span class="text-body">Update</span>
+                      </button>
+                    </li>
+                  </ul>
+                  <input type="hidden" name="oldPhoto" value="<%= user.image %>">
+                </form>
+              </div>
+            </div>
+            <% if (user.isVerified == 1) { %>
+            <div
+              class="flex flex-col justify-center items-center bg-green-400 rounded-normal"
+            >
+              <i
+                class="bi bi-check-circle-fill text-white text-[5rem] mb-2"
+              ></i>
+              <span class="text-subHeading">Terverifikasi</span>
+            </div>
+            <% } else { %>
+            <div
+              class="flex flex-col justify-center items-center bg-red-400 rounded-normal"
+            >
+              <i class="bi bi-x-circle-fill text-white text-[5rem] mb-2"></i>
+              <span class="text-subHeading">Belum Verifikasi</span>
+              <a
+                href="/manage/user/verid/<%= user.id %>"
+                class="text-body hover:underline text-blue-600 bg-accent px-4 rounded-normal"
+                >Verifikasi Sekarang!!!</a
+              >
+            </div>
+            <% } %>
+          </div>
+          <% } else { %>
+          <div
+            class="w-full bg-white h-[200px] flex justify-center items-center rounded-normal"
+          >
+            <span class="text-heading font-bold">Data Tidak Ditemukan</span>
+          </div>
+
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+      <script>
+    document.getElementById('uploadInput').addEventListener('change', function() {
+        let file = this.files[0];
+        let reader = new FileReader();
+        
+        reader.onload = function(e) {
+            document.getElementById('previewImage').setAttribute('src', e.target.result);
+        };
+        
+        reader.readAsDataURL(file);
+    });
+</script>
+    </script>
+  </body>
+</html>

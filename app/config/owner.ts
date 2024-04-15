@@ -1,4 +1,4 @@
 export const owner = {
     noHp: "083109895990", // masukkan nomor admin  
-    nameOwner: "Muhammad Rifal Prasetyo"
+    nameOwner: "Muhammad Rifal Prasetyo" // nama owner Admin
 }

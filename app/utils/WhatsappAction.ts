@@ -1,9 +1,9 @@
 import { system } from "../config/system";
 import { getSession } from "../whatsapp/whatsapp";
 
-
+type TypeMessage = 'GROUP' | 'PERSONAL';
 export class WhatsappAction {
-    async sendMessage(jid: string, type: string, message: string) {
+    async sendMessage(jid: string, type: TypeMessage, message: string) {
         let target = "";
         switch (type) {
             case "PERSONAL":

@@ -27,9 +27,23 @@ router.get('/', isAdmin, InitController.initial); // WEB
 router.get('/whatsapp', isAdmin, InitController.check); // API
 router.get('/whatsapp/qr', isAdmin, InitController.qrCode); // API
 router.get('/logging/whatsapp/log', isAdmin, InitController.keepAlive); // API STREAN
-router.get('/manage/user', AdminController.manageUserPage); // Manage User
-router.get('/manage/user/detail/:id', AdminController.detailUser)
 
+// route development BELUM ADA MIDDLEWARE
+router.get('/manage/user', AdminController.manageUserPage); // Manage User
+router.get('/manage/user/detail/:id', AdminController.detailUser);
+router.get('/manage/user/edit/:id', AdminController.editUserPage);
+router.post('/manage/user/edit/:id', upload.single('image'), AdminController.editUserAction);
+router.get('/manage/user/delete/:id', AdminController.deleteUserPage);
+router.post('/manage/user/delete/:id', AdminController.deleteUserAction);
+router.get('/manage/user/verif/:id', AdminController.verifUserPage);
+router.post('/manage/user/verif/:id', AdminController.verifUserAction);
+
+router.get('/manage/announcement', AdminController.announcementPage);
+router.get('/manage/announcement/create', AdminController.announcementCreatePage);
+router.post('/manage/announcement/create', AdminController.announcementCreateAction);
+router.get('/manage/announcement/delete/:id', AdminController.announcementDeleteAction);
+router.get('/manage/announcement/hide/:id', AdminController.announcementHidePage);
+router.post('/manage/announcement/hide/:id', AdminController.announcementHideAction);
 // route for Authenticate USER
 router.get('/home', authenticateWEB, HomeController.homePage);
 router.get('/docs', authenticateWEB, HomeController.docsPage);

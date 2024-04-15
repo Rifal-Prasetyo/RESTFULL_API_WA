@@ -79,42 +79,42 @@
               </div>
             </div>
           </div>
+          <% if (announcement) { %>
           <div
             class="bg-white shadow-lg flex rounded-normal items-center scroll-text-container text-text-primary justify-between mb-4"
           >
             <i
               class="bi bi-info-circle-fill text-[2rem] bg-accent z-30 px-4 py-2"
             ></i>
-            <span class="scroll-text1"
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              nam quo a vitae vel! Ad quo animi nulla aliquid sequi ullam.</span
-            >
+            <span class="w-full scroll-text1"><%= announcement.body %></span>
           </div>
-          <div
+          <% } %> <% if (userVerfied) { %>
+          <a
+            href="/manage/user"
             class="bg-white shadow-lg flex rounded-normal items-center scroll-text-container text-text-primary justify-between mb-4"
           >
             <i
               class="bi bi-info-circle-fill text-[2rem] bg-secondary z-30 px-4 py-2 text-white"
             ></i>
             <span class="scroll-text1"
-              >Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt
-              nam quo a vitae vel! Ad quo animi nulla aliquid sequi ullam.</span
+              >Terdapat User belum Terverifikasi. Klik banner untuk masuk Owner
+              Dashboard</span
             >
-          </div>
-          <% if (isOwner) { %>
+          </a>
+          <% } %> <% if (isOwner) { %>
           <a
             href="/"
             id="offWABanner"
-            class="bg-white  shadow-lg flex rounded-normal items-center scroll-text-container text-text-primary gap-4 mb-4 hover:shadow-2xl"
+            class="bg-white shadow-lg flex rounded-normal items-center scroll-text-container text-text-primary gap-4 mb-4 hover:shadow-2xl overflow-hidden"
           >
             <i
               class="bi bi-info-circle-fill text-[2rem] bg-accent2 z-30 px-4 py-2 text-white"
             ></i>
-            <span class="text-body"
+            <span class=""
               >Layanan Whatsapp Offline. Klik banner untuk memulai...</span
             >
-          </a
-            href="/">
+          </a>
+
           <% } %>
           <div class="grid grid-cols-2 gap-4 mb-4 relative">
             <a
@@ -169,20 +169,22 @@
                 <i class="bi bi-clock-history text-[2rem]"></i>
                 <span class="text-body">Riwayat</span>
               </a>
+              <% if (isOwner) { %>
               <a
-                href="/history"
+                href="/manage/user"
                 class="px-4 py-2 rounded-normal scroll-text-container w-[6rem] h-[6rem] bg-accent hover:shadow-xl flex flex-col items-center"
               >
                 <i class="bi bi-person-rolodex text-[2rem]"></i>
                 <span class="text-body scroll-text">Manajemen Pengguna</span>
               </a>
               <a
-                href="/history"
+                href="/manage/announcement"
                 class="px-4 py-2 rounded-normal scroll-text-container w-[6rem] h-[6rem] bg-accent hover:shadow-xl flex flex-col items-center"
               >
                 <i class="bi bi-send text-[2rem]"></i>
                 <span class="text-body scroll-text">Pengumuman</span>
               </a>
+              <% } %>
             </div>
           </div>
 
@@ -208,7 +210,6 @@
                   >
                 </div>
               </div>
-              
             </div>
           </div>
 

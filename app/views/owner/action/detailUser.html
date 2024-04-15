@@ -11,7 +11,7 @@
   <body class="bg-accent">
     <div class="w-full h-screen p-8">
       <div class="container mx-auto flex justify-center">
-        <div class="w-full md:max-w-[80%]">
+        <div class="w-full md:max-w-[80%] text-text-primary">
           <div class="mb-4">
             <a
               href="/manage/user"
@@ -22,6 +22,7 @@
             </a>
           </div>
           <h1 class="text-heading font-bold mb-4">Detail Pengguna</h1>
+          <% if (isHasData) { %>
           <div
             class="grid grid-cols-3 gap-8 bg-white px-8 py-4 rounded-normal shadow-2xl"
           >
@@ -97,6 +98,13 @@
             </div>
             <% } %>
           </div>
+          <% } else { %>
+          <div
+            class="w-full bg-white h-[200px] flex justify-center items-center rounded-normal"
+          >
+            <span class="text-heading font-bold">Data Tidak Ditemukan</span>
+          </div>
+          <% } %>
         </div>
       </div>
     </div>

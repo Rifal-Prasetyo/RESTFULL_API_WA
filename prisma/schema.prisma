@@ -8,20 +8,21 @@ datasource db {
 }
 
 model User {
-  id           Int       @id @default(autoincrement())
-  image        String
-  name         String
-  organization String
-  address      String
-  noWa         String
-  role         String    @default("user")
-  password     String
-  note         String
-  name_project String
-  isVerified   Int       @default(0)
-  time         DateTime
-  api          ApiKey?
-  pushes       ApiPush[]
+  id            Int             @id @default(autoincrement())
+  image         String
+  name          String
+  organization  String
+  address       String
+  noWa          String
+  role          String          @default("user")
+  password      String
+  note          String
+  name_project  String
+  isVerified    Int             @default(0)
+  time          DateTime
+  api           ApiKey?
+  pushes        ApiPush[]
+  announcements Announcements[]
 }
 
 model ApiPush {
@@ -41,6 +42,15 @@ model ApiKey {
   api      String
   totalUse Int
   User_use User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model Announcements {
+  id       Int      @id @default(autoincrement())
+  user_id  Int
+  body     String
+  time     DateTime
+  isShow   Int
+  User_use User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
 }
 
 enum Type {

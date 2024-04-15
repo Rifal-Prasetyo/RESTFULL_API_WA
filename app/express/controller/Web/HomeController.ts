@@ -23,6 +23,18 @@ export class HomeController {
             isOwner = false;
         }
 
+        const announcement = await prisma.announcements.findFirst({
+            where: {
+                isShow: 1
+            }
+        });
+
+        const userVerfied = await prisma.user.findFirst({
+            where: {
+                isVerified: 0
+            }
+        });
+
         res.render('home/home', {
             titlePage: `${nameApp} | Home`,
             alert: false,
@@ -31,7 +43,9 @@ export class HomeController {
             message: req.flash('info'),
             ownerNumber: nomorHp,
             isOwner: isOwner,
-            userProfileImage: user.image
+            userProfileImage: user.image,
+            announcement: announcement,
+            userVerfied: userVerfied
         })
 
 
@@ -86,6 +100,7 @@ export class HomeController {
                 noWa: req.session.user
             },
             select: {
+                id: true,
                 name: true,
                 noWa: true,
             }
@@ -93,7 +108,7 @@ export class HomeController {
         try {
             await prisma.user.update({
                 where: {
-                    id: 1,
+                    id: user.id,
                     noWa: req.session.user
                 },
                 data: {

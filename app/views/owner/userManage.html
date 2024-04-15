@@ -24,23 +24,30 @@
           <h1 class="text-heading font-bold mb-4">Owner Dashboard</h1>
           <div class="flex flex-wrap gap-4 text-text-primary mb-4">
             <a
-              href="/history"
+              href="/manage/user"
               class="px-4 py-2 rounded-normal bg-secondary hover:shadow-xl flex gap-4 items-center"
             >
               <i class="bi bi-person-rolodex text-[2rem]"></i>
               <span class="text-body">Manajemen Pengguna</span>
             </a>
             <a
-              href="/history"
+              href="/manage/announcement"
               class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center"
             >
               <i class="bi bi-send text-[2rem]"></i>
               <span class="text-body">Pengumuman</span>
             </a>
           </div>
+          <% if (message.length > 0 ) { %>
+            <div
+              class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2"
+            >
+              <%= message %>
+            </div>
+            <% } %>
           <div class="w-full mb-2 flex justify-between">
             <h1 class="text-heading">Pengguna</h1>
-            <div class="flex gap-4">
+            <div class="flex gap-4 ">
               <input
                 type="text"
                 name="search"
@@ -85,7 +92,7 @@
                               src="/img/profile-user/<%= users[index].image %>"
                               alt=""
                               srcset=""
-                              class="w-16 h-16 rounded-full"
+                              class="w-16 h-16 rounded-full object-cover"
                             />
                           </th>
                           <td class="px-6 py-4"><%= users[index].name %></td>
