@@ -110,7 +110,6 @@ export class AdminController {
             await prisma.user.update({
                 where: {
                     id: getID,
-                    noWa: req.session.user
                 },
                 data: {
                     name: req.body.name,
@@ -127,6 +126,7 @@ export class AdminController {
             req.flash('info', "Berhasil Update")
             return res.redirect('/manage/user')
         } catch (error) {
+            console.log(error);
             req.flash('info', "Gagal Update, Periksa Kembali");
             return res.redirect('/manage/user');
         }

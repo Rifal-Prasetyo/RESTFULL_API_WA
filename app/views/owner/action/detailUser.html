@@ -1,112 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= titlePage %></title>
-    <link href="/css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
-  </head>
 
-  <body class="bg-accent">
-    <div class="w-full h-screen p-8">
-      <div class="container mx-auto flex justify-center">
-        <div class="w-full md:max-w-[80%] text-text-primary">
-          <div class="mb-4">
-            <a
-              href="/manage/user"
-              class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4"
-            >
-              <i class="bi bi-arrow-left-circle text-[1rem]"></i>
-              <span class="text-body">Kembali</span>
-            </a>
-          </div>
-          <h1 class="text-heading font-bold mb-4">Detail Pengguna</h1>
-          <% if (isHasData) { %>
-          <div
-            class="grid grid-cols-3 gap-8 bg-white px-8 py-4 rounded-normal shadow-2xl"
-          >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= titlePage %>
+  </title>
+  <link href="/css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
+</head>
+
+<body class="bg-accent">
+  <div class="w-full h-screen p-8">
+    <div class="container mx-auto flex justify-center">
+      <div class="w-full md:max-w-[80%] text-text-primary">
+        <div class="mb-4">
+          <a href="/manage/user"
+            class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4">
+            <i class="bi bi-arrow-left-circle text-[1rem]"></i>
+            <span class="text-body">Kembali</span>
+          </a>
+        </div>
+        <h1 class="text-heading font-bold mb-4">Detail Pengguna</h1>
+        <% if (isHasData) { %>
+          <div class="grid grid-cols-3 gap-8 bg-white px-8 py-4 rounded-normal shadow-2xl">
             <div class="col-span-2 flex gap-8">
-              <img
-                src="/img/profile-user/<%= user.image %>"
-                alt=""
-                srcset=""
-                class="w-32 h-32 rounded-full"
-              />
+              <img src="/img/profile-user/<%= user.image %>" alt="" srcset=""
+                class="w-32 h-32 rounded-full object-cover" />
               <div class="flex flex-col">
-                <h1 class="text-subHeading font-bold mb-2"><%= user.name %></h1>
+                <h1 class="text-subHeading font-bold mb-2">
+                  <%= user.name %>
+                </h1>
                 <ul>
                   <li>
                     <div class="flex gap-2 mb-2 items-center">
                       <i class="bi bi-whatsapp text-[1rem]"></i>
-                      <span class="text-body"><%= user.noWa %></span>
+                      <span class="text-body">
+                        <%= user.noWa %>
+                      </span>
                     </div>
                   </li>
                   <li>
                     <div class="flex gap-2 mb-2 items-center">
                       <i class="bi bi-building text-[1rem]"></i>
-                      <span class="text-body"><%= user.organization %></span>
+                      <span class="text-body">
+                        <%= user.organization %>
+                      </span>
                     </div>
                   </li>
                   <li>
                     <div class="flex gap-2 mb-2 items-center">
                       <i class="bi bi-kanban text-[1rem]"></i>
-                      <span class="text-body"><%= user.name_project %></span>
+                      <span class="text-body">
+                        <%= user.name_project %>
+                      </span>
                     </div>
                   </li>
                   <li>
                     <div class="flex gap-2 mb-2 items-center">
                       <i class="bi bi-geo-alt-fill text-[1rem]"></i>
-                      <span class="text-body"><%= user.address %></span>
+                      <span class="text-body">
+                        <%= user.address %>
+                      </span>
                     </div>
                   </li>
                   <li>
                     <div class="flex gap-2 mb-2 items-center">
                       <i class="bi bi-plus-circle text-[1rem]"></i>
-                      <span class="text-body"><%= user.time %></span>
+                      <span class="text-body">
+                        <%= user.time %>
+                      </span>
                     </div>
                   </li>
                   <li class="md:w-[70%]">
                     <div class="rounded-normal bg-accent px-4 py-2">
                       <h3 class="text-subHeading mb-2">Catatan</h3>
-                      <p class="text-body"><%= user.note %></p>
+                      <p class="text-body">
+                        <%= user.note %>
+                      </p>
                     </div>
                   </li>
                 </ul>
               </div>
             </div>
-            <% if (user.isVerified == 1) { %>
-            <div
-              class="flex flex-col justify-center items-center bg-green-400 rounded-normal"
-            >
-              <i
-                class="bi bi-check-circle-fill text-white text-[5rem] mb-2"
-              ></i>
-              <span class="text-subHeading">Terverifikasi</span>
-            </div>
-            <% } else { %>
-            <div
-              class="flex flex-col justify-center items-center bg-red-400 rounded-normal"
-            >
-              <i class="bi bi-x-circle-fill text-white text-[5rem] mb-2"></i>
-              <span class="text-subHeading">Belum Verifikasi</span>
-              <a
-                href="/manage/user/verid/<%= user.id %>"
-                class="text-body hover:underline text-blue-600 bg-accent px-4 rounded-normal"
-                >Verifikasi Sekarang!!!</a
-              >
-            </div>
-            <% } %>
+            <% if (user.isVerified==1) { %>
+              <div class="flex flex-col justify-center items-center bg-green-400 rounded-normal">
+                <i class="bi bi-check-circle-fill text-white text-[5rem] mb-2"></i>
+                <span class="text-subHeading">Terverifikasi</span>
+              </div>
+              <% } else { %>
+                <div class="flex flex-col justify-center items-center bg-red-400 rounded-normal">
+                  <i class="bi bi-x-circle-fill text-white text-[5rem] mb-2"></i>
+                  <span class="text-subHeading">Belum Verifikasi</span>
+                  <a href="/manage/user/verid/<%= user.id %>"
+                    class="text-body hover:underline text-blue-600 bg-accent px-4 rounded-normal">Verifikasi
+                    Sekarang!!!</a>
+                </div>
+                <% } %>
           </div>
           <% } else { %>
-          <div
-            class="w-full bg-white h-[200px] flex justify-center items-center rounded-normal"
-          >
-            <span class="text-heading font-bold">Data Tidak Ditemukan</span>
-          </div>
-          <% } %>
-        </div>
+            <div class="w-full bg-white h-[200px] flex justify-center items-center rounded-normal">
+              <span class="text-heading font-bold">Data Tidak Ditemukan</span>
+            </div>
+            <% } %>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

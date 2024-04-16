@@ -1,108 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= titlePage %></title>
-    <link href="/css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
-  </head>
 
-  <body class="bg-accent">
-    <div class="w-full h-screen p-8">
-      <div class="container mx-auto flex justify-center">
-        <div class="w-full md:max-w-[80%]">
-          <div class="mb-4">
-            <a
-              href="/home"
-              class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4"
-            >
-              <i class="bi bi-arrow-left-circle text-[1rem]"></i>
-              <span class="text-body">Kembali</span>
-            </a>
-          </div>
-          <h1 class="text-heading font-bold mb-4">Owner Dashboard</h1>
-          <div class="flex flex-wrap gap-4 text-text-primary mb-4">
-            <a
-              href="/manage/user"
-              class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center"
-            >
-              <i class="bi bi-person-rolodex text-[2rem]"></i>
-              <span class="text-body">Manajemen Pengguna</span>
-            </a>
-            <a
-              href="/manage/announcement"
-              class="px-4 py-2 rounded-normal bg-secondary hover:shadow-xl flex gap-4 items-center"
-            >
-              <i class="bi bi-send text-[2rem]"></i>
-              <span class="text-body">Pengumuman</span>
-            </a>
-          </div>
-          <% if (message.length > 0 ) { %>
-          <div
-            class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2"
-          >
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= titlePage %>
+  </title>
+  <link href="/css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
+</head>
+
+<body class="bg-accent">
+  <div class="w-full h-screen p-8">
+    <div class="container mx-auto flex justify-center">
+      <div class="w-full md:max-w-[80%]">
+        <div class="mb-4">
+          <a href="/home"
+            class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4">
+            <i class="bi bi-arrow-left-circle text-[1rem]"></i>
+            <span class="text-body">Kembali</span>
+          </a>
+        </div>
+        <h1 class="text-heading font-bold mb-4">Owner Dashboard</h1>
+        <div class="flex flex-wrap gap-4 text-text-primary mb-4">
+          <a href="/manage/user" class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center">
+            <i class="bi bi-person-rolodex text-[2rem]"></i>
+            <span class="text-body">Manajemen Pengguna</span>
+          </a>
+          <a href="/manage/announcement"
+            class="px-4 py-2 rounded-normal bg-secondary hover:shadow-xl flex gap-4 items-center">
+            <i class="bi bi-send text-[2rem]"></i>
+            <span class="text-body">Pengumuman</span>
+          </a>
+        </div>
+        <% if (message.length> 0 ) { %>
+          <div class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2">
             <%= message %>
           </div>
           <% } %>
-          <div class="w-full mb-2 flex justify-between">
-            <h1 class="text-heading">Pengumuman</h1>
-            <a href="/manage/announcement/create" class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4">Buat Pengumuman Baru</a>
-          </div>
-          <div class="mb-4">
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-              <table
-                class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
-              >
-                <thead
-                  class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
-                >
-                  <tr>
-                    <th scope="col" class="px-6 py-3">Isi </th>
-                    <th scope="col" class="px-6 py-3">Waktu</th>
-                    <th scope="col" class="px-6 py-3">Aksi</th>
-                  </tr>
-                </thead>
-                <tbody>
-                    <% for( let index = 0; index < announcements.length; index++ ) { %>
-                        <tr
-                          class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-                        >
-                          <th
-                            scope="row"
-                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                          >
-                            <%= announcements[index].body %>
-                          </th>
-                          <td class="px-6 py-4"><%= announcements[index].time %>></td>
-                          <td class="px-6 py-4">
-                       
-                           
-                            <a
-                              href="/manage/announcement/delete/<%=  announcements[index].id %>" onclick="alert('yakin Menghapus?')"
-                              class="font-medium text-red-600 dark:text-red-500 hover:underline"
-                              >Hapus</a
-                            >
-                            <% if ( announcements[index].isShow == 1) { %>
-                                <a
-                                    href="/manage/announcement/hide/<%= announcements[index].id %>"
-                                    class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-accent transition-all delay-75 duration-150 z-40 bg-accent flex justify-between items-center gap-4"
-                                >
-                                <i class="bi bi-check-circle-fill text-[1rem]"></i>
-                                    <span class="text-body">Sembunyikan</span>
-                                </a>
-                            <% } %>
-                          </td>
-                        </tr>
-                    <% } %>
-                </tbody>
-              </table>
+            <div class="w-full mb-2 flex flex-wrap justify-between">
+              <h1 class="text-subHeading md:text-heading">Pengumuman</h1>
+              <a href="/manage/announcement/create"
+                class="px-4 py-2 md:px-8 md:py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4 ">Buat
+                Pengumuman Baru</a>
             </div>
+            <div class=" mb-4">
+              <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                  <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                      <th scope="col" class="px-6 py-3 w-[60%]">Isi </th>
+                      <th scope="col" class="px-6 py-3">Waktu</th>
+                      <th scope="col" class="px-6 py-3">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for( let index=0; index < announcements.length; index++ ) { %>
+                      <tr
+                        class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 ">
+                        <th scope="row"
+                          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white overflow-hidden">
+                          <%= announcements[index].body %>
+                        </th>
+                        <td class="px-6 py-4">
+                          <%= announcements[index].time %>>
+                        </td>
+                        <td class="px-6 py-4">
 
-          </div>
-        </div>
-        </div>
+
+                          <a href="/manage/announcement/delete/<%=  announcements[index].id %>"
+                            onclick="alert('yakin Menghapus?')"
+                            class="font-medium text-red-600 dark:text-red-500 hover:underline">Hapus</a>
+                          <% if ( announcements[index].isShow==1) { %>
+                            <a href="/manage/announcement/hide/<%= announcements[index].id %>"
+                              class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-accent transition-all delay-75 duration-150 z-40 bg-accent flex justify-between items-center gap-4">
+                              <i class="bi bi-check-circle-fill text-[1rem]"></i>
+                              <span class="text-body">Sembunyikan</span>
+                            </a>
+                            <% } %>
+                        </td>
+                      </tr>
+                      <% } %>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
       </div>
     </div>
-  </body>
+  </div>
+  </div>
+</body>
+
 </html>
