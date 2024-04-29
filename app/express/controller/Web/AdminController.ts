@@ -323,7 +323,7 @@ export class AdminController {
     public static async waManagePage(req: Request, res: Response) {
         const session = getSession('admin');
         res.render('owner/waManage', {
-            titlePage: `${nameApp} | S`,
+            titlePage: `${nameApp} | Manajemen Whatsapp`,
             message: req.flash('info'),
         })
     }

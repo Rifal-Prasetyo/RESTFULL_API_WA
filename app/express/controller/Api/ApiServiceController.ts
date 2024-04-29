@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import prisma from "../../../database/prisma";
 import { trimUndefined } from "@whiskeysockets/baileys";
 import { isRequestAllowed } from "../../../utils/rateLimiter";
+import { getSession, infoSessionDetailWhatsapp, init } from "../../../whatsapp/whatsapp";
 
 export class ApiServiceController {
     public static async info(req: Request, res: Response) {
@@ -52,6 +53,33 @@ export class ApiServiceController {
                 status: false,
                 message: "Check Your ApiKey"
             });
+        }
+    }
+    public static async infoSessionWhatsapp(req: Request, res: Response) {
+        const session = getSession('admin');
+        return res.send({
+            name: session?.user.name,
+            number: session?.user.id
+        });
+    }
+    public static async actionButtonWhatsapp(req: Request, res: Response) {
+        const session = getSession('admin');
+        if (req.body.action == 'start' || 'stop' || 'logout') {
+            switch (req.body.action) {
+                case 'start':
+                    init();
+                    break;
+                case 'stop':
+                    session.end(null);
+                    break;
+                case 'logout':
+                    session.logout();
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            return res.status(403).send({ status: false, message: "Ngapain anda?" });
         }
     }
 }

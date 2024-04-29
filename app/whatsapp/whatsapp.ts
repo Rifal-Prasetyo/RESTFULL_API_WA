@@ -8,6 +8,7 @@ import { secretKey } from "../config/server";
 const session: Map<string, WASocket> = new Map();
 let qrData = null;
 let newLogin = false;
+let retry = 0;
 
 let dataWrite = {
     connection: null,
@@ -44,7 +45,12 @@ export async function init() {
             if (statusCode == 408 || statusCode == 428 || statusCode == 503) {
                 dataWrite.connection = "CONNLOST"
                 log.error("SYSTEM : CONNECTION LOST, RETRYING");
-                setTimeout(() => init(), 10000);
+                if (retry >= 5) {
+                    sock.end(null);
+                    retry = 0;
+                } else {
+                    setTimeout(() => { init(); retry++ }, 10000);
+                }
             }
             if (statusCode == 515) {
                 dataWrite.connection = "RESTART"
@@ -112,6 +118,13 @@ export async function getQrData() {
     };
 }
 
+
 export async function stateWA() {
     return dataWrite;
+}
+
+export async function infoSessionDetailWhatsapp() {
+    const session = getSession('admin');
+    const user = session.user;
+    return user;
 }
