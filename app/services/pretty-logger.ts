@@ -1,5 +1,13 @@
 import Logger from 'pretty-logger';
 
+interface Log {
+    info: (message: string) => void,
+    error: (message: string) => void,
+    warn: (message: string) => void,
+    warning: (message: string) => void,
+    debug: (message: string) => void,
+    trace: (message: string) => void,
+}
 
 // configure level one time, it will be set to every instance of the logger
 Logger.setLevel('info'); // only warnings and errors will be shown
@@ -14,7 +22,7 @@ var customConfig = {
 };
 
 
-var log = new Logger(customConfig) // custom config parameters will be used, defaults will be used for the other parameters
+var log: Log = new Logger(customConfig) // custom config parameters will be used, defaults will be used for the other parameters
 //var log = new Logger(); // you can also do this to accept the defaults
 
 // log.error("An error occurred"); // will be red

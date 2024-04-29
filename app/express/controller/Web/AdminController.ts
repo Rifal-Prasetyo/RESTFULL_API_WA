@@ -4,6 +4,7 @@ import { owner } from "../../../config/owner";
 import * as fs from 'node:fs';
 import { WhatsappAction } from "../../../utils/WhatsappAction";
 import { numberResolve } from "../../../utils/numberResolve";
+import { getSession } from "../../../whatsapp/whatsapp";
 
 const nameApp = process.env.NAME_APP;
 export class AdminController {
@@ -316,5 +317,14 @@ export class AdminController {
             req.flash('info', `Gagal Menyembunyikan Pengumuman`);
             return res.redirect('/manage/announcement');
         }
+    }
+
+    // WHATSAPP MANAGE CONTROLLER
+    public static async waManagePage(req: Request, res: Response) {
+        const session = getSession('admin');
+        res.render('owner/waManage', {
+            titlePage: `${nameApp} | S`,
+            message: req.flash('info'),
+        })
     }
 }

@@ -4,6 +4,7 @@ import log from "../services/pretty-logger";
 import * as fs from 'fs';
 import { Boom } from "@hapi/boom";
 import { serializeMessage } from "../utils/chatSerialize";
+import { secretKey } from "../config/server";
 const session: Map<string, WASocket> = new Map();
 let qrData = null;
 let newLogin = false;
@@ -59,8 +60,8 @@ export async function init() {
                         if (err) {
                             log.error("SYSTEM: FAILED DELETE CREDENTIALS");
                         } else {
-                            log.info("SYSTEM: CREDENTIALS DELETED RETRYING");
-                            setTimeout(() => init(), 2000);
+                            log.info("SYSTEM: CREDENTIALS DELETED. SYSTEM WHATSAPP CLOSED!!!");
+                            setTimeout(() => sock.end(null), 2000);
                         }
                     })
                 }, 4000)

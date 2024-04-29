@@ -18,6 +18,7 @@ import { guest } from '../express/middleware/guest';
 import { ApiServiceController } from '../express/controller/Api/ApiServiceController';
 import { upload } from '../utils/fileUpload';
 import { AdminController } from '../express/controller/Web/AdminController';
+import { CobaController } from '../express/controller/Web/CobaController';
 
 const router = express.Router();
 const validator = new ApiValidator();
@@ -28,7 +29,7 @@ router.get('/whatsapp', isAdmin, InitController.check); // API
 router.get('/whatsapp/qr', isAdmin, InitController.qrCode); // API
 router.get('/logging/whatsapp/log', isAdmin, InitController.keepAlive); // API STREAN
 
-// route development BELUM ADA MIDDLEWARE
+
 router.get('/manage/user', isAdmin, AdminController.manageUserPage); // Manage User
 router.get('/manage/user/detail/:id', isAdmin, AdminController.detailUser);
 router.get('/manage/user/edit/:id', isAdmin, AdminController.editUserPage);
@@ -44,6 +45,10 @@ router.post('/manage/announcement/create', isAdmin, AdminController.announcement
 router.get('/manage/announcement/delete/:id', isAdmin, AdminController.announcementDeleteAction);
 router.get('/manage/announcement/hide/:id', isAdmin, AdminController.announcementHidePage);
 router.post('/manage/announcement/hide/:id', isAdmin, AdminController.announcementHideAction);
+
+// route development BELUM ADA MIDDLEWARE
+router.get('/manage/whatsapp', AdminController.waManagePage);
+
 // route for Authenticate USER
 router.get('/home', authenticateWEB, HomeController.homePage);
 router.get('/docs', authenticateWEB, HomeController.docsPage);
@@ -68,7 +73,8 @@ router.get('/whatsapp/sendimage', validator.sendMedia(), MessageWAController.sen
 // API Information
 router.get('/whatsapp/info', authenticateWEB, HomeController.infouser)
 router.get('/logout', authenticateWEB, LoginController.logout);
+router.post('/webhook', CobaController.saweria);
 
-
+router.get('/end', CobaController.end);
 //protected Route
 export default router;   
