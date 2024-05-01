@@ -1,6 +1,6 @@
 import { makeWASocket, useMultiFileAuthState, Browsers, BufferJSON, DisconnectReason, BaileysEventMap, SocketConfig, WASocket } from "@whiskeysockets/baileys";
 import Logger, { pino } from 'pino';
-import log from "../services/pretty-logger";
+import log, { writeLogtoDatabase } from "../services/pretty-logger";
 import * as fs from 'fs';
 import { Boom } from "@hapi/boom";
 import { serializeMessage } from "../utils/chatSerialize";
@@ -20,7 +20,7 @@ export async function init() {
     const sock = makeWASocket({
         printQRInTerminal: true,
         auth: state,
-        browser: Browsers.macOS('coba'),
+        browser: Browsers.ubuntu('coba'),
         syncFullHistory: true,
         logger: Logger({ level: 'silent' })
     });
@@ -39,38 +39,51 @@ export async function init() {
             const logout = DisconnectReason.loggedOut == 401 ? dataWrite.connection = "logout" : "";
             const connLost = DisconnectReason.connectionLost == 408 ? dataWrite.connection = "conLost" : "";
             const connClose = DisconnectReason.connectionClosed == 428 ? dataWrite.connection = "connClode" : "";
-            const badSession = DisconnectReason.unavailableService == 503 ? dataWrite.connection = "badSession" : "";
+            const badSession = DisconnectReason.unavailableService == 503 ? dataWrite.connection = "badSession(STOP)" : "";
             const statusCode = (lastDisconnect.error as Boom)?.output.statusCode;
-
-            if (statusCode == 408 || statusCode == 428 || statusCode == 503) {
-                dataWrite.connection = "CONNLOST"
+            console.log(statusCode);
+            if (statusCode == 408 || statusCode == 428) {
+                dataWrite.connection = "CONNLOST";
+                writeLogtoDatabase("CONNLOST", "KONEKSI TERPUTUS, MEMULAI ULANG...");
                 log.error("SYSTEM : CONNECTION LOST, RETRYING");
                 if (retry >= 5) {
+                    log.error("SYSTEM : CONNECTION LOST... 5 RETRY FAILED");
                     sock.end(null);
-                    retry = 0;
+
                 } else {
                     setTimeout(() => { init(); retry++ }, 10000);
+                    retry = 0;
                 }
             }
             if (statusCode == 515) {
-                dataWrite.connection = "RESTART"
+                dataWrite.connection = "RESTART";
+                writeLogtoDatabase("RESTART", "MERESTERTART KONEKSI...");
                 log.error("SYSTEM : BUTUH RESTART, MERESTART, RESTARTING");
                 setTimeout(() => init(), 1000);
             }
 
             if (statusCode == 401) {
+                writeLogtoDatabase("LOGOUT", "KELUAR... MENGHAPUS KREDENSIAL DAN SESI");
                 log.error("SYSTEM : KELUAR, LOG OUT: DELETING CREDENTIALS");
                 dataWrite.connection = "LOGOUT"
                 return setTimeout(() => {
                     fs.rm('app/whatsapp/session', { recursive: true, force: true }, (err) => {
                         if (err) {
                             log.error("SYSTEM: FAILED DELETE CREDENTIALS");
+                            writeLogtoDatabase("LOGOUT", "GAGAL KELUAR SESI... BUG MAYBE");
                         } else {
+                            writeLogtoDatabase("LOGOUT", "BERHASIL HAPUS KREDENSIAL DAN KONEKSI WHATSAPP DIPUTUS");
                             log.info("SYSTEM: CREDENTIALS DELETED. SYSTEM WHATSAPP CLOSED!!!");
                             setTimeout(() => sock.end(null), 2000);
                         }
                     })
                 }, 4000)
+            }
+
+            if (DisconnectReason.unavailableService == 503) {
+                dataWrite.connection = "BADSESSION";
+                writeLogtoDatabase("DISCONNECT", "KONEKSI TERPUTUS. (Jangan Khawatir BadSession, itu normal:))");
+                log.error('SYSTEM: CONNECTION STOPPED!!! BAD SESSION(Dont Worry this info)');
             }
 
             // console.log("INI DARI INFO SYSTEM", statusCode);
@@ -93,9 +106,11 @@ export async function init() {
 
         } else if (connection === 'open') {
             dataWrite.connection = "OPEN";
+            const writeLog = writeLogtoDatabase("OPEN", "KONEKSI TERBUKA... DAPAT DIGUNAKAN");
             log.info("SYSTEM : CONNECTION OPEN, GOOD LUCK : ) ");
         } else if (connection === 'connecting') {
             dataWrite.connection = "CONNECTING";
+            const writeLog = writeLogtoDatabase("CONNECTING", "MENGUBUNGKAN...");
             log.warn("SYSTEM : CONNECTING, PLEASE WAIT : ) ");
         }
 

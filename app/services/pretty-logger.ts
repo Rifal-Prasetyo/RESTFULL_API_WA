@@ -1,4 +1,5 @@
 import Logger from 'pretty-logger';
+import prisma from '../database/prisma';
 
 interface Log {
     info: (message: string) => void,
@@ -31,3 +32,15 @@ var log: Log = new Logger(customConfig) // custom config parameters will be used
 //     log.debug("The value of x is: " + x); // will be blue
 //     log.trace("Heres some more stuff to help out."); // will be gray
 export default log;
+
+export async function writeLogtoDatabase(type: string, logMsg: string) {
+    const dateTime = new Date();
+    const log = await prisma.log.create({
+        data: {
+            type: type,
+            date: dateTime,
+            log: logMsg
+        }
+    });
+
+}

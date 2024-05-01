@@ -45,9 +45,8 @@ router.post('/manage/announcement/create', isAdmin, AdminController.announcement
 router.get('/manage/announcement/delete/:id', isAdmin, AdminController.announcementDeleteAction);
 router.get('/manage/announcement/hide/:id', isAdmin, AdminController.announcementHidePage);
 router.post('/manage/announcement/hide/:id', isAdmin, AdminController.announcementHideAction);
+router.get('/manage/whatsapp', isAdmin, AdminController.waManagePage);
 
-// route development BELUM ADA MIDDLEWARE
-router.get('/manage/whatsapp', AdminController.waManagePage);
 
 // route for Authenticate USER
 router.get('/home', authenticateWEB, HomeController.homePage);

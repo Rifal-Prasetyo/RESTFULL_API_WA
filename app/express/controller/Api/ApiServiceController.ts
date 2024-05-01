@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import prisma from "../../../database/prisma";
 import { trimUndefined } from "@whiskeysockets/baileys";
 import { isRequestAllowed } from "../../../utils/rateLimiter";
-import { getSession, infoSessionDetailWhatsapp, init } from "../../../whatsapp/whatsapp";
+import { getSession, infoSessionDetailWhatsapp, init, stateWA } from "../../../whatsapp/whatsapp";
+import { InitController } from "../Web/InitController";
+import log from "../../../services/pretty-logger";
 
 export class ApiServiceController {
     public static async info(req: Request, res: Response) {
@@ -56,10 +58,30 @@ export class ApiServiceController {
         }
     }
     public static async infoSessionWhatsapp(req: Request, res: Response) {
+        res.setHeader('Content-Type', 'text/event-stream');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.setHeader('Connection', 'keep-alive');
         const session = getSession('admin');
-        return res.send({
-            name: session?.user.name,
-            number: session?.user.id
+        const stateWa = await stateWA();
+        const log = await prisma.log.findMany();
+
+        const intervalId = setInterval(async () => {
+            // check Whatsapp Init
+            // Kirim data setiap detik
+            const dataWrite = {
+                name: session?.user?.name,
+                number: session?.user?.id,
+                connection: stateWa?.connection,
+                isNewLogin: stateWa?.isNewLogin,
+                log: log
+            }
+            res.write(`data: ${JSON.stringify(dataWrite)}\n\n`);
+        }, 3000);
+
+
+        // Handle jika klien terputus
+        req.on('close', () => {
+            clearInterval(intervalId);
         });
     }
     public static async actionButtonWhatsapp(req: Request, res: Response) {
@@ -67,16 +89,25 @@ export class ApiServiceController {
         if (req.body.action == 'start' || 'stop' || 'logout') {
             switch (req.body.action) {
                 case 'start':
-                    init();
+                    if (!InitController.isRunning) {
+                        init();
+                        InitController.isRunning = true;
+                    }
                     break;
                 case 'stop':
-                    session.end(null);
+                    if (InitController.isRunning) {
+                        session.end(null);
+                        InitController.isRunning = false;
+                    }
                     break;
                 case 'logout':
-                    session.logout();
+                    if (InitController.isRunning) {
+
+                        session.logout();
+                    }
                     break;
                 default:
-                    break;
+                    return res.status(403).send({ status: false, message: "Ngapain anda?" });
             }
         } else {
             return res.status(403).send({ status: false, message: "Ngapain anda?" });

@@ -1,107 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= titlePage %></title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    <%= titlePage %>
-  </title>
-  <link href="/css/style.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
-</head>
-
-<body class="bg-accent">
-  <div class="w-full h-screen p-8">
-    <div class="container mx-auto flex justify-center">
-      <div class="w-full md:max-w-[80%]">
-        <div class="mb-4">
-          <a href="/home"
-            class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4">
-            <i class="bi bi-arrow-left-circle text-[1rem]"></i>
-            <span class="text-body">Kembali</span>
-          </a>
-        </div>
-        <h1 class="text-heading font-bold mb-4">Owner Dashboard</h1>
-        <div class="flex flex-wrap gap-4 text-text-primary mb-4">
-          <a href="/manage/user" class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center">
-            <i class="bi bi-person-rolodex text-[2rem]"></i>
-            <span class="text-body">Manajemen Pengguna</span>
-          </a>
-          <a href="/manage/announcement"
-            class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center">
-            <i class="bi bi-send text-[2rem]"></i>
-            <span class="text-body">Pengumuman</span>
-          </a>
-          <a href="/manage/whatsapp"
-            class="px-4 py-2 rounded-normal bg-secondary hover:shadow-xl flex gap-4 items-center">
-            <i class="bi bi-whatsapp text-[2rem]"></i>
-            <span class="text-body">Whatsapp</span>
-          </a>
-        </div>
-        <% if (message.length> 0 ) { %>
-          <div class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2">
+  <body class="bg-accent">
+    <div class="w-full h-screen p-8">
+      <div class="container mx-auto flex justify-center">
+        <div class="w-full md:max-w-[80%]">
+          <div class="mb-4">
+            <a
+              href="/home"
+              class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4"
+            >
+              <i class="bi bi-arrow-left-circle text-[1rem]"></i>
+              <span class="text-body">Kembali</span>
+            </a>
+          </div>
+          <h1 class="text-heading font-bold mb-4">Owner Dashboard</h1>
+          <div class="flex flex-wrap gap-4 text-text-primary mb-4">
+            <a
+              href="/manage/user"
+              class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center"
+            >
+              <i class="bi bi-person-rolodex text-[2rem]"></i>
+              <span class="text-body">Manajemen Pengguna</span>
+            </a>
+            <a
+              href="/manage/announcement"
+              class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center"
+            >
+              <i class="bi bi-send text-[2rem]"></i>
+              <span class="text-body">Pengumuman</span>
+            </a>
+            <a
+              href="/manage/whatsapp"
+              class="px-4 py-2 rounded-normal bg-secondary hover:shadow-xl flex gap-4 items-center"
+            >
+              <i class="bi bi-whatsapp text-[2rem]"></i>
+              <span class="text-body">Whatsapp</span>
+            </a>
+          </div>
+          <% if (message.length> 0 ) { %>
+          <div
+            class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2"
+          >
             <%= message %>
           </div>
           <% } %>
-            <h1 class="text-heading mb-8">Manajemen Whatsapp</h1>
-            <div class="flex flex-wrap-reverse md:flex-wrap px-4 py-4 bg-white rounded-normal">
-              <div class="bg-accent rounded-normal px-8 py-4 md:w-1/2">
-                <h2 class="text-subHeading font-medium">Informasi Sesi</h2>
-                <img src="/img/profile.png" alt="" srcset=""
-                  class="w-8 h-8 md:w-24 md:h-24 mb-4 rounded-full object-cover" />
-                <table style="width: 662px" class="overflow-hidden w-full mb-4">
-                  <colgroup>
-                    <col style="width: 246.81481px" />
-                    <col style="width: 414.81481px" />
-                  </colgroup>
-                  <thead></thead>
-                  <tbody>
-                    <tr>
-                      <th class="font-bold text-left">Nama Whatsapp Sesi:</th>
-                      <td id="nameSession">...</td>
-                    </tr>
-                    <tr>
-                      <th class="font-bold text-left">Nomor:</th>
-                      <td id="numberSession">...</td>
-                    </tr>
-                    <tr>
-                      <th class="font-bold text-left">Status:</th>
-                      <td>PAID</td>
-                    </tr>
-                    <tr>
-                      <td colspan="2">
-                        <div class="flex gap-2 flex-wrap mt-9">
-                          <button id="button1" onclick="actionButton('start')"
-                            class="px-4 py-2 bg-green-500 hover:opacity-75 rounded-normal">
-                            START
-                          </button>
-                          <button id="button2" onclick="actionButton('stop')"
-                            class="px-4 py-2 bg-secondary hover:opacity-75 rounded-normal">
-                            STOP
-                          </button>
-                          <button id="button2" onclick="actionButton('logout')"
-                            class="px-4 py-2 bg-accent2 hover:opacity-75 rounded-normal">
-                            LOGOUT
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <span class="font-medium text-body">Log:</span>
-                <div class="w-full bg-slate-100 rounded-normal px-2 py-2 text-left mt-2 mb-20 h-40 overflow-scroll">
-                  <pre>[SUCCESS] BERHASIL INISIALISASI</pre>
-                </div>
-              </div>
-              <div class="w-full bg-accent rounded-normal px-8 py-4 md:w-1/2">
-                <img src="/img/profile.png" alt="" srcset="" />
+          <h1 class="text-heading mb-8">Manajemen Whatsapp</h1>
+          <div
+            class="flex flex-wrap-reverse md:flex-wrap px-4 py-4 bg-white rounded-normal"
+          >
+            <div
+              class="bg-accent rounded-normal px-8 py-4 md:w-1/2 overflow-scroll"
+            >
+              <h2 class="text-subHeading font-medium">Informasi Sesi</h2>
+              <img
+                src="/img/profile.png"
+                alt=""
+                srcset=""
+                class="w-8 h-8 md:w-24 md:h-24 mb-4 rounded-full object-cover"
+              />
+              <table style="width: 662px" class="overflow-hidden w-full mb-4">
+                <colgroup>
+                  <col style="width: 246.81481px" />
+                  <col style="width: 414.81481px" />
+                </colgroup>
+                <thead></thead>
+                <tbody>
+                  <tr>
+                    <th class="font-bold text-left">Nama Whatsapp Sesi:</th>
+                    <td id="nameSession">...</td>
+                  </tr>
+                  <tr>
+                    <th class="font-bold text-left">Nomor:</th>
+                    <td id="numberSession">...</td>
+                  </tr>
+                  <tr>
+                    <th class="font-bold text-left">Status:</th>
+                    <td id="statusSession">...</td>
+                  </tr>
+                  <tr>
+                    <td colspan="2">
+                      <div class="flex gap-2 flex-wrap mt-9">
+                        <button
+                          id="button1"
+                          onclick="actionButton('start')"
+                          class="px-4 py-2 bg-green-500 hover:opacity-75 rounded-normal"
+                        >
+                          START
+                        </button>
+                        <button
+                          id="button2"
+                          onclick="actionButton('stop')"
+                          class="px-4 py-2 bg-secondary hover:opacity-75 rounded-normal"
+                        >
+                          STOP
+                        </button>
+                        <button
+                          id="button2"
+                          onclick="actionButton('logout')"
+                          class="px-4 py-2 bg-accent2 hover:opacity-75 rounded-normal"
+                        >
+                          LOGOUT
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <span class="font-medium text-body">Log:</span>
+              <div
+                id="wrapperSession"
+                class="w-full bg-slate-100 rounded-normal px-2 py-2 text-left mt-2 mb-20 h-40 overflow-scroll"
+              >
+                <pre></pre>
               </div>
             </div>
+            <div class="w-full bg-accent rounded-normal px-8 py-4 md:w-1/2 o">
+              <img src="/img/profile.png" alt="" srcset="" id="qrcode" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <script src="/js/whatsappSessionCore.js"></script>
-</body>
-
+    <script src="/js/whatsappSessionCore.js"></script>
+  </body>
 </html>
