@@ -16,8 +16,8 @@ const eventSource = new EventSource("/api/info/detailwhatsapp");
             insertData += `<pre>[${log.type} | ${log.date}] ${log.log}</pre>`;
         })
         wrapperSesion.innerHTML =  insertData;
-        if( json.connection == 'CONNECTING' && json.isNewLogin) {
-            qrCodeDisplay.src = "/whatsapp/qr"    
+        if( json.connection == 'CONNECTING' && typeof json.isNewLogin == true) {
+            qrCodeDisplay.src = "/whatsapp/qr"  
         }
 
         if(json.connection == "OPEN") {

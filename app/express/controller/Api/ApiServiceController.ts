@@ -86,7 +86,7 @@ export class ApiServiceController {
     }
     public static async actionButtonWhatsapp(req: Request, res: Response) {
         const session = getSession('admin');
-        if (req.body.action == 'start' || 'stop' || 'logout') {
+        if (req.body.action == 'start' || 'stop' || 'logout' || 'deleteLog') {
             switch (req.body.action) {
                 case 'start':
                     if (!InitController.isRunning) {
@@ -106,6 +106,9 @@ export class ApiServiceController {
                         session.logout();
                     }
                     break;
+                case 'deleteLog':
+                    await prisma.log.deleteMany();
+                    break
                 default:
                     return res.status(403).send({ status: false, message: "Ngapain anda?" });
             }

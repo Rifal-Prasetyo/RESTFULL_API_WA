@@ -60,12 +60,7 @@
               class="bg-accent rounded-normal px-8 py-4 md:w-1/2 overflow-scroll"
             >
               <h2 class="text-subHeading font-medium">Informasi Sesi</h2>
-              <img
-                src="/img/profile.png"
-                alt=""
-                srcset=""
-                class="w-8 h-8 md:w-24 md:h-24 mb-4 rounded-full object-cover"
-              />
+
               <table style="width: 662px" class="overflow-hidden w-full mb-4">
                 <colgroup>
                   <col style="width: 246.81481px" />
@@ -114,7 +109,15 @@
                   </tr>
                 </tbody>
               </table>
-              <span class="font-medium text-body">Log:</span>
+              <div class="flex justify-between">
+                <span class="font-medium text-body">Log:</span>
+                <button
+                  class="px-4 py-2 bg-accent2 text-white hover:opacity-50 border border-slate-400 rounded-normal"
+                  onclick="actionButton('deleteLog')"
+                >
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
               <div
                 id="wrapperSession"
                 class="w-full bg-slate-100 rounded-normal px-2 py-2 text-left mt-2 mb-20 h-40 overflow-scroll"
