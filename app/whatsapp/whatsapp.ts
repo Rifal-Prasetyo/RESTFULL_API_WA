@@ -129,7 +129,8 @@ export function getSession(data: string) {
 export async function getQrData() {
     return {
         isNewLogin: newLogin,
-        qr: qrData
+        qr: qrData,
+        conn: dataWrite.connection
     };
 }
 

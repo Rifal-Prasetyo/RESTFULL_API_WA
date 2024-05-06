@@ -5,27 +5,23 @@ const wrapperSesion = document.getElementById('wrapperSession');
 const qrCodeDisplay = document.getElementById('qrcode');
 // const delay1 = 1000;
 const eventSource = new EventSource("/api/info/detailwhatsapp");
-    eventSource.onmessage = async function (event) {
-        const json = JSON.parse(event.data);
-        const number = json.number ?  json.number.split(':')[0] : "";
-        nameSession.innerHTML = json.name ? json.name : "NULL";
-        numberSession.innerHTML = number ? number : "NULL";
-        connectionSession.innerHTML = json.connection ? json.connection  : "NULL";
-        let insertData = ``;
-        json.log.forEach(log => {
-            insertData += `<pre>[${log.type} | ${log.date}] ${log.log}</pre>`;
-        })
-        wrapperSesion.innerHTML =  insertData;
-        if( json.connection == 'CONNECTING' && typeof json.isNewLogin == true) {
-            qrCodeDisplay.src = "/whatsapp/qr"  
-        }
-
-        if(json.connection == "OPEN") {
-            qrCodeDisplay.src = "/img/profile.png"  
-        }
+eventSource.onmessage = async function (event) {
+    const json = JSON.parse(event.data);
+    const number = json.number ? json.number.split(':')[0] : "";
+    nameSession.innerHTML = json.name ? json.name : "NULL";
+    numberSession.innerHTML = number ? number : "NULL";
+    connectionSession.innerHTML = json.connection ? json.connection : "NULL";
+    let insertData = ``;
+    json.log.forEach(log => {
+        insertData += `<pre>[${log.type} | ${log.date}] ${log.log}</pre>`;
+    });
 }
 
-
+function refreshImage() {
+    var img = qrCodeDisplay;
+    img.src = img.src.split('?')[0] + '?' + new Date().getTime();
+}
+setInterval(refreshImage, 2000);
 
 // Fungsi untuk membuat elemen <pre> dan mengisi dengan teks dari objek
 // function tambahkanPre(div, teks) {

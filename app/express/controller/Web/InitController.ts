@@ -65,7 +65,13 @@ export class InitController {
     }
     public static async qrCode(req: Request, res: Response) {
         const qrCode = await getQrData();
-        res.end(await toBuffer(qrCode.qr));
+        if (qrCode.qr == null) {
+            res.end(fs.readFileSync('public/img/profile.png'))
+        } else if (qrCode.conn != "CONNECTING") {
+            res.end(fs.readFileSync('public/img/profile.png'))
+        } else {
+            res.end(await toBuffer(qrCode.qr));
+        }
     }
     public static async keepAlive(req: Request, res: Response) {
         res.setHeader('Content-Type', 'text/event-stream');
