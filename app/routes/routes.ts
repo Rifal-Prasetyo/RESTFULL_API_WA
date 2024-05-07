@@ -19,6 +19,7 @@ import { ApiServiceController } from '../express/controller/Api/ApiServiceContro
 import { upload } from '../utils/fileUpload';
 import { AdminController } from '../express/controller/Web/AdminController';
 import { CobaController } from '../express/controller/Web/CobaController';
+import { FeatureController } from '../express/controller/Web/FeatureController';
 
 const router = express.Router();
 const validator = new ApiValidator();
@@ -55,6 +56,7 @@ router.get('/randomApi', authenticateWEB, QrCodeController.qrRandom); // API
 router.get('/profile', authenticateWEB, HomeController.infoProfile);
 router.post('/profile/update', authenticateWEB, HomeController.updateProfileAction);
 router.get('/history', HomeController.history);
+router.get('/feature', authenticateWEB, FeatureController.featurePage)
 
 
 // PUBLIC ROUTE
