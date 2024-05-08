@@ -9,20 +9,20 @@ datasource db {
 
 model User {
   id            Int             @id @default(autoincrement())
-  image         String
   name          String
-  organization  String
-  address       String
   noWa          String
   role          String          @default("user")
   password      String
+  time          DateTime
+  address       String
   note          String
+  organization  String
   name_project  String
   isVerified    Int             @default(0)
-  time          DateTime
+  image         String
+  announcements Announcements[]
   api           ApiKey?
   pushes        ApiPush[]
-  announcements Announcements[]
 }
 
 model ApiPush {
