@@ -11,6 +11,8 @@ apiRouter.get('/info/detailwhatsapp', isAdmin, ApiServiceController.infoSessionW
 apiRouter.post('/info/actionbuttonwhatsapp', isAdmin, ApiServiceController.actionButtonWhatsapp);
 
 // route for NORMADA 
-apiRouter.get('/feature/basajawa/populer', BasajawaServiceController.randomUkara)
-
+apiRouter.get('/feature/basajawa/populer', BasajawaServiceController.randomUkara);
+apiRouter.get('/feature/basajawa/search/:ukara', BasajawaServiceController.searchJawa);
+apiRouter.get('/feature/basajawa/tipe', BasajawaServiceController.tipeKata);
+apiRouter.get('/feature/basajawa/detail/:ukara', BasajawaServiceController.detailJawa);
 export default apiRouter;

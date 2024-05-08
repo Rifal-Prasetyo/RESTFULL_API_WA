@@ -1,0 +1,47 @@
+<%- include('../../layout/header.html', {title: titlePage}) %>
+    <div class="w-full h-screen p-8">
+        <div class="container mx-auto flex justify-center">
+            <div class="w-full md:max-w-[60%] text-text-primary">
+                <div class="mb-4">
+                    <a href="/feature/basajawa"
+                        class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4">
+                        <i class="bi bi-arrow-left-circle text-[1rem]"></i>
+                        <span class="text-body">Mbalek</span>
+                    </a>
+                </div>
+                <% if (status==false) { %>
+                    Sing mbok goleki ora ono
+                    <% } else if(status==true) { %>
+                        <div class="w-full mb-6">
+                            <h1 class="text-lg md:text-heading font-bold">
+                                Ukara: <%= data.name %>
+                            </h1>
+                            <p class="text-body text-text-secondary w-1/2">Luwih Lengkape delok info ngisor</p>
+                        </div>
+                        <div class="bg-white shadow-lg rounded-normal px-4 py-2 md:px-8 md:py-4 mb-4 ">
+                            <h2 class="text-subHeading md:text-subHeading font-bold">
+                                <%= data.name %>
+                            </h2>
+                            <hr class="h-1 bg-slate-400 w-1/3 my-2" />
+                            <p class="text-body mb-4 ">
+                                <%= data.description %>
+                            </p>
+                            <h3 class="px-8 py-4 text-subHeading bg-red-300 my-4  w-fit">
+                                <%= data.phonetic_transcription %>
+                            </h3>
+                            <h3 class="text-body md:text-subHeading mb-2 ">Tipe</h3>
+                            <div class="grid grid-cols-3 w-full mb-2 gap-2">
+                                <% data.types.forEach(output=> { %>
+                                    <div class="bg-green-100 rounded-normal px-4 col-span-1 py-2">
+                                        <%= output %>
+                                    </div>
+                                    <% }) %>
+                                        <% } %>
+                            </div>
+
+
+                        </div>
+            </div>
+        </div>
+
+        <%- include('../../layout/footer.html'); %>

@@ -14,13 +14,13 @@ export async function randomJawa() {
     }
 }
 
-export async function searchJawa(tipe, istilah, halaman) {
+export async function searchJawa(istilah) {
     let data = {
         status: false,
         data: []
     }
     try {
-        const url = await fetch(`https://senaraiistilahjawa.kemdikbud.go.id/api/v1/public/search/${tipe}/${istilah}?page=${halaman}`);
+        const url = await fetch(`https://senaraiistilahjawa.kemdikbud.go.id/api/v1/public/search/terms/${istilah}`);
         const result = await url.json();
         data.status = true;
         data.data = result;
@@ -31,7 +31,7 @@ export async function searchJawa(tipe, istilah, halaman) {
 }
 
 export async function detailJawa(istilah) {
-    let data = {
+    let data: any = {
         status: false,
         data: {}
     }

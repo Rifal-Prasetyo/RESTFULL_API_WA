@@ -1,0 +1,105 @@
+<%- include('../../layout/header.html', {title: titlePage}) %>
+    <div class="w-full h-screen p-8">
+        <div class="container mx-auto flex justify-center">
+            <div class="w-full md:max-w-[60%] text-text-primary">
+                <div class="mb-4">
+                    <a href="/feature"
+                        class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4">
+                        <i class="bi bi-arrow-left-circle text-[1rem]"></i>
+                        <span class="text-body">Mbalek</span>
+                    </a>
+                </div>
+                <div class="w-full mb-6">
+                    <h1 class="text-lg md:text-heading font-bold">
+                        Basa Jawa
+                    </h1>
+                    <p class="text-body text-text-secondary w-1/2">Istilah Basa Jawa</p>
+                </div>
+
+                <div class="bg-white shadow-lg rounded-normal px-4 py-2 md:px-8 md:py-4 mb-4 ">
+                    <h2 class="text-subHeading md:text-subHeading font-bold">
+                        Basa Jawa
+                    </h2>
+                    <hr class="h-1 bg-slate-400 w-1/3 my-2" />
+                    <div class="grid grid-cols-8 w-full mb-2 gap-2">
+                        <input type="text"
+                            class="px-4 py-2 col-span-6 md:col-span-7 overflow-hidden rounded-normal border border-black bg-accent "
+                            id="apiValue" placeholder="lebukke istilah jawa seng dimaksud" />
+
+                        <button id="search_button"
+                            class="px-4 py-2 bg-accent2 text-white hover:opacity-50 border col-span-2 md:col-span-1 border-slate-400 rounded-normal">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                    <h2 class="text-body md:text-subHeading mb-3 hidden " id="kasilPencarianTitle">
+                        Kasil Pencarian
+                    </h2>
+                    <div class="grid grid-cols-9 w-full mb-2 gap-2" id="kasilPencarianField">
+                    </div>
+                    <h2 class="text-body md:text-subHeading mb-3 ">
+                        Ukara Acak
+                    </h2>
+                    <div class="grid grid-cols-9 w-full mb-2 gap-2" id="randomUkaraField">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        // inisalisai class
+        const inputText = document.getElementById('apiValue');
+        const buttonSearch = document.getElementById('search_button');
+        const randomUkaraField = document.getElementById('randomUkaraField');
+        const kasilPencarianField = document.getElementById('kasilPencarianField');
+        const kasilPencarianTitle = document.getElementById('kasilPencarianTitle');
+
+
+        const delay = 2000;
+        async function getRandomUkara() {
+            const url = await fetch('/api/feature/basajawa/populer');
+            const result = await url.json();
+            let output = "";
+            result.data.forEach((ukara) => {
+                output += `<a href="/feature/basajawa/detail/${ukara}" class="button-jawa"> ${ukara} </a>`
+            });
+            randomUkaraField.innerHTML = output;
+
+        }
+
+
+        getRandomUkara()
+
+
+        function debounce(func, delay) {
+            let timeoutId;
+            return function () {
+                const context = this;
+                const args = arguments;
+                clearTimeout(timeoutId);
+                timeoutId = setTimeout(() => func.apply(context, args), delay);
+            };
+        }
+
+        async function resultService() {
+            kasilPencarianTitle.style.display = "block";
+            const url = await fetch('/api/feature/basajawa/search/' + inputText.value);
+            const result = await url.json();
+            let output = "";
+            result.data.terms.data.forEach((ukara) => {
+                output += `<a href="/feature/basajawa/detail/${ukara.name}" class="button-jawa"> ${ukara.name} </a>`
+            });
+            kasilPencarianField.innerHTML = output;
+        }
+
+        inputText.addEventListener('input', debounce(() => {
+            if (inputText.value.length == 0) {
+                kasilPencarianTitle.style.display = "none";
+                kasilPencarianField.innerHTML = "";
+            }
+            resultService();
+        }, delay))
+
+    </script>
+    <%- include('../../layout/footer.html'); %>

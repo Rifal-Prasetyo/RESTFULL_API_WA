@@ -12,4 +12,12 @@ export class FeatureController {
             message: req.flash('info'),
         })
     }
+
+    public static async basaJawaPage(req: Request, res: Response) {
+        res.render('feature/basaJawa/basaJawaPage', {
+            titlePage: `${nameApp} | Basa Jawa `,
+            message: req.flash('info'),
+        })
+    }
+
 }
