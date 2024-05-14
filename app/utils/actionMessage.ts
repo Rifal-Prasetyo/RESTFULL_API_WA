@@ -2,6 +2,7 @@ import { delay } from "@whiskeysockets/baileys";
 import prisma from "../database/prisma";
 import { getSession } from "../whatsapp/whatsapp"
 import { jidToNormalNumber, numberResolve } from "./numberResolve";
+import { advanceAutoReplyWhatsapp } from "../plugins/whatsappAutomation/advanceAutoReplyWhatsapp";
 
 interface DataMessage {
 
@@ -65,8 +66,10 @@ export async function actionMessage(data: DataMessage) {
                 console.log(error);
             }
         } else {
-            console.log('gasido')
+            console.log('gasido');
             return false;
         }
+    } else {
+        await advanceAutoReplyWhatsapp(data);
     }
 }
