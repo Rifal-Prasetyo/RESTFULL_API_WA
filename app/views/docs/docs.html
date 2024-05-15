@@ -1,46 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= titlePage %></title>
-    <link href="/css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
-    <link rel="stylesheet" href="/highlight/styles/xt256.min.css" />
-    <script src="/highlight/highlight.min.js"></script>
-    <style>
-      .hljs {
-        border-radius: 10px;
-      }
-    </style>
-  </head>
+<html lang="en" class="scroll-smooth">
 
-  <body class="bg-accent">
-    <div class="w-full h-screen p-8">
-      <div class="container mx-auto flex justify-center">
-        <div class="w-full md:max-w-[60%] text-text-primary">
-          <div class="mb-4">
-            <a
-              href="/home"
-              class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4"
-            >
-              <i class="bi bi-arrow-left-circle text-[1rem]"></i>
-              <span class="text-body">Kembali</span>
-            </a>
-          </div>
-          <h1 class="text-heading font-bold">DOCS</h1>
-          <h2 class="text-body font-medium">Dokumentasi Penggunaan Bot</h2>
-          <hr class="w-1/3 bg-white my-2" />
-          <h1 class="text-subHeading font-medium">Sending Message</h1>
-          <p class="text-body font-light mb-2">Kirim Pesan</p>
-          <p class="text-body font-mono mb-2">
-            Endpoint: /whatsapp/sendmessage
-          </p>
-          <p class="text-body font-mono mb-2">Method: POST</p>
-          <h4 class="text-body font-medium text-text-secondary mb-4">
-            Request
-          </h4>
-          <pre class="mb-8"><code>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= titlePage %>
+  </title>
+  <link href="/css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="/highlight/styles/xt256.min.css" />
+  <script src="/highlight/highlight.min.js"></script>
+  <style>
+    .hljs {
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body class="bg-accent">
+  <div class="w-full h-screen p-8">
+    <div class="container mx-auto flex justify-center">
+      <div class="w-full md:max-w-[60%] text-text-primary">
+        <div class="mb-4">
+          <a href="/home"
+            class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4">
+            <i class="bi bi-arrow-left-circle text-[1rem]"></i>
+            <span class="text-body">Kembali</span>
+          </a>
+        </div>
+        <h1 class="text-heading font-bold">DOCS</h1>
+        <h2 class="text-body font-medium">Dokumentasi Penggunaan Bot</h2>
+        <hr class="w-1/3 bg-white my-2" />
+        <h1 class="text-subHeading font-medium">Sending Message</h1>
+        <p class="text-body font-light mb-2">Kirim Pesan</p>
+        <p class="text-body font-mono mb-2">
+          Endpoint: /whatsapp/sendmessage
+        </p>
+        <p class="text-body font-mono mb-2">Method: POST</p>
+        <h4 class="text-body font-medium text-text-secondary mb-4">
+          Request
+        </h4>
+        <pre class="mb-8"><code>
             {
                 "api_key": "APALOBUKABUKA|BIKINADMINMARAH", // your Screet key
                 "receiver": "08200000000", // target
@@ -50,26 +51,26 @@
                 }
             }
         </code></pre>
-          <h4 class="text-body font-medium text-text-secondary mb-4">
-            Respone
-          </h4>
-          <pre class="mb-8"><code>
+        <h4 class="text-body font-medium text-text-secondary mb-4">
+          Respone
+        </h4>
+        <pre class="mb-8"><code>
           {
               "code": 200 // 200 | 500 | 404,
               "status": true // boolean,
               "message": "Alhamdulillah" // message from server
           }
         </code></pre>
-          <h1 class="text-subHeading font-medium">Sending Media</h1>
-          <p class="text-body font-light mb-2">
-            Kirim Media berupa gambar video
-          </p>
-          <p class="text-body font-mono mb-2">Endpoint: /whatsapp/sendimage</p>
-          <p class="text-body font-mono mb-2">Method: POST</p>
-          <h4 class="text-body font-medium text-text-secondary mb-4">
-            Request
-          </h4>
-          <pre class="mb-8"><code>
+        <h1 class="text-subHeading font-medium">Sending Media</h1>
+        <p class="text-body font-light mb-2">
+          Kirim Media berupa gambar video
+        </p>
+        <p class="text-body font-mono mb-2">Endpoint: /whatsapp/sendimage</p>
+        <p class="text-body font-mono mb-2">Method: POST</p>
+        <h4 class="text-body font-medium text-text-secondary mb-4">
+          Request
+        </h4>
+        <pre class="mb-2"><code>
             {
                 "api_key": "APALOBUKABUKA|BIKINADMINMARAH", // your Screet key
                 "receiver": "08200000000", // target
@@ -81,34 +82,36 @@
                 }
             }
         </code></pre>
-          <h4 class="text-body font-medium text-text-secondary mb-4">
-            Respone
-          </h4>
-          <pre class="mb-8"><code>
+        <p class="text-xs italic mb-8">Untuk Mendapatkan ID Grub ikuti panduan ini <a href="#IDGroup"
+            class="text-blue-700 underline">Klik Disini</a></p>
+        <h4 class="text-body font-medium text-text-secondary mb-4">
+          Respone
+        </h4>
+        <pre class="mb-8"><code>
           {
               "code": 200 // 200 | 500 | 404,
               "status": true // boolean,
               "message": "Alhamdulillah" // message from server
           }
         </code></pre>
-          <hr class="h-2 bg-slate-400 w-1/3 my-4" />
-          <h1 class="text-subHeading font-medium">Check History</h1>
-          <p class="text-body font-light mb-2">Mengecek Riwayat</p>
-          <p class="text-body font-mono mb-2">Endpoint: /api/info</p>
-          <p class="text-body font-mono mb-2">Method: POST</p>
-          <h4 class="text-body font-medium text-text-secondary mb-4">
-            Request
-          </h4>
-          <pre class="mb-8"><code>
+        <hr class="h-2 bg-slate-400 w-1/3 my-4" />
+        <h1 class="text-subHeading font-medium">Check History</h1>
+        <p class="text-body font-light mb-2">Mengecek Riwayat</p>
+        <p class="text-body font-mono mb-2">Endpoint: /api/info</p>
+        <p class="text-body font-mono mb-2">Method: POST</p>
+        <h4 class="text-body font-medium text-text-secondary mb-4">
+          Request
+        </h4>
+        <pre class="mb-8"><code>
           {
             "api_key": "APALOBUKABUKA|BIKINADMINMARAH",
             "page": 0 // optional
           }
         </code></pre>
-          <h4 class="text-body font-medium text-text-secondary mb-4">
-            Respone
-          </h4>
-          <pre class="mb-8"><code>
+        <h4 class="text-body font-medium text-text-secondary mb-4">
+          Respone
+        </h4>
+        <pre class="mb-8"><code>
           {
             "status": true,
             "name": "Nisaazzahra",
@@ -127,13 +130,53 @@
             ]
           }
         </code></pre>
-        </div>
+        <hr class="h-2 bg-slate-400 w-1/2 my-4" />
+        <h1 class="text-subHeading font-medium">Whatsapp Command</h1>
+        <p class="text-body font-light mb-2">Perintah Whatsapp</p>
+        <hr class="h-1 bg-slate-600 w-1/3 my-1" />
+        <p class="text-body font-light mb-2">Perintah Whatsapp dapat dilakukan dengan melakukan Reply ke Bot Whatsapp
+          dengan memasukkan perintah tertentu, biasanya diawali dengan tanda /[command] [Argument]. berikut adalah
+          perintah yang dapat dilakukan ke bot Whatsapp</p>
+        <h4 class="text-body font-medium text-text-secondary">
+          Cek Status
+        </h4>
+        <p class="text-body mb-4">Cek Status dasar Identitas mu dan penggunaan kamu</p>
+        <img src="/img/docsMedia/status_command.jpeg" alt="" class="rounded-normal w-[80%] object-cover mb-8">
+        <h4 class="text-body font-medium text-text-secondary" id="IDGroup">
+          Mendapatkan ID Group
+        </h4>
+        <p class="text-body mb-2">Mendapatkan Id Grub untuk melakukan automisasi Bot ke Grub kamu</p>
+        <p class="text-body mb-4">Langkah: Undang Bot Whatsapp kedalam Grub yang dituju, masukkan perintah /capt di
+          dalam group</p>
+        <img src="/img/docsMedia/capt_command.jpeg" alt="" class="rounded-normal w-[80%] object-cover mb-4">
+        <p class="text-body mb-4">Setelah memasukkan perintah tersebut otomatis bot mengirimkan chat ke kamu secara
+          pribadi</p>
+        <img src="/img/docsMedia/result_command.jpeg" alt="" class="rounded-normal w-[80%] object-cover mb-4">
+
+        <hr class="h-2 bg-slate-400 w-1/2 my-4" />
+        <h1 class="text-heading font-bold">NORMADA FEATURE</h1>
+        <h1 class="text-subHeading font-medium">Whatsapp Command Normada Lesson</h1>
+        <p class="text-body font-light mb-2">Perintah Whatsapp untuk Pelajaran Normada</p>
+        <h4 class="text-body font-medium text-text-secondary">
+          Basa Jawa
+        </h4>
+        <p class="text-body font-light mb-2">Sampeyan saget bales pesan maring WhatsappBot ngangge prentah:</p>
+        <p class="text-body font-light mb-2"><span
+            class="rounded-normal bg-slate-200  text-body px-4">/randombasa</span>: kangge ngentukke kata2 acak </p>
+        <p class="text-body font-light mb-2"><span class="rounded-normal bg-slate-200  text-body px-4">/basa
+            [kata]</span>: kangge ngentukke detail saking kata kang digoleki </p>
+        <p class="text-body font-light mb-2">Tuladha: </p>
+        <img src="/img/docsMedia/randomBasa.jpeg" alt="" class="rounded-normal w-[80%] object-cover mb-4">
+        <img src="/img/docsMedia/basa_ukara.jpeg" alt="" class="rounded-normal w-[80%] object-cover mb-4">
+
       </div>
     </div>
-    >
-    <script>
-      hljs.highlightAll();
-    </script>
-    <%- include('../layout/footer.html'); %>
-  </body>
+  </div>
+  >
+  <script>
+    hljs.highlightAll();
+  </script>
+  <%- include('../layout/footer.html'); %>
+</body>
+
 </html>

@@ -25,9 +25,11 @@
         <h1 class="text-heading font-bold mb-4">Detail Pengguna</h1>
         <% if (isHasData) { %>
           <div class="grid grid-cols-3 gap-8 bg-white px-8 py-4 rounded-normal shadow-2xl">
-            <div class="col-span-2 flex gap-8">
-              <img src="/img/profile-user/<%= user.image %>" alt="" srcset=""
-                class="w-32 h-32 rounded-full object-cover" />
+            <div class="col-span-3 md:col-span-2 flex flex-wrap gap-8">
+              <div class="w-full">
+                <img src="/img/profile-user/<%= user.image %>" alt="" srcset=""
+                  class="w-32 h-32 rounded-full object-cover" />
+              </div>
               <div class="flex flex-col">
                 <h1 class="text-subHeading font-bold mb-2">
                   <%= user.name %>
@@ -74,23 +76,33 @@
                     </div>
                   </li>
                   <li class="md:w-[70%]">
-                    <div class="rounded-normal bg-accent px-4 py-2">
-                      <h3 class="text-subHeading mb-2">Catatan</h3>
-                      <p class="text-body">
-                        <%= user.note %>
-                      </p>
+                    <div class="grid grid-cols-3 gap-2">
+                      <div class="rounded-normal bg-accent px-4 py-2 col-span-2">
+                        <h3 class="text-subHeading mb-2">Catatan</h3>
+                        <p class="text-body">
+                          <%= user.note %>
+                        </p>
+                      </div>
+                      <div class="rounded-normal bg-accent px-4 py-2 col-span-1">
+                        <h3 class="text-subHeading mb-2">ApiPush</h3>
+                        <span class="text-heading font-bold text-accent2">
+                          <%= user.api.totalUse %>
+                        </span>
+                      </div>
                     </div>
                   </li>
                 </ul>
               </div>
             </div>
             <% if (user.isVerified==1) { %>
-              <div class="flex flex-col justify-center items-center bg-green-400 rounded-normal">
+              <div
+                class="flex flex-col justify-center items-center col-span-3 md:col-span-1 bg-green-400 rounded-normal">
                 <i class="bi bi-check-circle-fill text-white text-[5rem] mb-2"></i>
                 <span class="text-subHeading">Terverifikasi</span>
               </div>
               <% } else { %>
-                <div class="flex flex-col justify-center items-center bg-red-400 rounded-normal">
+                <div
+                  class="flex flex-col justify-center items-center col-span-3 md:col-span-1 bg-red-400 rounded-normal">
                   <i class="bi bi-x-circle-fill text-white text-[5rem] mb-2"></i>
                   <span class="text-subHeading">Belum Verifikasi</span>
                   <a href="/manage/user/verid/<%= user.id %>"

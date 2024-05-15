@@ -33,8 +33,7 @@
             <i class="bi bi-send text-[2rem]"></i>
             <span class="text-body">Pengumuman</span>
           </a>
-          <a href="/manage/whatsapp"
-            class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center">
+          <a href="/manage/whatsapp" class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center">
             <i class="bi bi-whatsapp text-[2rem]"></i>
             <span class="text-body">Whatsapp</span>
           </a>
@@ -47,11 +46,13 @@
             <div class="w-full mb-2 flex justify-between">
               <h1 class="text-heading">Pengguna</h1>
               <div class="flex gap-4 w-[50%] md:w-fit ">
-                <input type="text" name="search" id="search" placeholder="Cari"
-                  class="px-4 py-2 overflow-hidden rounded-normal border border-black bg-white" />
-                <button class="border border-black bg-white px-4 py-2 rounded-normal">
-                  <i class="bi bi-search text-[1rem]"></i>
-                </button>
+                <form action="" method="get">
+                  <input type="text" name="query" placeholder="Cari" value="<%= search %>"
+                    class="px-4 py-2 overflow-hidden rounded-normal border border-black bg-white" />
+                  <button type="submit" class="border border-black bg-white px-4 py-2 rounded-normal">
+                    <i class="bi bi-search text-[1rem]"></i>
+                  </button>
+                </form>
               </div>
             </div>
             <div class="mb-4">
@@ -100,8 +101,8 @@
                           <% if ( users[index].isVerified==0) { %>
                             <a href="/manage/user/verif/<%= users[index].id %>"
                               class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-accent transition-all delay-75 duration-150 z-40 bg-accent flex justify-between items-center gap-4">
-                              <i class="bi bi-check-circle-fill text-[1rem]"></i>
-                              <span class="text-body">Verifikasi</span>
+                              <i class="bi bi-check-circle-fill text-[1rem] text-text-primary"></i>
+                              <span class="text-body text-text-primary">Verifikasi</span>
                             </a>
                             <% } %>
                         </td>
@@ -118,21 +119,19 @@
             <nav aria-label="Page navigation example">
               <ul class="inline-flex -space-x-px text-base h-10">
                 <li>
-                  <a href="#"
+                  <a href="?<% if (search) { %>
+                    query=<%= search %>
+                  <% } %>p=<%= page ? page - 1 : 1 %>"
                     class="flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
                 </li>
                 <li>
-                  <a href="#"
-                    class="flex items-center justify-center px-4 h-10 leading-tight text-accent bg-text-primary border border-gray-300 hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
-                </li>
-
-                <li>
-                  <a href="#"
+                  <a href="?<% if (search) { %>
+                    query=<%= search %>
+                  <% } %>p=<%= parseInt(page) + 1 %>"
                     class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
                 </li>
               </ul>
             </nav>
-
       </div>
     </div>
   </div>

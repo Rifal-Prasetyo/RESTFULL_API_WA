@@ -9,6 +9,17 @@ import { getSession } from "../../../whatsapp/whatsapp";
 const nameApp = process.env.NAME_APP;
 export class AdminController {
     public static async manageUserPage(req: Request, res: Response) {
+        const query = req.query.query ? req.query.query : "";
+        let pageNumber = req.query.p ? req.query.p : 1;
+        if (pageNumber == 0) pageNumber = 1;
+        const pageSize = 10;
+        let wherecondition = {};
+        // set to session 
+        req.session.query = query as string;
+        req.session.page = pageNumber as unknown as number;
+        if (query) {
+            wherecondition = ''
+        }
         const user = await prisma.user.findMany({
             select: {
                 name: true,
@@ -19,17 +30,25 @@ export class AdminController {
                 id: true,
                 isVerified: true
             },
-            take: 10,
-            skip: 0,
+            where: {
+                OR: [
+                    { name: { contains: "%" + query as string + "%" } },
+                    { organization: { contains: "%" + query as string + "%" } }
+                ],
+            },
+            skip: (pageNumber as unknown as number - 1) * pageSize,
+            take: pageSize,
             orderBy: {
                 id: 'desc'
             }
-        })
+        });
         res.render('owner/userManage', {
             titlePage: `${nameApp} | Manage User`,
             users: user,
+            search: req.session.query,
+            page: req.session.page,
             message: req.flash('info'),
-        })
+        });
     }
 
     public static async detailUser(req: Request, res: Response) {
@@ -39,6 +58,9 @@ export class AdminController {
             const user = await prisma.user.findFirst({
                 where: {
                     id: getID
+                },
+                include: {
+                    api: true
                 }
             });
 

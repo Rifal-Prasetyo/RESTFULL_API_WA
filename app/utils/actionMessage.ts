@@ -3,6 +3,8 @@ import prisma from "../database/prisma";
 import { getSession } from "../whatsapp/whatsapp"
 import { jidToNormalNumber, numberResolve } from "./numberResolve";
 import { advanceAutoReplyWhatsapp } from "../plugins/whatsappAutomation/advanceAutoReplyWhatsapp";
+import * as fs from 'fs';
+import log from "../services/pretty-logger";
 
 interface DataMessage {
 
@@ -68,6 +70,39 @@ export async function actionMessage(data: DataMessage) {
         } else {
             console.log('gasido');
             return false;
+        }
+    } else if (data.message.startsWith('/status')) {
+        const session = getSession('admin');
+        const dateTime = new Date();
+        const numbeReg = jidToNormalNumber(data.number);
+        try {
+            const find = await prisma.user.findFirst({
+                where: {
+                    noWa: numbeReg
+                },
+                include: {
+                    api: true
+                }
+            });
+            if (find) {
+                let msg = ``;
+                msg += `*Berikut Status WhatsappQue Anda*\n`;
+                msg += `Nama: *${find.name}*\n`;
+                msg += `Organisasi: \n*${find.organization}*\n`;
+                msg += `Proyek: *${find.name_project}*\n`;
+                msg += `Total Penggunaan API Anda: *${find.api.totalUse}*\n`;
+                msg += `Selengkapnya kunjungi web Dokumentasi WhatsappQue\n\n`;
+                msg += `RIFAL PRASETYO | ${dateTime.getFullYear()}`;
+                await session.sendMessage(data.number, {
+                    image: fs.readFileSync(`./public/img/profile-user/${find.image}`),
+                    caption: msg,
+                    gifPlayback: false
+                });
+            }
+        } catch (err) {
+            log.error("ERROR: GET STATUS !!!");
+            console.log(err);
+
         }
     } else {
         await advanceAutoReplyWhatsapp(data);
