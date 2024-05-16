@@ -14,4 +14,24 @@ export class PublicController {
             message: req.flash('info'),
         });
     }
+    public static async tosAction(req: Request, res: Response) {
+        const getNomorWA = req.session.user;
+        const gettingUser = await prisma.user.findFirst({
+            where: {
+                noWa: getNomorWA
+            }
+        });
+        const update = await prisma.user.update({
+            where: {
+                id: gettingUser.id,
+            },
+            data: {
+                isTermsofService: 1
+            }
+        });
+
+        return res.redirect('/wait');
+
+
+    }
 }
