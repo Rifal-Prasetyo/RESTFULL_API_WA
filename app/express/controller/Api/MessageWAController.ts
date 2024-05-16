@@ -19,11 +19,11 @@ export class MessageWAController {
 
         });
 
-        if (apiKey === null) {
+        if (apiKey === null && apiKey.User_use.isVerified == 0) {
             return res.send({
                 code: 404,
                 status: false,
-                message: "INVALID API KEY!!!",
+                message: "INVALID API KEY !!! OR HAS BANNED/DELETED",
             });
         } else {
             if (!isRequestAllowed(api_key, 1, 10000)) {
@@ -100,11 +100,11 @@ export class MessageWAController {
             }
 
         });
-        if (apiKey === null) {
+        if (apiKey === null && apiKey.User_use.isVerified == 0) {
             return res.send({
                 code: 404,
                 status: false,
-                message: "INVALID API KEY!!!",
+                message: "INVALID API KEY!!! OR HAS BANNED/DELETED",
             });
         } else {
             if (!isRequestAllowed(api_key, 1, 10000)) {

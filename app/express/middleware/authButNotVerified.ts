@@ -14,10 +14,12 @@ export default async function authButNotVerified(req: Request, res: Response, ne
         //         return next('route');
         //     }
         // })
-        if (user && user.isVerified == 1) {
+        if (user && user.isVerified == 1 && user.isTermsofService == 1) {
             return res.redirect('/home')
+        } else if (user && user.isTermsofService == 0) {
+            return res.redirect('/tos');
         } else {
-            return next()
+            return next();
         }
 
     } else {

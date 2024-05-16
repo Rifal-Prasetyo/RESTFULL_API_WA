@@ -18,7 +18,7 @@
           <form class="mx-auto" method="post" action="/register/action" enctype="multipart/form-data">
             <div class="flex flex-col items-center pb-10">
               <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="/img/profile.png" alt="Bonnie image" />
-              <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">
+              <h5 class="mb-1 text-xl font-medium text-gray-900 ">
                 <%= nameApp %>
               </h5>
               <span class="text-sm text-gray-500 dark:text-gray-400">Daftar</span>
@@ -92,9 +92,11 @@
                 <p class="text-body mb-4">Sudah Punya akun? <a href="/login" class="text-cyan-500 underline">Masuk</a>
                 </p>
                 <button type="submit"
-                  class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  class="text-white bg-blue-700 mb-2 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   Daftar
                 </button>
+                <p class=" text-xs italic font-mono">Dengan melanjutkan pendaftaran kamu setuju dengan <a href="/tos"
+                    class="text-blue-600 underline">Terms of Service</a> Layanan Ini </p>
           </form>
         </div>
       </div>

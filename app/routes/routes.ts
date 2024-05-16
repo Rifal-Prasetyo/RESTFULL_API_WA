@@ -21,6 +21,8 @@ import { AdminController } from '../express/controller/Web/AdminController';
 import { CobaController } from '../express/controller/Web/CobaController';
 import { FeatureController } from '../express/controller/Web/FeatureController';
 import { FeatureBasaJawaController } from '../express/controller/Web/FeatureBasaJawaController';
+import { PublicController } from '../express/controller/Web/PublicController';
+import authButTOS from '../express/middleware/authButTOS';
 
 const router = express.Router();
 const validator = new ApiValidator();
@@ -70,6 +72,7 @@ router.post('/login', LoginController.loginAction);
 router.get('/register', RegisterController.registerPage);
 router.post('/register/action', upload.single('image'), validator.registerSerialize(), RegisterController.registerAction);
 router.get('/wait', authButNotVerified, HomeController.waitUntilAdminVerify);
+router.get('/tos', authButTOS, PublicController.tosPage);
 // router.post('/login/api', LoginController.loginActinAPI)
 
 // API Send Message

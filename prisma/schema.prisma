@@ -8,21 +8,23 @@ datasource db {
 }
 
 model User {
-  id            Int             @id @default(autoincrement())
-  name          String
-  noWa          String
-  role          String          @default("user")
-  password      String
-  time          DateTime
-  address       String
-  note          String
-  organization  String
-  name_project  String
-  isVerified    Int             @default(0)
-  image         String
-  announcements Announcements[]
-  api           ApiKey?
-  pushes        ApiPush[]
+  id               Int             @id @default(autoincrement())
+  name             String
+  noWa             String
+  role             String          @default("user")
+  password         String
+  time             DateTime
+  address          String
+  note             String
+  organization     String
+  name_project     String
+  isVerified       Int             @default(0)
+  isTermsofService Int             @default(0)
+  isBanned         Int             @default(0)
+  image            String
+  announcements    Announcements[]
+  api              ApiKey?
+  pushes           ApiPush[]
 }
 
 model ApiPush {

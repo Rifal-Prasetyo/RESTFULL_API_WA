@@ -85,7 +85,7 @@ export class RegisterController {
                     api: true
                 }
             });
-            return res.redirect('/wait');
+            return res.redirect('/tos');
         } catch (error) {
             console.log(error);
             req.flash('info', 'Kesalahan, Server Sibuk.');

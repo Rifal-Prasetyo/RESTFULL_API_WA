@@ -1,7 +1,6 @@
 import { NextFunction, Request, Response } from "express"
 import prisma from "../../database/prisma"
-import * as bcrypt from 'bcrypt';
-export async function authenticateWEB(req: Request, res: Response, next: NextFunction) {
+export default async function authButTOS(req: Request, res: Response, next: NextFunction) {
     if (req.session.user) {
         const user = await prisma.user.findFirst({
             where: {
@@ -15,14 +14,15 @@ export async function authenticateWEB(req: Request, res: Response, next: NextFun
         //         return next('route');
         //     }
         // })
-        if (user && user.isVerified == 1 && user.isTermsofService == 1) {
-            return next();
+        if (user && user.isTermsofService == 1) {
+            return res.redirect('/wait');
+        } else if (user && user.isTermsofService == 1 && user.isVerified == 1) {
+            return res.redirect('/home');
         } else {
-            res.redirect('/tos');
+            return next();
         }
 
     } else {
         res.redirect('/login');
     }
-
 }
