@@ -15,6 +15,7 @@ eventSource.onmessage = async function (event) {
     json.log.forEach(log => {
         insertData += `<pre>[${log.type} | ${log.date}] ${log.log}</pre>`;
     });
+    wrapperSesion.innerHTML = insertData;
 }
 
 function refreshImage() {
