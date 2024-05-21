@@ -64,7 +64,7 @@ export async function advanceAutoReplyWhatsapp(data: DataMessage) {
         /** BOT WHATSAPP BRANCH  
          * Penggabungan dari bot WA sebelumnya
         */
-    } else if (data.message.startsWith('tt')) {
+    } else if (data.message.startsWith('/tt')) {
         const session = getSession('admin');
         await session.sendPresenceUpdate("composing", data.number);
         await delay(2000);
@@ -108,11 +108,11 @@ export async function advanceAutoReplyWhatsapp(data: DataMessage) {
             await session.sendMessage(data.number, { text: 'GAGAL MENGUNDUH...' })
         }
 
-    } else if (data.message.startsWith('menu')) {
+    } else if (data.message.startsWith('/menu')) {
         const session = getSession('admin');
         const name_user = data.name;
         const date = new Date();
-        const message = `Halo ${name_user}, Berikut adalah perintah yang bisa dilakukan oleh bot\n===========\n- *Buat Stiker*\nMasukkan gambar dengan diberi   caption "/s" di gambarnya\n- *Download Video Tiktok*\n/tt [link_tiktok]\nContoh: /tt https://vt.tiktok.com/blabla/blablabala\n\n- *Download Video Reels Instagram*\n/ig [link_ig]\nContoh: /ig https://ig.com/blabalabala\n============\nDisclaimer masukkan perintah /tos\n============\nRifal Bot V3.4 ${date.getFullYear}`;
+        const message = `Halo ${name_user}, Berikut adalah perintah yang bisa dilakukan oleh bot\n===========\n- *Buat Stiker*\nMasukkan gambar dengan diberi   caption "/s" di gambarnya\n- *Download Video Tiktok*\n/tt [link_tiktok]\nContoh: /tt https://vt.tiktok.com/blabla/blablabala\n\n- *Download Video Reels Instagram*\n/ig [link_ig]\nContoh: /ig https://ig.com/blabalabala\n============\nDisclaimer masukkan perintah /tos\n============\nRifal Bot V3.4 ${date.getFullYear()}`;
         await session.sendPresenceUpdate("composing", data.number);
         await delay(1000);
         await session.sendMessage(data.number,
