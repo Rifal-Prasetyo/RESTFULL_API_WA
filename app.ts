@@ -9,6 +9,8 @@ import 'dotenv/config';
 import * as path from 'path';
 import { init } from './app/whatsapp/whatsapp';
 import apiRouter from './app/routes/apiRoutes';
+import { scheduleJob } from './app/plugins/whatsappAutomation/scheduleWhatsapp/liburSystem';
+
 
 const app = express();
 app.use(express.json());
@@ -36,5 +38,6 @@ const host = server.host || "0.0.0.0";
 const port = server.port || 3000;
 (async () => {
     // await init();
+    await scheduleJob();
     app.listen(port, host, listener);
 })();

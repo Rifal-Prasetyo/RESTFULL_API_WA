@@ -1,6 +1,7 @@
 import { WAMessage } from "@whiskeysockets/baileys";
 import { actionMessage } from "./actionMessage";
 import log from "../services/pretty-logger";
+import { sendDatabase } from "../services/storeDatabase";
 
 interface DataMessage {
 
@@ -11,6 +12,7 @@ interface DataMessage {
     group?: string
 
 }
+let messageRaw: WAMessage = null;
 export async function serializeMessage(messages: WAMessage[]) {
     let data: DataMessage = {
         name: "",
@@ -19,6 +21,7 @@ export async function serializeMessage(messages: WAMessage[]) {
         message: ""
     };
     const m = messages[0];
+    messageRaw = m;
     if (m.key.fromMe) return false;
     if (m.key.remoteJid === 'status@broadcast') return false;
     const messageType = Object.keys(m.message)[0] ? Object.keys(m.message)[0] : null;
@@ -37,4 +40,9 @@ export async function serializeMessage(messages: WAMessage[]) {
         data['group'] = m.key.remoteJid;
     }
     actionMessage(data);
+    sendDatabase(data);
+}
+
+export async function getRawMessage() {
+    return messageRaw;
 }

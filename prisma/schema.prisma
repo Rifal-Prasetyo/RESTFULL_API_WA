@@ -62,6 +62,13 @@ model Log {
   log  String
 }
 
+model Contact {
+  id       Int    @id @default(autoincrement())
+  nameUser String
+  number   String
+  useBot   Int
+}
+
 enum Type {
   PERSONAL
   GROUP

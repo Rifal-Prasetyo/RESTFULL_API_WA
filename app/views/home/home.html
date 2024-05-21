@@ -1,328 +1,398 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= titlePage %></title>
+    <link href="/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>
-    <%= titlePage %>
-  </title>
-  <link href="/css/style.css" rel="stylesheet" />
-  <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
-</head>
-
-<body class="bg-accent">
-  <div class="w-full h-screen p-8">
-    <div class="container mx-auto flex justify-center">
-      <div class="w-full md:max-w-[60%]">
-        <!-- beginning CONTENT  -->
-        <% if (message.length> 0 ) { %>
-          <div class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2">
+  <body class="bg-accent">
+    <div class="w-full h-screen p-8">
+      <div class="container mx-auto flex justify-center">
+        <div class="w-full md:max-w-[60%]">
+          <!-- beginning CONTENT  -->
+          <% if (message.length> 0 ) { %>
+          <div
+            class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2"
+          >
             <%= message %>
           </div>
           <% } %>
-            <div class="bg-white shadow-lg rounded-normal px-8 flex items-center justify-between mb-4">
-              <div class="flex gap-4 items-center py-4">
-                <img src="/img/profile-user/<%= userProfileImage %>" alt="" srcset=""
-                  class="w-8 h-8 md:w-16 md:h-16 rounded-full object-cover" />
+          <div
+            class="bg-white shadow-lg rounded-normal px-8 flex items-center justify-between mb-4"
+          >
+            <div class="flex gap-4 items-center py-4">
+              <img
+                src="/img/profile-user/<%= userProfileImage %>"
+                alt=""
+                srcset=""
+                class="w-8 h-8 md:w-16 md:h-16 rounded-full object-cover"
+              />
+              <div class="">
+                <h3 class="text-sm md:text-subHeading mb-1">Selamat Datang</h3>
                 <div class="">
-                  <h3 class="text-sm md:text-subHeading mb-1">Selamat Datang</h3>
-                  <div class="">
-                    <h1 class="text-lg md:text-heading font-bold">
-                      <%= nameUser %>
-                    </h1>
-                    <% if (isOwner) { %>
-                      <span class="text-body rounded-lg bg-primary text-white px-2 h-fit">OWNER</span>
-                      <% } %>
-                  </div>
-                </div>
-              </div>
-              <div class="relative bg-opacity-30">
-                <div class="flex items-center gap-2">
-
-                  <i class="bi bi-list text-[2rem] md:text-[4rem] px-2 hover:bg-secondary rounded-normal"
-                    id="imageButton"></i>
-                </div>
-
-                <div
-                  class="absolute shadow-lg px-4 py-2 rounded-normal -bottom-0 right-0 opacity-0 transition-all duration-150 ease-in-out -z-40 bg-accent text-text-primary"
-                  id="targetImageButton">
-                  <ul>
-                    <li>
-                      <a href="/profile" class="flex items-center justify-between gap-4 hover:bg-slate-100">
-                        <i class="bi bi-person text-[1rem]"></i>
-                        <span class="text-body">Profile</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="/logout" class="flex items-center justify-between gap-4 hover:bg-slate-100">
-                        <i class="bi bi-box-arrow-in-right text-[1rem]"></i>
-                        <span class="text-body">logout</span>
-                      </a>
-                    </li>
-                  </ul>
+                  <h1 class="text-lg md:text-heading font-bold">
+                    <%= nameUser %>
+                  </h1>
+                  <% if (isOwner) { %>
+                  <span
+                    class="text-body rounded-lg bg-primary text-white px-2 h-fit"
+                    >OWNER</span
+                  >
+                  <% } %>
                 </div>
               </div>
             </div>
-            <% if (announcement) { %>
-              <div
-                class="bg-white shadow-lg flex rounded-normal items-center scroll-text-container text-text-primary justify-between mb-4">
-                <i class="bi bi-info-circle-fill text-[2rem] bg-accent z-30 px-4 py-2"></i>
-                <span class="w-full scroll-text1">
-                  <%= announcement.body %>
-                </span>
+            <div class="relative bg-opacity-30">
+              <div class="flex items-center gap-2">
+                <i
+                  class="bi bi-list text-[2rem] md:text-[4rem] px-2 hover:bg-secondary rounded-normal"
+                  id="imageButton"
+                ></i>
               </div>
-              <% } %>
 
-                <% if (isOwner) { %>
-                  <% if (userVerfied) { %>
-                    <a href="/manage/user"
-                      class="bg-white shadow-lg flex rounded-normal items-center scroll-text-container text-text-primary justify-between mb-4">
-                      <i class="bi bi-info-circle-fill text-[2rem] bg-secondary z-30 px-4 py-2 text-white"></i>
-                      <span class="scroll-text1">Terdapat User belum Terverifikasi. Klik banner untuk masuk Owner
-                        Dashboard</span>
+              <div
+                class="absolute shadow-lg px-4 py-2 rounded-normal -bottom-0 right-0 opacity-0 transition-all duration-150 ease-in-out -z-40 bg-accent text-text-primary"
+                id="targetImageButton"
+              >
+                <ul>
+                  <li>
+                    <a
+                      href="/profile"
+                      class="flex items-center justify-between gap-4 hover:bg-slate-100"
+                    >
+                      <i class="bi bi-person text-[1rem]"></i>
+                      <span class="text-body">Profile</span>
                     </a>
-                    <% } %>
-                      <a href="/" id="offWABanner" class="hidden">
-                        <div
-                          class="bg-white shadow-lg flex rounded-normal items-center scroll-text-container text-text-primary gap-4 mb-4 hover:shadow-2xl overflow-hidden">
-                          <i class="bi bi-info-circle-fill text-[2rem] bg-accent2 z-30 px-4 py-2 text-white"></i>
-                          <span class="">Layanan Whatsapp Offline. Klik banner untuk memulai...</span>
-                        </div>
-                      </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/logout"
+                      class="flex items-center justify-between gap-4 hover:bg-slate-100"
+                    >
+                      <i class="bi bi-box-arrow-in-right text-[1rem]"></i>
+                      <span class="text-body">logout</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <% if (announcement) { %>
+          <div
+            class="bg-white shadow-lg flex rounded-normal items-center scroll-text-container text-text-primary justify-between mb-4"
+          >
+            <i
+              class="bi bi-info-circle-fill text-[2rem] bg-accent z-30 px-4 py-2"
+            ></i>
+            <span class="w-full scroll-text1"> <%= announcement.body %> </span>
+          </div>
+          <% } %> <% if (isOwner) { %> <% if (userVerfied) { %>
+          <a
+            href="/manage/user"
+            class="bg-white shadow-lg flex rounded-normal items-center scroll-text-container text-text-primary justify-between mb-4"
+          >
+            <i
+              class="bi bi-info-circle-fill text-[2rem] bg-secondary z-30 px-4 py-2 text-white"
+            ></i>
+            <span class="scroll-text1"
+              >Terdapat User belum Terverifikasi. Klik banner untuk masuk Owner
+              Dashboard</span
+            >
+          </a>
+          <% } %>
+          <a href="/" id="offWABanner" class="hidden">
+            <div
+              class="bg-white shadow-lg flex rounded-normal items-center scroll-text-container text-text-primary gap-4 mb-4 hover:shadow-2xl overflow-hidden"
+            >
+              <i
+                class="bi bi-info-circle-fill text-[2rem] bg-accent2 z-30 px-4 py-2 text-white"
+              ></i>
+              <span class=""
+                >Layanan Whatsapp Offline. Klik banner untuk memulai...</span
+              >
+            </div>
+          </a>
 
-                      <% } %>
-                        <div class="grid grid-cols-2 gap-4 mb-4 relative">
-                          <a href="/docs"
-                            class="bg-text-primary transition-all ease-in-out duration-150 hover:scale-95 shadow-lg rounded-normal text-white px-8 py-2 col-span-1 flex w-full justify-center items-center">
-                            <div class="flex flex-col">
-                              <i class="bi bi-journal-bookmark-fill text-[4rem] mb-4"></i>
-                              <span class="text-subHeading text-center">Docs</span>
-                            </div>
-                          </a>
-                          <div class="relative z-20">
-                            <div id="button-report"
-                              class="bg-white cursor-pointer transition-all ease-in-out duration-150 hover:scale-95 shadow-lg rounded-normal text-text-primary px-8 py-2 col-span-1 flex w-full justify-center items-center">
-                              <div class="flex flex-col items-center">
-                                <i class="bi bi-info-square-fill text-[4rem] mb-4"></i>
-                                <span class="text-subHeading text-center">Report</span>
-                              </div>
-                            </div>
-                            <div id="dropdown-btn"
-                              class="absolute right-4 bottom-3 transition-all ease-out duration-200 -z-[1] bg-accent shadow-lg rounded-normal px-4 py-2">
-                              <ul class="text-text-primary text-body">
-                                <li class="cursor-pointer mb-2 bg-opacity-30 hover:bg-slate-100">
-                                  <a href="http://wa.me/<%= ownerNumber %>">Tidak Berfungsi?</a>
-                                </li>
-                                <li class="cursor-pointer bg-opacity-30 hover:bg-slate-100">
-                                  <a href="http://wa.me/<%= ownerNumber %>">Offline</a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                          <a href="/feature"
-                            class="bg-accent2 transition-all ease-in-out duration-150 hover:scale-95 shadow-lg rounded-normal text-white px-8 py-2 col-span-2 flex w-full justify-center items-center">
-                            <div class="flex flex-col items-center">
-                              <i class="bi bi-view-list text-[4rem] mb-4"></i>
-                              <span class="text-subHeading text-center">Fitur Lain</span>
-                            </div>
-                          </a>
-                        </div>
-                        <div class="bg-white shadow-lg rounded-normal px-8 py-6 items-center justify-between mb-4">
-                          <h4 class="text-subHeading mb-2 text-text-primary">Alat</h4>
-                          <div class="flex flex-wrap gap-2 text-text-primary">
-                            <a href="/history"
-                              class="px-4 py-2 rounded-normal w-[6rem] h-[6rem] bg-accent hover:shadow-xl flex flex-col items-center">
-                              <i class="bi bi-clock-history text-[2rem]"></i>
-                              <span class="text-body">Riwayat</span>
-                            </a>
-                            <% if (isOwner) { %>
-                              <a href="/manage/whatsapp"
-                                class="px-4 py-2 rounded-normal scroll-text-container w-[6rem] h-[6rem] bg-accent hover:shadow-xl flex flex-col items-center">
-                                <i class="bi bi-whatsapp text-[2rem]"></i>
-                                <span class="text-body scroll-text">Manajemen Whatsapp</span>
-                              </a>
-                              <a href="/manage/user"
-                                class="px-4 py-2 rounded-normal scroll-text-container w-[6rem] h-[6rem] bg-accent hover:shadow-xl flex flex-col items-center">
-                                <i class="bi bi-person-rolodex text-[2rem]"></i>
-                                <span class="text-body scroll-text">Manajemen Pengguna</span>
-                              </a>
-                              <a href="/manage/announcement"
-                                class="px-4 py-2 rounded-normal scroll-text-container w-[6rem] h-[6rem] bg-accent hover:shadow-xl flex flex-col items-center">
-                                <i class="bi bi-send text-[2rem]"></i>
-                                <span class="text-body scroll-text">Pengumuman</span>
-                              </a>
-                              <% } %>
-                          </div>
-                        </div>
+          <% } %>
+          <div class="grid grid-cols-2 gap-4 mb-4 relative">
+            <a
+              href="/docs"
+              class="bg-text-primary transition-all ease-in-out duration-150 hover:scale-95 shadow-lg rounded-normal text-white px-8 py-2 col-span-1 flex w-full justify-center items-center"
+            >
+              <div class="flex flex-col">
+                <i class="bi bi-journal-bookmark-fill text-[4rem] mb-4"></i>
+                <span class="text-subHeading text-center">Docs</span>
+              </div>
+            </a>
+            <div class="relative z-20">
+              <div
+                id="button-report"
+                class="bg-white cursor-pointer transition-all ease-in-out duration-150 hover:scale-95 shadow-lg rounded-normal text-text-primary px-8 py-2 col-span-1 flex w-full justify-center items-center"
+              >
+                <div class="flex flex-col items-center">
+                  <i class="bi bi-info-square-fill text-[4rem] mb-4"></i>
+                  <span class="text-subHeading text-center">Report</span>
+                </div>
+              </div>
+              <div
+                id="dropdown-btn"
+                class="absolute right-4 bottom-3 transition-all ease-out duration-200 -z-[1] bg-accent shadow-lg rounded-normal px-4 py-2"
+              >
+                <ul class="text-text-primary text-body">
+                  <li
+                    class="cursor-pointer mb-2 bg-opacity-30 hover:bg-slate-100"
+                  >
+                    <a href="http://wa.me/<%= ownerNumber %>"
+                      >Tidak Berfungsi?</a
+                    >
+                  </li>
+                  <li class="cursor-pointer bg-opacity-30 hover:bg-slate-100">
+                    <a href="http://wa.me/<%= ownerNumber %>">Offline</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <a
+              href="/feature"
+              class="bg-accent2 transition-all ease-in-out duration-150 hover:scale-95 shadow-lg rounded-normal text-white px-8 py-2 col-span-2 flex w-full justify-center items-center"
+            >
+              <div class="flex flex-col items-center">
+                <i class="bi bi-view-list text-[4rem] mb-4"></i>
+                <span class="text-subHeading text-center">Fitur Lain</span>
+              </div>
+            </a>
+          </div>
+          <div
+            class="bg-white shadow-lg rounded-normal px-8 py-6 items-center justify-between mb-4"
+          >
+            <h4 class="text-subHeading mb-2 text-text-primary">Alat</h4>
+            <div class="flex flex-wrap gap-2 text-text-primary">
+              <a
+                href="/history"
+                class="px-4 py-2 rounded-normal w-[6rem] h-[6rem] bg-accent hover:shadow-xl flex flex-col items-center"
+              >
+                <i class="bi bi-clock-history text-[2rem]"></i>
+                <span class="text-body">Riwayat</span>
+              </a>
+              <% if (isOwner) { %>
+              <a
+                href="/manage/whatsapp"
+                class="px-4 py-2 rounded-normal scroll-text-container w-[6rem] h-[6rem] bg-accent hover:shadow-xl flex flex-col items-center"
+              >
+                <i class="bi bi-whatsapp text-[2rem]"></i>
+                <span class="text-body scroll-text">Manajemen Whatsapp</span>
+              </a>
+              <a
+                href="/manage/user"
+                class="px-4 py-2 rounded-normal scroll-text-container w-[6rem] h-[6rem] bg-accent hover:shadow-xl flex flex-col items-center"
+              >
+                <i class="bi bi-person-rolodex text-[2rem]"></i>
+                <span class="text-body scroll-text">Manajemen Pengguna</span>
+              </a>
+              <a
+                href="/manage/announcement"
+                class="px-4 py-2 rounded-normal scroll-text-container w-[6rem] h-[6rem] bg-accent hover:shadow-xl flex flex-col items-center"
+              >
+                <i class="bi bi-send text-[2rem]"></i>
+                <span class="text-body scroll-text">Pengumuman</span>
+              </a>
+              <% } %>
+            </div>
+          </div>
 
-                        <div class="w-full mb-4 px-8 py-6 bg-white text-text-primary rounded-normal shadow-lg">
-                          <h4 class="text-subHeading">Informasi Dasar</h4>
-                          <div class="flex flex-wrap justify-between">
-                            <div class="flex flex-wrap gap-4">
-                              <div class="flex items-center gap-4">
-                                <p class="text-body">Status Layanan WA:</p>
-                                <span id="span-connection"
-                                  class="text-body rounded-lg bg-primary text-white px-2"></span>
-                              </div>
-                              <div class="flex items-center gap-4">
-                                <p class="text-body">Total HitAPI:</p>
-                                <span id="span-hitapi"
-                                  class="text-body rounded-lg bg-secondary text-white px-2">0</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+          <div
+            class="w-full mb-4 px-8 py-6 bg-white text-text-primary rounded-normal shadow-lg"
+          >
+            <h4 class="text-subHeading">Informasi Dasar</h4>
+            <div class="flex flex-wrap justify-between">
+              <div class="flex flex-wrap gap-4">
+                <div class="flex items-center gap-4">
+                  <p class="text-body">Status Layanan WA:</p>
+                  <span
+                    id="span-connection"
+                    class="text-body rounded-lg bg-primary text-white px-2"
+                  ></span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <p class="text-body">Total HitAPI:</p>
+                  <span
+                    id="span-hitapi"
+                    class="text-body rounded-lg bg-secondary text-white px-2"
+                    >0</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
 
-                        <div class="w-full rounded-normal bg-white shadow-lg px-8 py-6 text-text-primary mb-4">
-                          <h4 class="text-subHeading">Kode APIKEY Anda:</h4>
-                          <h5 class="text-body mb-4">
-                            Gunakan APIKEY Ini untuk menggunakan layanan
-                          </h5>
-                          <div class="grid grid-cols-12 gap-4 w-full">
-                            <label
-                              class="px-4 py-2 overflow-hidden rounded-normal border border-black bg-accent col-span-8"
-                              id="apiValue">
-                              <%= apiKey %>
-                            </label>
-                            <button onclick="randomApiKey()"
-                              class="px-4 py-2 flex justify-center items-center rounded-normal border bg-accent border-black col-span-2 hover:opacity-65 transition-all ease-out"
-                              id="button-random">
-                              <i class="bi bi-dice-5-fill text-xs md:text-[1.5rem] m-0"></i>
-                            </button>
-                            <button
-                              class="px-4 py-2 rounded-normal border bg-accent flex justify-center items-center border-black col-span-2 hover:opacity-65 transition-all ease-out"
-                              id="button-copy">
-                              <i class="bi bi-clipboard-fill text-xs md:text-[1.5rem] m-0"></i>
-                            </button>
-                          </div>
-                        </div>
-                        <div class="w-full flex justify-between items-center flex-wrap mb-4">
-                          <div class="flex gap-4 z-40">
-                            <a href="https://saweria.co/rifalkom" id="saweria"
-                              class="px-8 py-2 rounded-normal hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4">
-                              <i class="bi bi-emoji-smile text-[2rem]"></i>
-                              <span class="text-body">Buy me a Coffe</span>
-                            </a>
-                          </div>
-                          <a href="http://rifalkom.my.id" target="_blank"
-                            class="text-body hover:bg-black hover:text-white transition-all cursor-pointer duration-200 ease-linear font-mono text-text-primary">Develope
-                            By : Muhamamad Rifal Prasetyo (Normada Branch)</a>
-                        </div>
-                        <div
-                          class="w-full px-8 py-4 transition-all duration-150 ease-out rounded-normal bg-white shadow-lg text-text-primary mb-8">
-                          <h2 class="text-subHeading">Tentang Web</h2>
-                          <p class="text-body text-justify mb-4">
-                            WhatsappQue merupakan layanan RestAPI untuk pengiriman pesan Via
-                            Whatsapp. Hal ini berguna untuk digunakan sebagai kode OTP dari apps milik kamu
-                            sendiri atau hal lainnya. Selain itu, WhatsappQue juga memiliki fitur lain yang hanya
-                            tersedia
-                            pada Versi Normada. Yaitu, Basa Jawa. Kamu dapat mencari makna atau istilah terkenal Jawa.
-                          </p>
-                          <h3 class="text-body font-medium leading-8">
-                            Terimakasih
-                          </h3>
-                          <div class="mb-4">
-                            <p class="text-body text-justify font-mono">
-                              Allah Swt. , OrangTua, Bapak/Ibu Guru, Diri Sendiri, Teman-Teman XI TEFA
-                            </p>
-
-                          </div>
-                          <h3 class="text-body font-medium leading-8 mb-4">
-                            TUGAS AKHIR PROYEK WEB TEFA(Teaching Factory)
-                          </h3>
-                          <div class="text-center w-full font-bold">
-                            <p>MUHAMMAD RIFAL PRASETYO | <span id="date" class="text-red-600"></span></p>
-                          </div>
-                        </div>
+          <div
+            class="w-full rounded-normal bg-white shadow-lg px-8 py-6 text-text-primary mb-4"
+          >
+            <h4 class="text-subHeading">Kode APIKEY Anda:</h4>
+            <h5 class="text-body mb-4">
+              Gunakan APIKEY Ini untuk menggunakan layanan
+            </h5>
+            <div class="grid grid-cols-12 gap-4 w-full">
+              <label
+                class="px-4 py-2 overflow-hidden rounded-normal border border-black bg-accent col-span-8"
+                id="apiValue"
+              >
+                <%= apiKey %>
+              </label>
+              <button
+                onclick="randomApiKey()"
+                class="px-4 py-2 flex justify-center items-center rounded-normal border bg-accent border-black col-span-2 hover:opacity-65 transition-all ease-out"
+                id="button-random"
+              >
+                <i class="bi bi-dice-5-fill text-xs md:text-[1.5rem] m-0"></i>
+              </button>
+              <button
+                class="px-4 py-2 rounded-normal border bg-accent flex justify-center items-center border-black col-span-2 hover:opacity-65 transition-all ease-out"
+                id="button-copy"
+              >
+                <i
+                  class="bi bi-clipboard-fill text-xs md:text-[1.5rem] m-0"
+                ></i>
+              </button>
+            </div>
+          </div>
+          <div class="w-full flex justify-between items-center flex-wrap mb-4">
+            <div class="flex gap-4 z-40">
+              <a
+                href="https://saweria.co/rifalkom"
+                id="saweria"
+                class="px-8 py-2 rounded-normal hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4"
+              >
+                <i class="bi bi-emoji-smile text-[2rem]"></i>
+                <span class="text-body">Buy me a Coffe</span>
+              </a>
+            </div>
+            <a
+              href="http://rifalkom.my.id"
+              target="_blank"
+              class="text-body hover:bg-black hover:text-white transition-all cursor-pointer duration-200 ease-linear font-mono text-text-primary"
+              >Develope By : Muhamamad Rifal Prasetyo (botWA Branch)</a
+            >
+          </div>
+          <div
+            class="w-full px-8 py-4 transition-all duration-150 ease-out rounded-normal bg-white shadow-lg text-text-primary mb-8"
+          >
+            <h2 class="text-subHeading">Tentang Web</h2>
+            <p class="text-body text-justify mb-4">
+              WhatsappQue merupakan layanan RestAPI untuk pengiriman pesan Via
+              Whatsapp. Hal ini berguna untuk digunakan sebagai kode OTP dari
+              apps milik kamu sendiri atau hal lainnya. Selain itu, WhatsappQue
+              juga memiliki fitur lain yang hanya tersedia pada Versi Normada.
+              Yaitu, Basa Jawa. Kamu dapat mencari makna atau istilah terkenal
+              Jawa.
+            </p>
+            <h3 class="text-body font-medium leading-8">Terimakasih</h3>
+            <div class="mb-4">
+              <p class="text-body text-justify font-mono">
+                Allah Swt. , OrangTua, Bapak/Ibu Guru, Diri Sendiri, Teman-Teman
+                XI TEFA
+              </p>
+            </div>
+            <h3 class="text-body font-medium leading-8 mb-4">
+              TUGAS AKHIR PROYEK WEB TEFA(Teaching Factory)
+            </h3>
+            <div class="text-center w-full font-bold">
+              <p>
+                MUHAMMAD RIFAL PRASETYO |
+                <span id="date" class="text-red-600"></span>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <script>
-    const date = new Date();
-    document.getElementById('date').innerHTML = date.getFullYear()
+    <script>
+      const date = new Date();
+      document.getElementById('date').innerHTML = date.getFullYear()
 
-    async function randomApiKey() {
-      try {
-        const apiValue = document.getElementById("apiValue");
-        const hitApi = await fetch("/randomApi");
-        const json = await hitApi.json();
-        apiValue.innerHTML = json.apiKey;
-      } catch (e) {
-        console.log("DATA FAIL FETCHED", e);
-      }
-    }
-    const inputElement = document.querySelector("#apiValue");
-
-    async function copyData() {
-      try {
-        await navigator.clipboard.writeText(inputElement.innerHTML);
-        alert("Data berhasil disalin!");
-      } catch (error) {
-        console.error("Gagal menyalin data:", error);
-      }
-    }
-
-    document
-      .querySelector("#button-copy")
-      .addEventListener("click", copyData);
-
-    const reportBtn = document.querySelector("#button-report");
-    const dropdownBtn = document.querySelector("#dropdown-btn");
-    reportBtn.addEventListener("click", () => {
-      dropdownBtn.classList.toggle("visible-dropdown");
-    });
-
-    // dropdown near profile to logout
-    const buttonImage = document.querySelector("#imageButton");
-    const targetImageButton = document.querySelector("#targetImageButton");
-
-    buttonImage.addEventListener("click", () => {
-      targetImageButton.classList.toggle("visible-dropdown1");
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!buttonImage.contains(e.target) && !targetImageButton.contains(e.target)) {
-        targetImageButton.classList.remove("visible-dropdown1");
-      }
-    });
-
-    // fetch information data
-    async function getInfo() {
-      const spanConnection = document.querySelector("#span-connection");
-      const spanHitAPI = document.querySelector("#span-hitapi");
-      const offWABanner = document.querySelector("#offWABanner");
-      try {
-        const get = await fetch("/whatsapp/info");
-        const json = await get.json();
-        switch (json.info) {
-          case "OPEN":
-            spanConnection.innerHTML = json.info;
-            break;
-          case "CONNLOST":
-            spanConnection.innerHTML = json.info;
-            spanConnection.classList.add("kamu_pacaran_wkwkwk_goblog");
-                <% if (isOwner) { %>
-              offWABanner.classList.add("visible");
-                <% } %>
-                break;
-          default:
-            spanConnection.innerHTML = "OFFLINE";
-            spanConnection.classList.add("kamu_pacaran_wkwkwk_goblog");
-                <% if (isOwner) { %>
-              offWABanner.classList.add("visible");
-                <% } %>
-                break;
+      async function randomApiKey() {
+        try {
+          const apiValue = document.getElementById("apiValue");
+          const hitApi = await fetch("/randomApi");
+          const json = await hitApi.json();
+          apiValue.innerHTML = json.apiKey;
+        } catch (e) {
+          console.log("DATA FAIL FETCHED", e);
         }
-        spanHitAPI.innerHTML = json.totalHitAPI;
-      } catch (e) {
-        spanConnection.innerHTML = "ERR";
-        spanHitAPI.innerHTML = "0";
       }
-    }
-    getInfo();
-  </script>
-  <%- include('../layout/footer.html'); %>
-</body>
+      const inputElement = document.querySelector("#apiValue");
 
+      async function copyData() {
+        try {
+          await navigator.clipboard.writeText(inputElement.innerHTML);
+          alert("Data berhasil disalin!");
+        } catch (error) {
+          console.error("Gagal menyalin data:", error);
+        }
+      }
+
+      document
+        .querySelector("#button-copy")
+        .addEventListener("click", copyData);
+
+      const reportBtn = document.querySelector("#button-report");
+      const dropdownBtn = document.querySelector("#dropdown-btn");
+      reportBtn.addEventListener("click", () => {
+        dropdownBtn.classList.toggle("visible-dropdown");
+      });
+
+      // dropdown near profile to logout
+      const buttonImage = document.querySelector("#imageButton");
+      const targetImageButton = document.querySelector("#targetImageButton");
+
+      buttonImage.addEventListener("click", () => {
+        targetImageButton.classList.toggle("visible-dropdown1");
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!buttonImage.contains(e.target) && !targetImageButton.contains(e.target)) {
+          targetImageButton.classList.remove("visible-dropdown1");
+        }
+      });
+
+      // fetch information data
+      async function getInfo() {
+        const spanConnection = document.querySelector("#span-connection");
+        const spanHitAPI = document.querySelector("#span-hitapi");
+        const offWABanner = document.querySelector("#offWABanner");
+        try {
+          const get = await fetch("/whatsapp/info");
+          const json = await get.json();
+          switch (json.info) {
+            case "OPEN":
+              spanConnection.innerHTML = json.info;
+              break;
+            case "CONNLOST":
+              spanConnection.innerHTML = json.info;
+              spanConnection.classList.add("kamu_pacaran_wkwkwk_goblog");
+                  <% if (isOwner) { %>
+                offWABanner.classList.add("visible");
+                  <% } %>
+                  break;
+            default:
+              spanConnection.innerHTML = "OFFLINE";
+              spanConnection.classList.add("kamu_pacaran_wkwkwk_goblog");
+                  <% if (isOwner) { %>
+                offWABanner.classList.add("visible");
+                  <% } %>
+                  break;
+          }
+          spanHitAPI.innerHTML = json.totalHitAPI;
+        } catch (e) {
+          spanConnection.innerHTML = "ERR";
+          spanHitAPI.innerHTML = "0";
+        }
+      }
+      getInfo();
+    </script>
+    <%- include('../layout/footer.html'); %>
+  </body>
 </html>
