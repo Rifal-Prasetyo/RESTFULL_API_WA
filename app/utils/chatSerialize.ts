@@ -2,6 +2,7 @@ import { WAMessage } from "@whiskeysockets/baileys";
 import { actionMessage } from "./actionMessage";
 import log from "../services/pretty-logger";
 import { sendDatabase } from "../services/storeDatabase";
+import { readMessage } from "./readingMessage";
 
 interface DataMessage {
 
@@ -41,6 +42,8 @@ export async function serializeMessage(messages: WAMessage[]) {
     }
     actionMessage(data);
     sendDatabase(data);
+    readMessage();
+
 }
 
 export async function getRawMessage() {
