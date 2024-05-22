@@ -34,7 +34,7 @@ async function liburan() {
     const userDataBaru = userAwal.filter((obj) => {
         const tipeNumber = obj.number.toLowerCase();
         return !tipeNumber.includes("status@broadcast") && !tipeNumber.endsWith("@g.us");
-    })
+    });
     // get libur
     try {
         const session = await getSession('admin');

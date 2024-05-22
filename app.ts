@@ -37,7 +37,6 @@ const listener = () => {
 const host = server.host || "0.0.0.0";
 const port = server.port || 3000;
 (async () => {
-    // await init();
-    await scheduleJob();
+    // await scheduleJob(); // jadwal fetch api hari libur
     app.listen(port, host, listener);
 })();
