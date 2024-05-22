@@ -40,6 +40,7 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.18.0",
     "express-validator": "^7.0.1",
+    "flowbite": "^2.3.0",
     "fs": "^0.0.1-security",
     "jimp": "^0.16.13",
     "jsonwebtoken": "^9.0.2",

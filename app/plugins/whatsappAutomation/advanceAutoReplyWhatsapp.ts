@@ -130,7 +130,7 @@ export async function advanceAutoReplyWhatsapp(data: DataMessage) {
         await session.sendMessage(data.number, { text: message });
     } else if (data.message.startsWith('!tagsemua')) {
         const session = getSession('admin');
-        if (numberResolve(data.number) == owner.noHp && data.group ? data.group : false) {
+        if (jidToNormalNumber(data.number) == owner.noHp && data.group ? data.group : false) {
             const metadata = await session.groupMetadata(data.group);
             let teks = `*Halo Semua | ${metadata.subject}*\n`;
             let men = [];

@@ -34,4 +34,11 @@ export class PublicController {
 
 
     }
+
+    public static async landingPage(req: Request, res: Response) {
+        res.render('landingPage', {
+            titlePage: `${nameApp} | Terms of Service`,
+            message: req.flash('info'),
+        });
+    }
 }

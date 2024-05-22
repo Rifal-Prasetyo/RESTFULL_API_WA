@@ -28,7 +28,7 @@ const router = express.Router();
 const validator = new ApiValidator();
 
 // route for admin
-router.get('/', isAdmin, InitController.initial); // WEB
+router.get('/', PublicController.landingPage); // WEB
 router.get('/whatsapp', isAdmin, InitController.check); // API
 router.get('/whatsapp/qr', isAdmin, InitController.qrCode); // API
 router.get('/logging/whatsapp/log', isAdmin, InitController.keepAlive); // API STREAN
