@@ -7,6 +7,7 @@
   <title>
     <%= titlePage %>
   </title>
+  <link rel="icon" type="image/x-icon" href="/img/profile.png">
   <link href="/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
 </head>
@@ -23,7 +24,7 @@
           </a>
         </div>
         <h1 class="text-heading font-bold mb-4">Owner Dashboard</h1>
-        <div class="flex flex-wrap gap-4 text-text-primary mb-4">
+        <div class="flex overflow-x-scroll gap-4 text-text-primary mb-4">
           <a href="/manage/user" class="px-4 py-2 rounded-normal bg-secondary hover:shadow-xl flex gap-4 items-center">
             <i class="bi bi-person-rolodex text-[2rem]"></i>
             <span class="text-body">Manajemen Pengguna</span>
@@ -45,10 +46,10 @@
           <% } %>
             <div class="w-full mb-2 flex justify-between">
               <h1 class="text-heading">Pengguna</h1>
-              <div class="flex gap-4 w-[50%] md:w-fit ">
+              <div class="flex gap-4  w-[50%] md:w-fit ">
                 <form action="" method="get">
                   <input type="text" name="query" placeholder="Cari" value="<%= search %>"
-                    class="px-4 py-2 overflow-hidden rounded-normal border border-black bg-white" />
+                    class="px-4 py-2 overflow-hidden rounded-normal border border-black w-[70%] bg-white" />
                   <button type="submit" class="border border-black bg-white px-4 py-2 rounded-normal">
                     <i class="bi bi-search text-[1rem]"></i>
                   </button>

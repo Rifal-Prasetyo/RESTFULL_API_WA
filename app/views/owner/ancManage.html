@@ -7,6 +7,7 @@
   <title>
     <%= titlePage %>
   </title>
+  <link rel="icon" type="image/x-icon" href="/img/profile.png">
   <link href="/css/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
 </head>
@@ -23,7 +24,7 @@
           </a>
         </div>
         <h1 class="text-heading font-bold mb-4">Owner Dashboard</h1>
-        <div class="flex flex-wrap gap-4 text-text-primary mb-4">
+        <div class="flex overflow-x-scroll  gap-4 text-text-primary mb-4">
           <a href="/manage/user" class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center">
             <i class="bi bi-person-rolodex text-[2rem]"></i>
             <span class="text-body">Manajemen Pengguna</span>
@@ -33,11 +34,10 @@
             <i class="bi bi-send text-[2rem]"></i>
             <span class="text-body">Pengumuman</span>
           </a>
-          <a href="/manage/whatsapp"
-          class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center">
-          <i class="bi bi-whatsapp text-[2rem]"></i>
-          <span class="text-body">Whatsapp</span>
-        </a>
+          <a href="/manage/whatsapp" class="px-4 py-2 rounded-normal bg-white hover:shadow-xl flex gap-4 items-center">
+            <i class="bi bi-whatsapp text-[2rem]"></i>
+            <span class="text-body">Whatsapp</span>
+          </a>
         </div>
         <% if (message.length> 0 ) { %>
           <div class="w-full mb-4 flex justify-center bg-white text-secondary rounded-normal border border-black py-2">

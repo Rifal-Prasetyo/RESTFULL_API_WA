@@ -71,6 +71,7 @@ router.get('/login', guest, LoginController.loginPage);
 router.post('/login', LoginController.loginAction);
 router.get('/register', RegisterController.registerPage);
 router.post('/register/action', upload.single('image'), validator.registerSerialize(), RegisterController.registerAction);
+router.get('/toss', PublicController.tosPagenoLogin);
 router.get('/wait', authButNotVerified, HomeController.waitUntilAdminVerify);
 router.get('/tos', authButTOS, PublicController.tosPage);
 router.post('/tos', authButTOS, PublicController.tosAction)
