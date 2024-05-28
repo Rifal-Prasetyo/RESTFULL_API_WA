@@ -15,6 +15,7 @@ interface DataMessage {
 }
 let messageRaw: WAMessage = null;
 export async function serializeMessage(messages: WAMessage[]) {
+    console.log(messages);
     let data: DataMessage = {
         name: "",
         type: "",
@@ -25,13 +26,12 @@ export async function serializeMessage(messages: WAMessage[]) {
     messageRaw = m;
     if (m.key.fromMe) return false;
     if (m.key.remoteJid === 'status@broadcast') return false;
-    const messageType = Object.keys(m.message)[0] ? Object.keys(m.message)[0] : null;
+    const messageType = Object.keys(m?.message)[0] ? Object.keys(m?.message)[0] : null;
     const text = messageType === "conversation" ? m.message.conversation
         : messageType === "extendedTextMessage" ? m.message.extendedTextMessage.text
             : messageType === "imageMessage" ? m.message.imageMessage.caption
                 : messageType === "videoMessage" ? m.message.videoMessage.caption
                     : ""
-
     data['name'] = m.pushName;
     data['number'] = m.key.remoteJid;
     data['type'] = messageType;
