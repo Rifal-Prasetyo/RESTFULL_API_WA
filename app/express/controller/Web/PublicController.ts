@@ -10,7 +10,7 @@ const nameApp = process.env.NAME_APP;
 export class PublicController {
     public static async tosPage(req: Request, res: Response) {
         res.render('tos/tos', {
-            titlePage: `${nameApp} | Terms of Service`,
+            titlePage: `${nameApp}  WhatsappAPI Mudah Menyenangkan`,
             message: req.flash('info'),
         });
     }

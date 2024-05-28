@@ -60,3 +60,7 @@
     transform: translateX(-100%);
   }
 }
+  
+.disabled_button {
+  @apply opacity-50
+}

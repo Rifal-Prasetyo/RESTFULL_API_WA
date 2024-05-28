@@ -3,6 +3,10 @@ const numberSession = document.getElementById('numberSession');
 const connectionSession = document.getElementById('statusSession');
 const wrapperSesion = document.getElementById('wrapperSession');
 const qrCodeDisplay = document.getElementById('qrcode');
+const btn1 = document.getElementById('button1');
+const btn2 = document.getElementById('button2');
+const btn3 = document.getElementById('button3');
+
 // const delay1 = 1000;
 const eventSource = new EventSource("/api/info/detailwhatsapp");
 eventSource.onmessage = async function (event) {
@@ -15,6 +19,29 @@ eventSource.onmessage = async function (event) {
     json.log.forEach(log => {
         insertData += `<pre>[${log.type} | ${log.date}] ${log.log}</pre>`;
     });
+    if (json.connection == "CONNECTING") {
+        btn1.classList.add('disabled_button');
+        btn1.disabled = true;
+        btn2.classList.add('disabled_button');
+        btn2.disabled = true;
+        btn3.classList.add('disabled_button');
+        btn3.disabled = true;
+    } else if (json.connection == "OPEN") {
+        btn1.classList.add('disabled_button');
+        btn1.disabled = true;
+        btn2.classList.remove('disabled_button');
+        btn2.disabled = false;
+        btn3.classList.remove('disabled_button');
+        btn3.disabled = false;
+    } else if (json.connection == "BADSESSION") {
+        btn1.classList.remove('disabled_button');
+        btn1.disabled = false;
+        btn2.classList.add('disabled_button');
+        btn2.disabled = true;
+        btn3.classList.add('disabled_button');
+        btn3.disabled = true;
+    }
+
     wrapperSesion.innerHTML = insertData;
 }
 

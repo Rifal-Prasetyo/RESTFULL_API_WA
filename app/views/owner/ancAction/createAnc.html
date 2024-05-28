@@ -1,60 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= titlePage %></title>
-    <link href="/css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
-  </head>
 
-  <body class="bg-accent">
-    <div class="w-full h-screen p-8">
-      <div class="container mx-auto flex justify-center">
-        <div class="w-full md:max-w-[80%] text-text-primary">
-          <div class="mb-4">
-            <a
-              href="/manage/announcement"
-              class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4"
-            >
-              <i class="bi bi-arrow-left-circle text-[1rem]"></i>
-              <span class="text-body">Kembali</span>
-            </a>
-          </div>
-          <h1 class="text-heading font-bold mb-4">Buat Pengumuman</h1>
-          <div class="w-full">
-            <form action="/manage/announcement/create" method="post">
-              <div class="mb-2">
-                <label
-                  for="bodyPengumuman"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >Isi Pengumuman</label
-                >
-                <input
-                  type="text"
-                  id="bodyPengumuman"
-                  name="isiPengumuman"
-                  class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                />
-              </div>
-              <div class="w-full rounded-normal bg-white px-4 py-2 mb-4">
-                <h3 class="text-subHeading mb-2">Catatan</h3>
-                <p class="text-body">
-                  Setelah mengklik BUAT, Pengumuman sebelumnya akan dimatikan
-                  dan diganti dengan yang baru
-                </p>
-              </div>
-              <button
-                type="submit"
-                class="px-8 py-2 rounded-normal w-fit hover:bg-white hover:text-text-primary text-white transition-all delay-75 duration-150 z-40 bg-text-primary flex justify-between items-center gap-4"
-              >
-                <i class="bi bi-send text-[1rem]"></i>
-                <span class="text-body">Buat</span>
-              </button>
-            </form>
-          </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>
+    <%= titlePage %>
+  </title>
+  <link href="/css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
+</head>
+
+<body class="bg-accent">
+  <div class="w-full h-screen p-8">
+    <div class="container mx-auto flex justify-center">
+      <div class="w-full md:max-w-[80%] text-text-primary">
+        <div class="mb-4">
+          <a href="/manage/announcement"
+            class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4">
+            <i class="bi bi-arrow-left-circle text-[1rem]"></i>
+            <span class="text-body">Kembali</span>
+          </a>
+        </div>
+        <h1 class="text-heading font-bold mb-4">Buat Pengumuman</h1>
+        <div class="w-full">
+          <form action="/manage/announcement/create" method="post">
+            <div class="mb-2">
+              <label for="bodyPengumuman" class="block mb-2 text-sm font-medium text-gray-900 ">Isi
+                Pengumuman</label>
+              <input type="text" id="bodyPengumuman" name="isiPengumuman"
+                class="block w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 " />
+            </div>
+            <div class="w-full rounded-normal bg-white px-4 py-2 mb-4">
+              <h3 class="text-subHeading mb-2">Catatan</h3>
+              <p class="text-body">
+                Setelah mengklik BUAT, Pengumuman sebelumnya akan dimatikan
+                dan diganti dengan yang baru
+              </p>
+            </div>
+            <button type="submit"
+              class="px-8 py-2 rounded-normal w-fit hover:bg-white hover:text-text-primary text-white transition-all delay-75 duration-150 z-40 bg-text-primary flex justify-between items-center gap-4">
+              <i class="bi bi-send text-[1rem]"></i>
+              <span class="text-body">Buat</span>
+            </button>
+          </form>
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>

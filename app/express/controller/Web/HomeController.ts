@@ -143,6 +143,11 @@ export class HomeController {
                 User_use: {
                     noWa: req.session.user
                 }
+            },
+            take: 10,
+            skip: 0,
+            orderBy: {
+                id: 'desc'
             }
         });
         res.render('history/history', {

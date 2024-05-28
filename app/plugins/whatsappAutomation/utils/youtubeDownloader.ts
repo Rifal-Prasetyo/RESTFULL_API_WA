@@ -64,8 +64,19 @@ export async function yt_core_dl(data: DataMessage, linkYT: string, type: Filter
                     await session.sendMessage(data.number, {
                         video: fs.readFileSync(path),
                         caption: basicDataYt.title
-                    })
+                    });
+                    fs.unlink(path, (err) => {
+                        if (err) {
+                            // Handle specific error if any
+                            if (err.code === 'ENOENT') {
+                                console.error('File does not exist.');
+                            } else {
+                                console.log(err);
+                            }
+                        }
+                    });
                 });
+
             } else if (type == 'audioonly') {
                 ffmpeg(downloadYt).audioCodec('libmp3lame')
                     .save(path)
@@ -73,20 +84,20 @@ export async function yt_core_dl(data: DataMessage, linkYT: string, type: Filter
                         await session.sendMessage(data.number, {
                             audio: fs.readFileSync(path),
                             mimetype: 'audio/mp4'
-                        })
+                        });
+                        fs.unlink(path, (err) => {
+                            if (err) {
+                                // Handle specific error if any
+                                if (err.code === 'ENOENT') {
+                                    console.error('File does not exist.');
+                                } else {
+                                    console.log(err);
+                                }
+                            }
+                        });
                     });
 
             }
-            fs.unlink(path, (err) => {
-                if (err) {
-                    // Handle specific error if any
-                    if (err.code === 'ENOENT') {
-                        console.error('File does not exist.');
-                    } else {
-                        console.log(err);
-                    }
-                }
-            });
         } catch (error) {
             await session.sendMessage(data.number, { text: 'Masukkan URL kamu dengan benar' });
         }
