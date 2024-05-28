@@ -11,6 +11,8 @@ import { Sticker, createSticker, StickerTypes } from 'wa-sticker-formatter' // E
 import { internal } from "@hapi/boom";
 import { getRawMessage } from "../../utils/chatSerialize";
 import { facebookDownloader } from "./utils/facebookDownloader";
+import ytdl from "ytdl-core";
+import { yt_core_dl } from "./utils/youtubeDownloader";
 
 interface DataMessage {
     name: string,
@@ -113,9 +115,9 @@ export async function advanceAutoReplyWhatsapp(data: DataMessage) {
         const session = getSession('admin');
         const name_user = data.name;
         const date = new Date();
-        let message = `Halo ${name_user}, Berikut adalah perintah yang bisa dilakukan oleh bot\n===========\n- *Buat Stiker*\nMasukkan gambar dengan diberi   caption "/s" di gambarnya\n- *Download Video Tiktok*\n/tt [link_tiktok]\nContoh: /tt https://vt.tiktok.com/blabla/blablabala\n\n- *Download Video Reels Instagram*\n/ig [link_ig]\nContoh: /ig https://ig.com/blabalabala\n============\n`;
-        message += `*Downloader Facebook [BARU]*\n/fb [link_fb]\nContoh: /fb https://fb.watch/blablabala\n========\n`;
-        message += `\nDisclaimer masukkan perintah /tos\n============\nRifal Bot V3.4 ${date.getFullYear()}`;
+        let message = `Halo ${name_user}, Berikut adalah perintah yang bisa dilakukan oleh bot\n===========\n- *Buat Stiker*\nMasukkan gambar dengan diberi   caption "/s" di gambarnya\n*Download Video Tiktok*\n/tt [link_tiktok]\nContoh: /tt https://vt.tiktok.com/blabla/blablabala\n\n*Download Video Reels Instagram*\n/ig [link_ig]\nContoh: /ig https://ig.com/blabalabala\n============\n`;
+        message += `*Downloader Facebook*\n/fb [link_fb]\nContoh: /fb https://fb.watch/blablabala\n========\n*Downloader Video Youtube[BARU]*\n/yt [link_yt]\nContoh: /yt https://youtu.be/blablaba\n==========\n*Downloader Audio Youtube[BARU]*\n/yta [link_yt]\nContoh: /yta https://youtu.be/blabalabla\n========\n`;
+        message += `\nDisclaimer masukkan perintah /tos\n============\nRifal Bot V3.5 ${date.getFullYear()}`;
         await session.sendPresenceUpdate("composing", data.number);
         await delay(1000);
         await session.sendMessage(data.number,
@@ -194,9 +196,19 @@ export async function advanceAutoReplyWhatsapp(data: DataMessage) {
             await delay(2000);
             await session.sendMessage(data.number, { text: 'GAGAL MENGUNDUH...' })
         }
+        // Audio Only
+    } else if (data.message.startsWith('/yta')) {
+        const link_yt = data.message.substring(5);
+        await yt_core_dl(data, link_yt, 'audioonly');
+
+        // Video and Audio 
+    } else if (data.message.startsWith('/yt')) {
+        const link_yt = data.message.substring(4);
+        await yt_core_dl(data, link_yt, 'audioandvideo');
     } else {
-        return false;
+
+        return false
     }
-
-
 }
+
+

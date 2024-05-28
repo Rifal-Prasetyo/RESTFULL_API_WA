@@ -1,2 +1,2 @@
 Run Tailwind
-npx tailwindcss -i ./src/input.css -o ./public/css/style.css --watch
+bun x tailwindcss -i ./src/input.css -o ./public/css/style.css --watch
