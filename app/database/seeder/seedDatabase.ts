@@ -20,7 +20,7 @@ async function seeder() {
                     name_project: "Siladu",
                     noWa: "083109895990",
                     isVerified: 1,
-                    image: '/user/coba.jpg',
+                    image: 'profile.png',
                     password: hashing("sukidakara"),
                     time: date
                 },
@@ -32,7 +32,7 @@ async function seeder() {
                     address: "Mlonggo",
                     note: "ingin menggunakan layanan anda karena sangat bermanfaat pada aplikasi saya",
                     name_project: "MPLB",
-                    image: '/user/coba.jpg',
+                    image: 'profile.png',
                     password: hashing("sukidakara"),
                     time: date
                 }

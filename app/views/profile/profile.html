@@ -7,23 +7,22 @@
     <title>
         <%= titlePage %>
     </title>
+    <link rel="icon" type="image/x-icon" href="/img/profile.png">
     <link href="/css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="/bootstrap-icons/font/bootstrap-icons.css" />
 </head>
 
 <body class="bg-accent">
-    <div class="w-full h-screen p-8">
+    <div class="w-full h-screen p-8 ">
         <div class="container mx-auto flex justify-center">
             <div class=" w-full md:max-w-[60%] text-text-primary">
                 <div class="mb-4">
-                    <a
-                      href="/home"
-                      class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4"
-                    >
-                      <i class="bi bi-arrow-left-circle text-[1rem]"></i>
-                      <span class="text-body">Kembali</span>
+                    <a href="/home"
+                        class="px-8 py-2 rounded-normal w-fit hover:bg-text-primary hover:text-white transition-all delay-75 duration-150 z-40 bg-white flex justify-between items-center gap-4">
+                        <i class="bi bi-arrow-left-circle text-[1rem]"></i>
+                        <span class="text-body">Kembali</span>
                     </a>
-                  </div>
+                </div>
                 <h1 class="text-heading font-bold">My Profile </h1>
                 <h2 class="text-body font-medium ">Profil ku</h2>
                 <hr class="w-1/3 bg-text-primary h-1 my-2" />
@@ -53,7 +52,7 @@
                             <div class="w-full mb-4 px-8 py-6 bg-white text-text-primary rounded-normal shadow-lg">
                                 <h4 class="text-subHeading ">Organisasi</h4>
                                 <h5 class="text-body font-light mb-4 ">Organization</h2>
-                                    <input type="number"
+                                    <input type="text"
                                         class="px-4 py-2 rounded-normal border opacity-40 border-black bg-accent w-full"
                                         id="apiValue" value="<%= user.organization %>" disabled placeholder="" />
                                     <p class="text-body font-mono"><span class="text-2xl text-accent2">*</span>
@@ -85,7 +84,7 @@
                                         id="apiValue" value="" />
                             </div>
                             <button
-                                class="w-full hover:opacity-70 px-4 py-2 text-white bg-text-primary rounded-normal text-center shadow-lg"
+                                class="w-full hover:opacity-70 mb-8 px-4 py-2 text-white bg-text-primary rounded-normal text-center shadow-lg"
                                 type="submit">
                                 Update
                             </button>

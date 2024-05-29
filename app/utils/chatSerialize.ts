@@ -15,7 +15,6 @@ interface DataMessage {
 }
 let messageRaw: WAMessage = null;
 export async function serializeMessage(messages: WAMessage[]) {
-    console.log(messages);
     let data: DataMessage = {
         name: "",
         type: "",

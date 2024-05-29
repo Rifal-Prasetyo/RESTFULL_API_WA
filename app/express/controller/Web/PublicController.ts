@@ -37,6 +37,12 @@ export class PublicController {
 
     public static async landingPage(req: Request, res: Response) {
         res.render('landingPage', {
+            titlePage: `${nameApp}  WhatsappAPI Mudah Menyenangkan`,
+            message: req.flash('info'),
+        });
+    }
+    public static async tosPagenoLogin(req: Request, res: Response) {
+        res.render('tos/toss_no_login', {
             titlePage: `${nameApp} | Terms of Service`,
             message: req.flash('info'),
         });
