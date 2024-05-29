@@ -5,6 +5,7 @@ import * as fs from 'node:fs';
 import { WhatsappAction } from "../../../utils/WhatsappAction";
 import { numberResolve } from "../../../utils/numberResolve";
 import { getSession } from "../../../whatsapp/whatsapp";
+import hashing from "../../../services/hashPassword";
 
 const nameApp = process.env.NAME_APP;
 export class AdminController {
@@ -128,21 +129,25 @@ export class AdminController {
                     return;
                 }
             });
+        };
+        let data = {
+            name: req.body.name,
+            noWa: req.body.noWa,
+            organization: req.body.organization,
+            name_project: req.body.name_project,
+            address: req.body.address,
+            note: req.body.note,
+            image: fileName
         }
+        if (req.body.kataSandi) {
+            data["password"] = hashing(req.body.kataSandi);
+        };
         try {
             await prisma.user.update({
                 where: {
                     id: getID,
                 },
-                data: {
-                    name: req.body.name,
-                    noWa: req.body.noWa,
-                    organization: req.body.organization,
-                    name_project: req.body.name_project,
-                    address: req.body.address,
-                    note: req.body.note,
-                    image: fileName
-                }
+                data: data
             });
 
             // set Session

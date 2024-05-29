@@ -14,9 +14,7 @@ import log from "../../../services/pretty-logger";
 export class InitController {
     static isRunning = false;
     public static async initial(req: Request, res: Response) {
-
         if (InitController.isRunning) {
-
             let dataText = {
                 title: "Login ke akun Whatsapp Anda",
                 pr: 'Login untuk dapat menggunkaan layanan ini'
@@ -26,19 +24,30 @@ export class InitController {
                 pr: dataText.pr
             });
         } else {
-            await init();
-            let dataText = {
-                title: "Login ke akun Whatsapp Anda",
-                pr: 'Login untuk dapat menggunkaan layanan ini'
-            };
-            res.render('index', {
-                title: dataText.title,
-                pr: dataText.pr
-            });
+            try {
+                await init();
+            } catch (error) {
+                log.info("INITIAL WHATSAPP ERROR... RETRYING");
+                await init()
+            }
+
         }
         InitController.isRunning = true;
     }
-
+    public static async initialFromDirect() {
+        if (InitController.isRunning) {
+            return false;
+        } else {
+            try {
+                await init();
+            } catch (error) {
+                log.info("INITIAL WHATSAPP ERROR... RETRYING");
+                await delay(2000);
+                await init();
+            }
+        }
+        InitController.isRunning = true;
+    }
     public static async check(req: Request, res: Response) {
         if (InitController.isRunning) {
             log.info("ACCESS FROM BROWSER : WA HAS RUNNING");

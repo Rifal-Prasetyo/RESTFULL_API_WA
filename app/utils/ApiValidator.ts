@@ -14,7 +14,6 @@ export class ApiValidator {
     }
     sendMedia() {
         return [
-
             body('api_key').exists().withMessage('Api Key not found'),
             body('receiver').exists().withMessage('Receiver not found'),
             body('type').exists().withMessage('type is not defined'),

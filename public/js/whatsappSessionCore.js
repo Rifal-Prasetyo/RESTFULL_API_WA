@@ -36,8 +36,8 @@ eventSource.onmessage = async function (event) {
     } else if (json.connection == "BADSESSION") {
         btn1.classList.remove('disabled_button');
         btn1.disabled = false;
-        btn2.classList.add('disabled_button');
-        btn2.disabled = true;
+        btn2.classList.remove('disabled_button');
+        btn2.disabled = false;
         btn3.classList.add('disabled_button');
         btn3.disabled = true;
     }

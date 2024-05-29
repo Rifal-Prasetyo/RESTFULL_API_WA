@@ -89,10 +89,7 @@ export class ApiServiceController {
         if (req.body.action == 'start' || 'stop' || 'logout' || 'deleteLog') {
             switch (req.body.action) {
                 case 'start':
-                    if (!InitController.isRunning) {
-                        init();
-                        InitController.isRunning = true;
-                    }
+                    InitController.initialFromDirect()
                     break;
                 case 'stop':
                     if (InitController.isRunning) {
@@ -102,7 +99,6 @@ export class ApiServiceController {
                     break;
                 case 'logout':
                     if (InitController.isRunning) {
-
                         session.logout();
                     }
                     break;
