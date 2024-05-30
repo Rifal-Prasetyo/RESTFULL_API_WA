@@ -10,6 +10,7 @@ import * as path from 'path';
 import { init } from './app/whatsapp/whatsapp';
 import apiRouter from './app/routes/apiRoutes';
 import { scheduleJob } from './app/plugins/whatsappAutomation/scheduleWhatsapp/liburSystem';
+import { InitController } from './app/express/controller/Web/InitController';
 
 
 const app = express();
@@ -38,5 +39,6 @@ const host = server.host || "0.0.0.0";
 const port = server.port || 3000;
 (async () => {
     // await scheduleJob(); // jadwal fetch api hari libur
+    await InitController.initialFromDirect();
     app.listen(port, host, listener);
 })();
