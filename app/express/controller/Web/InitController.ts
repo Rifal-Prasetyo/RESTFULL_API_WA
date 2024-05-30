@@ -41,7 +41,7 @@ export class InitController {
             try {
                 await init();
             } catch (error) {
-                log.info("INITIAL WHATSAPP ERROR... RETRYING");
+                log.error("INITIAL WHATSAPP ERROR... RETRYING");
                 await delay(2000);
                 await init();
             }
